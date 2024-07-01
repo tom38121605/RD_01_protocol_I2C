@@ -1,0 +1,54 @@
+
+注意： 要先插从机电源，让从机的i2c_slave初始化完毕后，再插主机电源   （或者主机开机增加1000ms的延时）
+
+说明1： 主机板用官板， 从机板用GS330 Mysa板
+
+==========================
+
+
+疑问1： 如何切换i2c主从机
+分析： 没有明确说明，可具体看下面的i2c主机，i2c从机的初始化比较
+
+      void Init_I2C_Master(void)
+      {
+         P13_OpenDrain_Mode;				 
+         P14_OpenDrain_Mode;				 
+
+         // Set I2C clock rate  
+         I2CLK =  I2C_CLOCK_400KHz; 
+
+         // Enable I2C  
+         set_I2CEN;                                   
+      }
+
+      void Init_I2C_SLAVE(void)
+      {
+         
+          P13_Quasi_Mode;                         //set SCL (P13) is Quasi mode
+          P14_Quasi_Mode;                         //set SDA (P14) is Quasi mode
+          
+          SDA = 1;                                //set SDA and SCL pins high
+          SCL = 1;
+          
+          //set_P0SR_6;                           //set SCL (P06) is  Schmitt triggered input select.
+          
+          set_EI2C;                               //enable I2C interrupt by setting IE1 bit 0
+          set_EA;
+
+          I2ADDR = EEPROM_SLA2;                   //define own slave address
+          set_I2CEN;                              //enable I2C circuit
+          set_AA;
+         
+      }
+
+
+
+
+
+从机硬件： i2c主机和从机都是P13, P14这两条线
+
+从机软件： slave端先做master，写入和读取at24c02中的数据  ( at24c02 的器件地址为 0xAE )
+                然后改成slave端，允许mater对它读写数据  ( slave端的器件地址为 0xE6 )
+
+
+

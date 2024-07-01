@@ -1,0 +1,23 @@
+#include "r_modstring.h"
+
+void byte2str(unsigned char *buf1,unsigned char ilen,unsigned char *buf2)
+{
+unsigned char shex[16]={"0123456789ABCDEF"};
+unsigned char c1;
+unsigned char i, j;
+
+  j=0;
+  for (i=0;i<ilen;i++)
+  {
+     c1=buf1[i] & 0xf0;
+     c1=c1>>4;
+     buf2[j++]=shex[c1];
+   
+     c1=buf1[i] & 0x0f;  
+     buf2[j++]=shex[c1];   
+
+  }
+  buf2[j]=0x00;   
+
+  return;
+}

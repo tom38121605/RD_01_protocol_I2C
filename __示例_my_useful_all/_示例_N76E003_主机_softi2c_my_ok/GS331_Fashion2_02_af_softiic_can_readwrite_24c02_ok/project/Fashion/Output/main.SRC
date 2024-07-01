@@ -1,0 +1,1301 @@
+; .\Output\main.SRC generated from: Code\main.c
+; COMPILER INVOKED BY:
+;        C:\Keil_c51\C51\BIN\C51.EXE Code\main.c LARGE OPTIMIZE(4,SPEED) BROWSE INCDIR(..\..\Include) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\LST\main.lst) TABS(3) SRC(.\Output\main.SRC)
+
+$NOMOD51
+
+NAME	MAIN
+
+AINDIDS	DATA	0F6H
+P0M1	DATA	0B1H
+RXD_1	BIT	080H.2
+P1M1	DATA	0B3H
+P0M2	DATA	0B2H
+P0	DATA	080H
+SADDR_1	DATA	0BBH
+P1M2	DATA	0B4H
+P1	DATA	090H
+TXD_1	BIT	090H.6
+AA	BIT	0C0H.2
+P3M1	DATA	0ACH
+P2	DATA	0A0H
+P3	DATA	0B0H
+P3M2	DATA	0ADH
+AC	BIT	0D0H.6
+WKCON	DATA	08FH
+RCTRIM0	DATA	084H
+EIE1	DATA	09CH
+RCTRIM1	DATA	085H
+EA	BIT	0A8H.7
+PWMCON0	DATA	0D8H
+PWMCON1	DATA	0DFH
+FE	BIT	098H.7
+EADC	BIT	0A8H.6
+PWMPH	DATA	0D1H
+IE	DATA	0A8H
+CKSWT	DATA	096H
+ADCF	BIT	0E8H.7
+EIP1	DATA	0FEH
+PWMPL	DATA	0D9H
+ADCHS0	BIT	0E8H.0
+TA	DATA	0C7H
+ADCHS1	BIT	0E8H.1
+ADCHS2	BIT	0E8H.2
+ES	BIT	0A8H.4
+ADCHS3	BIT	0E8H.3
+I2ADDR	DATA	0C1H
+PADC	BIT	0B8H.6
+IP	DATA	0B8H
+RI	BIT	098H.0
+EBOD	BIT	0A8H.5
+SI	BIT	0C0H.3
+CY	BIT	0D0H.7
+ADCS	BIT	0E8H.6
+FE_1	BIT	0F8H.7
+TI	BIT	098H.1
+LOAD	BIT	0D8H.6
+CKEN	DATA	097H
+PS	BIT	0B8H.4
+SP	DATA	081H
+OV	BIT	0D0H.2
+PWMINTC	DATA	0B7H
+PBOD	BIT	0B8H.5
+P0SR	DATA	0B2H
+EIPH	DATA	0F7H
+P1SR	DATA	0B4H
+P3SR	DATA	0ADH
+RI_1	BIT	0F8H.0
+TI_1	BIT	0F8H.1
+RCMP2H	DATA	0CBH
+ADCMPH	DATA	0CFH
+P00	BIT	080H.0
+P01	BIT	080H.1
+P10	BIT	090H.0
+PMEN	DATA	0FBH
+SBUF	DATA	099H
+PCON	DATA	087H
+P02	BIT	080H.2
+P11	BIT	090H.1
+P20	BIT	0A0H.0
+RCMP2L	DATA	0CAH
+P03	BIT	080H.3
+P12	BIT	090H.2
+P30	BIT	0B0H.0
+ADCDLY	DATA	0E3H
+ADCMPL	DATA	0CEH
+P04	BIT	080H.4
+P13	BIT	090H.3
+SCON	DATA	098H
+P05	BIT	080H.5
+P14	BIT	090H.4
+TMOD	DATA	089H
+TCON	DATA	088H
+P06	BIT	080H.6
+P15	BIT	090H.5
+P07	BIT	080H.7
+P16	BIT	090H.6
+P17	BIT	090H.7
+MOSI	BIT	080H.0
+MISO	BIT	080H.1
+SPCR	DATA	0F3H
+I2STAT	DATA	0BDH
+SPDR	DATA	0F5H
+PWMF	BIT	0D8H.5
+C0H	DATA	0E5H
+C1H	DATA	0E7H
+C2H	DATA	0EEH
+CHPCON	DATA	09FH
+IE0	BIT	088H.1
+IE1	BIT	088H.3
+C0L	DATA	0E4H
+SFRS	DATA	091H
+C1L	DATA	0E6H
+CM_RL2	BIT	0C8H.0
+B	DATA	0F0H
+C2L	DATA	0EDH
+SBUF_1	DATA	09AH
+IAPUEN	DATA	0A5H
+SCON_1	DATA	0F8H
+ACC	DATA	0E0H
+ET0	BIT	0A8H.1
+SPSR	DATA	0F4H
+IAPTRG	DATA	0A4H
+TF0	BIT	088H.5
+ET1	BIT	0A8H.3
+TF1	BIT	088H.7
+RB8	BIT	098H.2
+TF2	BIT	0C8H.7
+FBD	DATA	0D7H
+TH0	DATA	08CH
+IT0	BIT	088H.0
+EX0	BIT	0A8H.0
+RH3	DATA	0C6H
+TH1	DATA	08DH
+IT1	BIT	088H.2
+TB8	BIT	098H.3
+EX1	BIT	0A8H.2
+TH2	DATA	0CDH
+P	BIT	0D0H.0
+PDTCNT	DATA	0FAH
+SM0	BIT	098H.7
+TL0	DATA	08AH
+SM1	BIT	098H.6
+RL3	DATA	0C5H
+TL1	DATA	08BH
+SM2	BIT	098H.5
+I2CEN	BIT	0C0H.6
+TL2	DATA	0CCH
+P0S	DATA	0B1H
+EIE	DATA	09BH
+PT0	BIT	0B8H.1
+P1S	DATA	0B3H
+PT1	BIT	0B8H.3
+RS0	BIT	0D0H.3
+I2DAT	DATA	0BCH
+P2S	DATA	0B5H
+TR0	BIT	088H.4
+RS1	BIT	0D0H.4
+I2CLK	DATA	0BEH
+P3S	DATA	0ACH
+TR1	BIT	088H.6
+CLRPWM	BIT	0D8H.4
+SDA	BIT	090H.4
+PX0	BIT	0B8H.0
+TR2	BIT	0C8H.2
+EIPH1	DATA	0FFH
+PX1	BIT	0B8H.2
+ADCCON0	DATA	0E8H
+ADCCON1	DATA	0E1H
+ADCCON2	DATA	0E2H
+I2CON	DATA	0C0H
+DPH	DATA	083H
+RB8_1	BIT	0F8H.2
+EIP	DATA	0EFH
+TB8_1	BIT	0F8H.3
+PIF	DATA	0ECH
+DPL	DATA	082H
+SM0_1	BIT	0F8H.7
+PMD	DATA	0FCH
+IPH	DATA	0B7H
+SCL	BIT	090H.3
+SM1_1	BIT	0F8H.6
+I2TOC	DATA	0BFH
+SM2_1	BIT	0F8H.5
+ADCRH	DATA	0C3H
+IAPAH	DATA	0A7H
+REN	BIT	098H.4
+IAPFD	DATA	0AEH
+CAPCON0	DATA	092H
+I2CPX	BIT	0C0H.0
+T2MOD	DATA	0C9H
+T2CON	DATA	0C8H
+ADCRL	DATA	0C2H
+BODCON0	DATA	0A3H
+CAPCON1	DATA	093H
+STA	BIT	0C0H.5
+T3CON	DATA	0C4H
+BODCON1	DATA	0ABH
+IAPAL	DATA	0A6H
+CAPCON2	DATA	094H
+CAPCON3	DATA	0F1H
+CAPCON4	DATA	0F2H
+PWMRUN	BIT	0D8H.7
+SPCR2	DATA	0F3H
+SADEN	DATA	0B9H
+IAPCN	DATA	0AFH
+PWM0H	DATA	0D2H
+RXD	BIT	080H.7
+PNP	DATA	0D6H
+PWM1H	DATA	0D3H
+PWM2H	DATA	0D4H
+SADDR	DATA	0A9H
+CKCON	DATA	08EH
+STADC	BIT	080H.4
+TXD	BIT	080H.6
+PWM3H	DATA	0D5H
+PWM0L	DATA	0DAH
+PWM4H	DATA	0C4H
+PWM1L	DATA	0DBH
+PWM5H	DATA	0C5H
+AUXR1	DATA	0A2H
+CKDIV	DATA	095H
+PWM2L	DATA	0DCH
+PWM3L	DATA	0DDH
+RWK	DATA	086H
+F0	BIT	0D0H.5
+PWM4L	DATA	0CCH
+STO	BIT	0C0H.4
+ETGSEL0	BIT	0E8H.4
+REN_1	BIT	0F8H.4
+PWM5L	DATA	0CDH
+ETGSEL1	BIT	0E8H.5
+PICON	DATA	0E9H
+PIOCON0	DATA	0DEH
+PSW	DATA	0D0H
+PINEN	DATA	0EAH
+PIOCON1	DATA	0C6H
+PDTEN	DATA	0F9H
+WDCON	DATA	0AAH
+PIPEN	DATA	0EBH
+SADEN_1	DATA	0BAH
+?PR?_iputs0?MAIN     SEGMENT CODE 
+?XD?_iputs0?MAIN     SEGMENT XDATA OVERLAYABLE 
+?PR?Init_I2C?MAIN    SEGMENT CODE 
+?PR?I2C_SI_Check?MAIN                    SEGMENT CODE 
+?PR?_at24c02_write?MAIN                  SEGMENT CODE 
+?XD?_at24c02_write?MAIN                  SEGMENT XDATA OVERLAYABLE 
+?PR?_at24c02_read?MAIN                   SEGMENT CODE 
+?XD?_at24c02_read?MAIN                   SEGMENT XDATA OVERLAYABLE 
+?PR?main?MAIN        SEGMENT CODE 
+?XD?main?MAIN        SEGMENT XDATA OVERLAYABLE 
+?CO?MAIN             SEGMENT CODE 
+?BI?MAIN             SEGMENT BIT 
+	EXTRN	CODE (_sprintf)
+	EXTRN	XDATA (?_sprintf?BYTE)
+	EXTRN	CODE (_Timer0_Delay1ms)
+	EXTRN	CODE (_InitialUART0_Timer3)
+	EXTRN	CODE (_Send_Data_To_UART0)
+	EXTRN	CODE (?C?CLDPTR)
+	EXTRN	CODE (?C?ILDIX)
+	EXTRN	CODE (?C?CLDOPTR)
+	EXTRN	CODE (?C?CSTOPTR)
+	EXTRN	CODE (?C_STARTUP)
+	EXTRN	CODE (?C?COPY)
+	PUBLIC	temp
+	PUBLIC	xtemp
+	PUBLIC	itemp
+	PUBLIC	I2C_Reset_Flag
+	PUBLIC	main
+	PUBLIC	?_at24c02_read?BYTE
+	PUBLIC	_at24c02_read
+	PUBLIC	?_at24c02_write?BYTE
+	PUBLIC	_at24c02_write
+	PUBLIC	I2C_SI_Check
+	PUBLIC	Init_I2C
+	PUBLIC	_iputs0
+
+	ISEG  AT  080H
+          itemp:   DS   1
+
+	XSEG  AT  080H
+          xtemp:   DS   1
+
+	XSEG  AT  08H
+           temp:   DS   1
+
+	RSEG  ?XD?_at24c02_read?MAIN
+?_at24c02_read?BYTE:
+      iaddr?445:   DS   1
+	ORG  1
+       sbuf?446:   DS   3
+	ORG  4
+       ilen?447:   DS   1
+
+	RSEG  ?XD?_at24c02_write?MAIN
+?_at24c02_write?BYTE:
+      iaddr?341:   DS   1
+	ORG  1
+       sbuf?342:   DS   3
+	ORG  4
+       ilen?343:   DS   1
+
+	RSEG  ?XD?main?MAIN
+?main?BYTE:
+      sbuf1?549:   DS   10
+	ORG  10
+      sbuf2?550:   DS   10
+	ORG  20
+      stemp?551:   DS   20
+
+	RSEG  ?XD?_iputs0?MAIN
+?_iputs0?BYTE:
+        msg?040:   DS   3
+
+	RSEG  ?BI?MAIN
+ I2C_Reset_Flag:   DBIT   1
+
+	RSEG  ?CO?MAIN
+?SC_0:
+	DB  00AH,' ' ,'s' ,'t' ,'a' ,'r' ,'t' ,'.' ,'.' ,'.' 
+	DB  '.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' 
+	DB  '.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' 
+	DB  '.' ,'.' ,000H
+
+?SC_33:
+	DB  'r' ,'e' ,'g' ,'0' ,'2' ,' ' ,'=' ,' ' ,'%' ,'b' 
+	DB  'u' ,00DH,00AH,000H
+
+_?ix1000:
+	DB	000H
+	DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+
+_?ix1001:
+	DB	000H
+	DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+
+_?ix1002:
+	DB	000H
+	DB  000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+	DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+
+; #include "N76E003.h"
+; #include "SFR_Macro.h"
+; #include "Function_define.h"
+; #include "Common.h"
+; #include "Delay.h"
+; #include <string.h>
+; 
+; 
+; unsigned char temp _at_ 0x08;
+; unsigned char idata itemp _at_ 0x80;
+; unsigned char xdata xtemp _at_ 0x80;
+;  
+; 
+; //i2c
+; #define I2C_CLOCK_400KHz    9 
+; #define EEPROM_SLA              0x26   
+; 
+; #define EEPROM_WR               0
+; #define EEPROM_RD               1
+; 
+; #define  REG00  0x80
+; #define  REG01  0x81
+; #define  REG02  0x82
+; #define  REG03  0x83
+; 
+; #define  REG07  0x87
+; #define  REG08  0x88
+; #define  REG09  0x89
+; #define  REG10  0x8A
+; #define  REG11  0x8B
+; #define  REG12  0x8C
+; #define  REG13  0x8D
+; #define  REG14  0x8E
+; #define  REG15  0x8F
+; //#define  REG16  0x90
+; 
+; 
+; bit I2C_Reset_Flag;
+;   
+; void iputs0(UINT8 *msg);
+;    
+; void iputs0(UINT8 *msg)
+
+	RSEG  ?PR?_iputs0?MAIN
+_iputs0:
+	USING	0
+			; SOURCE LINE # 42
+	MOV  	DPTR,#msg?040
+	MOV  	A,R3
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R2
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R1
+	MOVX 	@DPTR,A
+; {
+			; SOURCE LINE # 43
+?C0001:
+;    while(*msg)
+			; SOURCE LINE # 44
+	MOV  	DPTR,#msg?040
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R2,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R1,A
+	LCALL	?C?CLDPTR
+	JZ   	?C0003
+; 		 Send_Data_To_UART0(*msg++);
+			; SOURCE LINE # 45
+	MOV  	DPTR,#msg?040
+	MOVX 	A,@DPTR
+	INC  	DPTR
+	CLR  	A
+	MOV  	B,#01H
+	LCALL	?C?ILDIX
+	MOV  	R1,B
+	MOV  	R2,A
+	LCALL	?C?CLDPTR
+	MOV  	R7,A
+	LCALL	_Send_Data_To_UART0
+	SJMP 	?C0001
+; }
+			; SOURCE LINE # 46
+?C0003:
+	RET  	
+; END OF _iputs0
+
+; 
+; 
+; void Init_I2C(void)
+
+	RSEG  ?PR?Init_I2C?MAIN
+Init_I2C:
+			; SOURCE LINE # 49
+; {
+			; SOURCE LINE # 50
+;    P13_OpenDrain_Mode;				 
+			; SOURCE LINE # 51
+	ORL  	P1M1,#08H
+	ORL  	P1M2,#08H
+;    P14_OpenDrain_Mode;				 
+			; SOURCE LINE # 52
+	ORL  	P1M1,#010H
+	ORL  	P1M2,#010H
+; 
+;    // Set I2C clock rate  
+;    I2CLK =  I2C_CLOCK_400KHz; 
+			; SOURCE LINE # 55
+	MOV  	I2CLK,#09H
+; 
+;    // Enable I2C  
+;    set_I2CEN;                                   
+			; SOURCE LINE # 58
+	SETB 	I2CEN
+; }
+			; SOURCE LINE # 59
+	RET  	
+; END OF Init_I2C
+
+; 
+; void I2C_SI_Check(void)
+
+	RSEG  ?PR?I2C_SI_Check?MAIN
+I2C_SI_Check:
+			; SOURCE LINE # 61
+; {
+			; SOURCE LINE # 62
+;    if (I2STAT == 0x00)
+			; SOURCE LINE # 63
+	MOV  	A,I2STAT
+	JNZ  	?C0007
+;    {
+			; SOURCE LINE # 64
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 65
+	SETB 	I2C_Reset_Flag
+;       set_STO;
+			; SOURCE LINE # 66
+	SETB 	STO
+;       SI = 0;
+			; SOURCE LINE # 67
+	CLR  	SI
+;       if(SI)
+			; SOURCE LINE # 68
+	JNB  	SI,?C0007
+;       {
+			; SOURCE LINE # 69
+;          clr_I2CEN;
+			; SOURCE LINE # 70
+	CLR  	I2CEN
+;          set_I2CEN;
+			; SOURCE LINE # 71
+	SETB 	I2CEN
+;          clr_SI;
+			; SOURCE LINE # 72
+	CLR  	SI
+;          clr_I2CEN;		
+			; SOURCE LINE # 73
+	CLR  	I2CEN
+;       } 	
+			; SOURCE LINE # 74
+;    }	
+			; SOURCE LINE # 75
+;    
+; }
+			; SOURCE LINE # 77
+?C0007:
+	RET  	
+; END OF I2C_SI_Check
+
+; 
+; 
+; void at24c02_write( UINT8 iaddr, UINT8 *sbuf, UINT8 ilen )
+
+	RSEG  ?PR?_at24c02_write?MAIN
+_at24c02_write:
+	USING	0
+			; SOURCE LINE # 80
+	MOV  	DPTR,#sbuf?342
+	MOV  	A,R3
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R2
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R1
+	MOVX 	@DPTR,A
+;---- Variable 'iaddr?341' assigned to Register 'R7' ----
+; {
+			; SOURCE LINE # 81
+;    
+;     UINT8  u8Count;
+; 
+;     /* Step1 */
+;     set_STA;                                /* Send Start bit to I2C EEPROM */         
+			; SOURCE LINE # 86
+	SETB 	STA
+;     clr_SI;
+			; SOURCE LINE # 87
+	CLR  	SI
+?C0008:
+;     while (!SI);
+			; SOURCE LINE # 88
+	JNB  	SI,?C0008
+?C0009:
+;    
+;     if (I2STAT != 0x08)                     /* 0x08:  A START condition has been transmitted*/
+			; SOURCE LINE # 90
+	MOV  	A,I2STAT
+	XRL  	A,#08H
+	JZ   	?C0010
+;     {
+			; SOURCE LINE # 91
+;         I2C_Reset_Flag = 1;
+			; SOURCE LINE # 92
+	SETB 	I2C_Reset_Flag
+;         //iputs1("\nI2C 'Send STA' error");
+;         goto Write_Error_Stop;
+			; SOURCE LINE # 94
+	SJMP 	?_at24c02_write?Write_Error_Stop
+;     }
+			; SOURCE LINE # 95
+?C0010:
+;     
+; 
+;     /* Step2 */
+;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */
+			; SOURCE LINE # 99
+	CLR  	STA
+;     I2DAT = EEPROM_SLA | EEPROM_WR;         /* Send (SLA+W) to EEPROM */
+			; SOURCE LINE # 100
+	MOV  	I2DAT,#026H
+;     clr_SI;
+			; SOURCE LINE # 101
+	CLR  	SI
+?C0012:
+;     while (!SI);
+			; SOURCE LINE # 102
+	JNB  	SI,?C0012
+?C0013:
+;     if (I2STAT != 0x18)                     /* 0x18: SLA+W has been transmitted; ACK has been received */             
+			; SOURCE LINE # 103
+	MOV  	A,I2STAT
+	XRL  	A,#018H
+	JZ   	?C0014
+;     {
+			; SOURCE LINE # 104
+;         I2C_Reset_Flag = 1;
+			; SOURCE LINE # 105
+	SETB 	I2C_Reset_Flag
+;         //iputs1("\nI2C 'Send SLA+W' error");
+;         goto Write_Error_Stop;
+			; SOURCE LINE # 107
+	SJMP 	?_at24c02_write?Write_Error_Stop
+;     }
+			; SOURCE LINE # 108
+?C0014:
+; 
+;     /* Step3 */
+;     I2DAT = iaddr;             /* Send EEPROM's  Address */
+			; SOURCE LINE # 111
+	MOV  	I2DAT,R7
+;     clr_SI;
+			; SOURCE LINE # 112
+	CLR  	SI
+?C0015:
+;     while (!SI);
+			; SOURCE LINE # 113
+	JNB  	SI,?C0015
+?C0016:
+;     if (I2STAT != 0x28)                     /* 0x28:  Data byte in S1DAT has been transmitted; ACK has been received */
+			; SOURCE LINE # 114
+	MOV  	A,I2STAT
+	XRL  	A,#028H
+	JZ   	?C0017
+;     {
+			; SOURCE LINE # 115
+;         I2C_Reset_Flag = 1;
+			; SOURCE LINE # 116
+	SETB 	I2C_Reset_Flag
+;         //iputs1("\nI2C 'Send High byte address' error");
+;         goto Write_Error_Stop;
+			; SOURCE LINE # 118
+	SJMP 	?_at24c02_write?Write_Error_Stop
+;     }
+			; SOURCE LINE # 119
+?C0017:
+;  
+; 
+;     /* Step5 */
+;     /* Write data to I2C EEPROM */ 
+; 
+;     for (u8Count = 0; u8Count < ilen; u8Count++)
+			; SOURCE LINE # 125
+;---- Variable 'u8Count?344' assigned to Register 'R7' ----
+	CLR  	A
+	MOV  	R7,A
+?C0018:
+	MOV  	DPTR,#ilen?343
+	MOVX 	A,@DPTR
+	MOV  	R6,A
+	MOV  	A,R7
+	CLR  	C
+	SUBB 	A,R6
+	JNC  	?C0019
+;     {
+			; SOURCE LINE # 126
+;     
+;       I2DAT = sbuf[u8Count];                    /* Send data to EEPROM */
+			; SOURCE LINE # 128
+	MOV  	DPTR,#sbuf?342
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R2,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R1,A
+	MOV  	DPL,R7
+	MOV  	DPH,#00H
+	LCALL	?C?CLDOPTR
+	MOV  	I2DAT,A
+;       clr_SI;
+			; SOURCE LINE # 129
+	CLR  	SI
+?C0021:
+;       while (!SI);
+			; SOURCE LINE # 130
+	JNB  	SI,?C0021
+?C0022:
+;       if (I2STAT != 0x28)                 /* 0x28:  Data byte in S1DAT has been transmitted; ACK has been received */
+			; SOURCE LINE # 131
+	MOV  	A,I2STAT
+	XRL  	A,#028H
+	JZ   	?C0020
+;       {
+			; SOURCE LINE # 132
+;          I2C_Reset_Flag = 1;
+			; SOURCE LINE # 133
+	SETB 	I2C_Reset_Flag
+;          //iputs1("\nI2C 'Write Data' error");
+;          goto Write_Error_Stop; 
+			; SOURCE LINE # 135
+	SJMP 	?_at24c02_write?Write_Error_Stop
+;          
+;       }   
+			; SOURCE LINE # 137
+;       
+;    }
+			; SOURCE LINE # 139
+?C0020:
+	INC  	R7
+	SJMP 	?C0018
+?C0019:
+;  
+;    
+;    /* Step6 */
+; 
+;    set_STO;                           
+			; SOURCE LINE # 144
+	SETB 	STO
+;    clr_SI;
+			; SOURCE LINE # 145
+	CLR  	SI
+?C0024:
+;    while (STO);
+			; SOURCE LINE # 146
+	JB   	STO,?C0024
+?C0025:
+;    
+;  
+; Write_Error_Stop: 
+			; SOURCE LINE # 149
+?_at24c02_write?Write_Error_Stop:
+;    
+;    if (I2C_Reset_Flag)
+			; SOURCE LINE # 151
+	JNB  	I2C_Reset_Flag,?C0027
+;    {
+			; SOURCE LINE # 152
+;       I2C_SI_Check();
+			; SOURCE LINE # 153
+	LCALL	I2C_SI_Check
+;       I2C_Reset_Flag	= 0;
+			; SOURCE LINE # 154
+	CLR  	I2C_Reset_Flag
+;       //iputs1("\nI2C Write error, test stop");
+;    }		
+			; SOURCE LINE # 156
+; 		
+; }
+			; SOURCE LINE # 158
+?C0027:
+	RET  	
+; END OF _at24c02_write
+
+; 
+; 
+; void at24c02_read( UINT8 iaddr, UINT8 *sbuf, UINT8 ilen )
+
+	RSEG  ?PR?_at24c02_read?MAIN
+_at24c02_read:
+	USING	0
+			; SOURCE LINE # 161
+	MOV  	DPTR,#sbuf?446
+	MOV  	A,R3
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R2
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,R1
+	MOVX 	@DPTR,A
+;---- Variable 'iaddr?445' assigned to Register 'R7' ----
+; {
+			; SOURCE LINE # 162
+;     UINT8  u8Count; 
+;    
+; 
+;     /* Step1 */
+;     set_STA;                                /* Send Start bit to I2C EEPROM */
+			; SOURCE LINE # 167
+	SETB 	STA
+;     clr_SI;
+			; SOURCE LINE # 168
+	CLR  	SI
+?C0028:
+;     while (!SI);
+			; SOURCE LINE # 169
+	JNB  	SI,?C0028
+?C0029:
+;     if (I2STAT != 0x08)                     /* 0x08:  A START condition has been transmitted*/
+			; SOURCE LINE # 170
+	MOV  	A,I2STAT
+	XRL  	A,#08H
+	JZ   	?C0030
+;     {
+			; SOURCE LINE # 171
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 172
+	SETB 	I2C_Reset_Flag
+;       //iputs1("\nI2C 'Send STA' error");
+;       goto Read_Error_Stop;
+			; SOURCE LINE # 174
+	LJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 175
+?C0030:
+; 
+;     /* Step2 */
+;     I2DAT = (EEPROM_SLA | EEPROM_WR);       /* Send (SLA+W) to EEPROM */
+			; SOURCE LINE # 178
+	MOV  	I2DAT,#026H
+;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */    
+			; SOURCE LINE # 179
+	CLR  	STA
+;     clr_SI;
+			; SOURCE LINE # 180
+	CLR  	SI
+?C0032:
+;     while (!SI);
+			; SOURCE LINE # 181
+	JNB  	SI,?C0032
+?C0033:
+;     if (I2STAT != 0x18)                     /* 0x18: SLA+W has been transmitted; ACK has been received */              
+			; SOURCE LINE # 182
+	MOV  	A,I2STAT
+	XRL  	A,#018H
+	JZ   	?C0034
+;     {
+			; SOURCE LINE # 183
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 184
+	SETB 	I2C_Reset_Flag
+;       //iputs1("\nI2C 'Send SLA+W' error");
+;       goto Read_Error_Stop;
+			; SOURCE LINE # 186
+	LJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 187
+?C0034:
+; 
+;     /* Step3 */
+;     I2DAT = iaddr;             /* Send I2C EEPROM's Address */
+			; SOURCE LINE # 190
+	MOV  	I2DAT,R7
+;     clr_SI;
+			; SOURCE LINE # 191
+	CLR  	SI
+?C0035:
+;     while (!SI);
+			; SOURCE LINE # 192
+	JNB  	SI,?C0035
+?C0036:
+;     if (I2STAT != 0x28)                     /* 0x28:  Data byte in S1DAT has been transmitted; ACK has been received */              
+			; SOURCE LINE # 193
+	MOV  	A,I2STAT
+	XRL  	A,#028H
+	JZ   	?C0037
+;     {
+			; SOURCE LINE # 194
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 195
+	SETB 	I2C_Reset_Flag
+;       //iputs1("\nI2C 'Send I2C High Byte Address' error");
+;       goto Read_Error_Stop;
+			; SOURCE LINE # 197
+	SJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 198
+?C0037:
+;  
+;     /* Step5 */
+;     set_STA;                                /* Repeated START */
+			; SOURCE LINE # 201
+	SETB 	STA
+;     clr_SI; 
+			; SOURCE LINE # 202
+	CLR  	SI
+?C0038:
+;     while (!SI);
+			; SOURCE LINE # 203
+	JNB  	SI,?C0038
+?C0039:
+;     if (I2STAT != 0x10)                     /* 0x10: A repeated START condition has been transmitted */
+			; SOURCE LINE # 204
+	MOV  	A,I2STAT
+	XRL  	A,#010H
+	JZ   	?C0040
+;     {
+			; SOURCE LINE # 205
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 206
+	SETB 	I2C_Reset_Flag
+;       //iputs1("\nI2C 'Send STA' error");
+;       goto Read_Error_Stop;
+			; SOURCE LINE # 208
+	SJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 209
+?C0040:
+; 
+;     /* Step6 */
+;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */
+			; SOURCE LINE # 212
+	CLR  	STA
+;     I2DAT = (EEPROM_SLA | EEPROM_RD);       /* Send (SLA+R) to EEPROM */
+			; SOURCE LINE # 213
+	MOV  	I2DAT,#027H
+;     clr_SI;
+			; SOURCE LINE # 214
+	CLR  	SI
+?C0041:
+;     while (!SI);
+			; SOURCE LINE # 215
+	JNB  	SI,?C0041
+?C0042:
+;     if (I2STAT != 0x40)                     /* 0x40:  SLA+R has been transmitted; ACK has been received */              
+			; SOURCE LINE # 216
+	MOV  	A,I2STAT
+	XRL  	A,#040H
+	JZ   	?C0043
+;     {
+			; SOURCE LINE # 217
+;       I2C_Reset_Flag = 1;
+			; SOURCE LINE # 218
+	SETB 	I2C_Reset_Flag
+;       //iputs1("\nI2C 'Send SLA+R' error");
+;       goto Read_Error_Stop;
+			; SOURCE LINE # 220
+	SJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 221
+?C0043:
+; 
+;     /* Step7 */                             /* Verify I2C EEPROM data */
+;     for (u8Count = 0; u8Count <ilen; u8Count++)
+			; SOURCE LINE # 224
+;---- Variable 'u8Count?448' assigned to Register 'R7' ----
+	CLR  	A
+	MOV  	R7,A
+?C0044:
+	MOV  	DPTR,#ilen?447
+	MOVX 	A,@DPTR
+	MOV  	R6,A
+	MOV  	A,R7
+	CLR  	C
+	SUBB 	A,R6
+	JNC  	?C0045
+;     {
+			; SOURCE LINE # 225
+;         set_AA;                             /* Set Assert Acknowledge Control Bit */
+			; SOURCE LINE # 226
+	SETB 	AA
+;         clr_SI;
+			; SOURCE LINE # 227
+	CLR  	SI
+?C0047:
+;         while (!SI);
+			; SOURCE LINE # 228
+	JNB  	SI,?C0047
+?C0048:
+;         if (I2STAT != 0x50)                 /* 0x50:Data byte has been received; NOT ACK has been returned */              
+			; SOURCE LINE # 229
+	MOV  	A,I2STAT
+	XRL  	A,#050H
+	JZ   	?C0049
+;         {
+			; SOURCE LINE # 230
+;             I2C_Reset_Flag = 1;
+			; SOURCE LINE # 231
+	SETB 	I2C_Reset_Flag
+;             //iputs1("\nI2C 'No Ack' error");
+;             goto Read_Error_Stop;
+			; SOURCE LINE # 233
+	SJMP 	?_at24c02_read?Read_Error_Stop
+;         }
+			; SOURCE LINE # 234
+?C0049:
+;        
+;         sbuf[u8Count] = I2DAT;
+			; SOURCE LINE # 236
+	MOV  	DPTR,#sbuf?446
+	MOVX 	A,@DPTR
+	MOV  	R3,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R2,A
+	INC  	DPTR
+	MOVX 	A,@DPTR
+	MOV  	R1,A
+	MOV  	DPL,R7
+	MOV  	DPH,#00H
+	MOV  	A,I2DAT
+	LCALL	?C?CSTOPTR
+;  
+;     }
+			; SOURCE LINE # 238
+	INC  	R7
+	SJMP 	?C0044
+?C0045:
+; 
+;     /* Step8 */
+;     clr_AA;                                 /* Send a NACK to disconnect 24xx64 */
+			; SOURCE LINE # 241
+	CLR  	AA
+;     clr_SI;
+			; SOURCE LINE # 242
+	CLR  	SI
+?C0050:
+;     while (!SI);
+			; SOURCE LINE # 243
+	JNB  	SI,?C0050
+?C0051:
+;     if (I2STAT != 0x58)                     /* 0x58:Data byte has been received; ACK has been returned */
+			; SOURCE LINE # 244
+	MOV  	A,I2STAT
+	XRL  	A,#058H
+	JZ   	?C0052
+;     {
+			; SOURCE LINE # 245
+;         I2C_Reset_Flag = 1;
+			; SOURCE LINE # 246
+	SETB 	I2C_Reset_Flag
+;         //iputs1("\nI2C 'Ack' error");
+;         goto Read_Error_Stop;
+			; SOURCE LINE # 248
+	SJMP 	?_at24c02_read?Read_Error_Stop
+;     }
+			; SOURCE LINE # 249
+?C0052:
+;     
+; 	/* Step9 */    
+; 	  clr_SI;
+			; SOURCE LINE # 252
+	CLR  	SI
+;     set_STO;
+			; SOURCE LINE # 253
+	SETB 	STO
+?C0053:
+;     
+;     while (STO);
+			; SOURCE LINE # 255
+	JB   	STO,?C0053
+?C0054:
+;     
+;  
+; Read_Error_Stop: 
+			; SOURCE LINE # 258
+?_at24c02_read?Read_Error_Stop:
+; 		if (I2C_Reset_Flag)
+			; SOURCE LINE # 259
+	JNB  	I2C_Reset_Flag,?C0056
+; 		{
+			; SOURCE LINE # 260
+;          I2C_SI_Check();
+			; SOURCE LINE # 261
+	LCALL	I2C_SI_Check
+;          //iputs1("\nI2C Read error, test stop");
+;          I2C_Reset_Flag = 0;
+			; SOURCE LINE # 263
+	CLR  	I2C_Reset_Flag
+; 		}
+			; SOURCE LINE # 264
+; }
+			; SOURCE LINE # 265
+?C0056:
+	RET  	
+; END OF _at24c02_read
+
+; 
+; 
+; 
+; 
+; 
+; void main (void) 
+
+	RSEG  ?PR?main?MAIN
+main:
+	USING	0
+			; SOURCE LINE # 271
+; {   
+			; SOURCE LINE # 272
+;    
+;    UINT8 sbuf1[10]={0};
+			; SOURCE LINE # 274
+	MOV  	R3,#0FFH
+	MOV  	R2,#HIGH (_?ix1000)
+	MOV  	R1,#LOW (_?ix1000)
+	MOV  	R0,#LOW (sbuf1?549)
+	MOV  	R4,#HIGH (sbuf1?549)
+	MOV  	R5,#01H
+	MOV  	R6,#00H
+	MOV  	R7,#0AH
+	LCALL	?C?COPY
+;    UINT8 sbuf2[10]={0};
+			; SOURCE LINE # 275
+	MOV  	R3,#0FFH
+	MOV  	R2,#HIGH (_?ix1001)
+	MOV  	R1,#LOW (_?ix1001)
+	MOV  	R0,#LOW (sbuf2?550)
+	MOV  	R4,#HIGH (sbuf2?550)
+	MOV  	R5,#01H
+	MOV  	R6,#00H
+	MOV  	R7,#0AH
+	LCALL	?C?COPY
+;    UINT8 stemp[20]={0};
+			; SOURCE LINE # 276
+	MOV  	R3,#0FFH
+	MOV  	R2,#HIGH (_?ix1002)
+	MOV  	R1,#LOW (_?ix1002)
+	MOV  	R0,#LOW (stemp?551)
+	MOV  	R4,#HIGH (stemp?551)
+	MOV  	R5,#01H
+	MOV  	R6,#00H
+	MOV  	R7,#014H
+	LCALL	?C?COPY
+;    
+;    
+;    //Set_All_GPIO_Quasi_Mode; 	 
+; 	//P15_PushPull_Mode;	
+;    
+;   
+;    //uart0 init
+;    InitialUART0_Timer3(115200);    
+			; SOURCE LINE # 284
+	MOV  	R7,#00H
+	MOV  	R6,#0C2H
+	MOV  	R5,#01H
+	MOV  	R4,#00H
+	LCALL	_InitialUART0_Timer3
+;    TI = 1;   
+			; SOURCE LINE # 285
+	SETB 	TI
+;    set_ES;           
+			; SOURCE LINE # 286
+	SETB 	ES
+;    set_EA;        
+			; SOURCE LINE # 287
+	SETB 	EA
+;    
+;    iputs0("\n start.........................");  
+			; SOURCE LINE # 289
+	MOV  	R3,#0FFH
+	MOV  	R2,#HIGH (?SC_0)
+	MOV  	R1,#LOW (?SC_0)
+	LCALL	_iputs0
+;    
+;    
+;    //i2c master init
+;    Init_I2C();  
+			; SOURCE LINE # 293
+	LCALL	Init_I2C
+?C0057:
+;    
+;       
+; //   sbuf[0] = 8;   
+; //   at24c02_write(0x82, sbuf, 1);
+; //   Timer0_Delay1ms(2);         
+; //   
+; //   at24c02_read(0x82, sbuf2, 1);    
+; //   sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+; //   iputs0(stemp);
+; 
+; 
+; 
+;    
+; 	while(1)
+			; SOURCE LINE # 307
+; 	{
+			; SOURCE LINE # 308
+;       //iputs0("\n run2...\r\n"); 
+;       Timer0_Delay1ms(1000);
+			; SOURCE LINE # 310
+	MOV  	R7,#0E8H
+	MOV  	R6,#03H
+	MOV  	R5,#00H
+	MOV  	R4,#00H
+	LCALL	_Timer0_Delay1ms
+;       
+;       sbuf1[0] = 8;   
+			; SOURCE LINE # 312
+	MOV  	DPTR,#sbuf1?549
+	MOV  	A,#08H
+	MOVX 	@DPTR,A
+;       at24c02_write(0x82, sbuf1, 1);
+			; SOURCE LINE # 313
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (sbuf1?549)
+	MOV  	R1,#LOW (sbuf1?549)
+	MOV  	DPTR,#?_at24c02_write?BYTE+04H
+	MOV  	A,#01H
+	MOVX 	@DPTR,A
+	MOV  	R7,#082H
+	LCALL	_at24c02_write
+;       Timer0_Delay1ms(2);         
+			; SOURCE LINE # 314
+	MOV  	R7,#02H
+	MOV  	R6,#00H
+	MOV  	R5,#00H
+	MOV  	R4,#00H
+	LCALL	_Timer0_Delay1ms
+;       
+;       at24c02_read(0x82, sbuf2, 1);    
+			; SOURCE LINE # 316
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (sbuf2?550)
+	MOV  	R1,#LOW (sbuf2?550)
+	MOV  	DPTR,#?_at24c02_read?BYTE+04H
+	MOV  	A,#01H
+	MOVX 	@DPTR,A
+	MOV  	R7,#082H
+	LCALL	_at24c02_read
+;       sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+			; SOURCE LINE # 317
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (stemp?551)
+	MOV  	R1,#LOW (stemp?551)
+	MOV  	DPTR,#?_sprintf?BYTE+03H
+	MOV  	A,#0FFH
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#HIGH (?SC_33)
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#LOW (?SC_33)
+	MOVX 	@DPTR,A
+	MOV  	DPTR,#sbuf2?550
+	MOVX 	A,@DPTR
+	MOV  	DPTR,#?_sprintf?BYTE+06H
+	MOVX 	@DPTR,A
+	LCALL	_sprintf
+;       iputs0(stemp);
+			; SOURCE LINE # 318
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (stemp?551)
+	MOV  	R1,#LOW (stemp?551)
+	LCALL	_iputs0
+; 
+;       Timer0_Delay1ms(1000);
+			; SOURCE LINE # 320
+	MOV  	R7,#0E8H
+	MOV  	R6,#03H
+	MOV  	R5,#00H
+	MOV  	R4,#00H
+	LCALL	_Timer0_Delay1ms
+;       sbuf1[0] = 9;   
+			; SOURCE LINE # 321
+	MOV  	DPTR,#sbuf1?549
+	MOV  	A,#09H
+	MOVX 	@DPTR,A
+;       at24c02_write(0x82, sbuf1, 1);
+			; SOURCE LINE # 322
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (sbuf1?549)
+	MOV  	R1,#LOW (sbuf1?549)
+	MOV  	DPTR,#?_at24c02_write?BYTE+04H
+	MOV  	A,#01H
+	MOVX 	@DPTR,A
+	MOV  	R7,#082H
+	LCALL	_at24c02_write
+;       Timer0_Delay1ms(2);         
+			; SOURCE LINE # 323
+	MOV  	R7,#02H
+	MOV  	R6,#00H
+	MOV  	R5,#00H
+	MOV  	R4,#00H
+	LCALL	_Timer0_Delay1ms
+;       
+;       at24c02_read(0x82, sbuf2, 1);    
+			; SOURCE LINE # 325
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (sbuf2?550)
+	MOV  	R1,#LOW (sbuf2?550)
+	MOV  	DPTR,#?_at24c02_read?BYTE+04H
+	MOV  	A,#01H
+	MOVX 	@DPTR,A
+	MOV  	R7,#082H
+	LCALL	_at24c02_read
+;       sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+			; SOURCE LINE # 326
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (stemp?551)
+	MOV  	R1,#LOW (stemp?551)
+	MOV  	DPTR,#?_sprintf?BYTE+03H
+	MOV  	A,#0FFH
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#HIGH (?SC_33)
+	MOVX 	@DPTR,A
+	INC  	DPTR
+	MOV  	A,#LOW (?SC_33)
+	MOVX 	@DPTR,A
+	MOV  	DPTR,#sbuf2?550
+	MOVX 	A,@DPTR
+	MOV  	DPTR,#?_sprintf?BYTE+06H
+	MOVX 	@DPTR,A
+	LCALL	_sprintf
+;       iputs0(stemp);      
+			; SOURCE LINE # 327
+	MOV  	R3,#01H
+	MOV  	R2,#HIGH (stemp?551)
+	MOV  	R1,#LOW (stemp?551)
+	LCALL	_iputs0
+; 
+; 	}   
+			; SOURCE LINE # 329
+	LJMP 	?C0057
+	RET  	
+; END OF main
+
+	END

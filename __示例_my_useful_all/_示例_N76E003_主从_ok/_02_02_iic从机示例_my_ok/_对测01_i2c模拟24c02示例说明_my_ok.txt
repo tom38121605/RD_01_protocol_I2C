@@ -1,0 +1,193 @@
+
+注意： 要先插从机电源，让从机的i2c_slave初始化完毕后，再插主机电源   （或者主机开机增加1000ms的延时）
+
+
+程序来自 “__对测IIC_01_iic模拟24c02_master_slave_ok”
+
+说明1： master 用GS330 Mysa板， slave用官板测试， 因Mysa板的i2c上有上拉电阻，所有可以跟官板直接飞线
+说明1： 官板模拟24c02，器件地址为0xA0
+说明1： Mysa板上也有一个真实的24c02, 但它的器件地址是0xAE，并不冲突
+
+说明2： 因为这是从机的示例说明，所以主机程序只把接口函数做一下讲解。
+说明2： 主机要多加一点延时，等从机上电平稳后，才能读写从机。（也可先插从机电源，后插主机电源测试）
+说明2： Mysa板用P00做看门狗处理使用专用延时函数DETECT_10MS，如改用其他板，则可用普通的延时函数Timer0_Delay1ms（）
+
+说明3:  i2c从机收到读地址后， 就把第1个数据读出来了，而不是收到读取请求时才开始读数据   （待验证）
+
+
+=============================== master的程序（简化） ===============================
+
+main()
+
+   UINT8 str1[20];   
+   
+   //uart1 init
+   InitialUART1_Timer3(115200);
+   TI_1 = 1;
+   //set_ES_1;            
+   set_EA;   
+
+   iputs1("12345\r\n");
+
+   //i2c init
+   Init_I2C();
+   
+   //Timer0_Delay1ms(1000);  
+   DETECT_10MS;   
+
+   while(1)
+
+      P00=1;
+      
+      //-------iic slave writeread test  ---------      
+ 
+      at24c02_write(2, "abcde\r\n", 8); DETECT_10MS;  
+      at24c02_read(2, str1, 8);       
+      
+      iputs1(str1);  
+      DETECT_10MS;       
+      
+
+      at24c02_write(2, "67890\r\n", 8); DETECT_10MS;  
+      at24c02_read(2, str1, 8);       
+      
+      iputs1(str1);  
+      DETECT_10MS;       
+
+      //-------iic slave writeread test  --end-------
+            
+
+
+
+=============================== slave的程序 ===============================
+
+
+main() 
+
+   Set_All_GPIO_Quasi_Mode;
+
+   //uart0 init
+   InitialUART0_Timer3(115200);
+   TI = 1;   
+   //set_ES;         
+   set_EA;   
+
+   //iputs0("\n 12345");    
+
+   //i2c slave初始化
+   Init_I2C_SLAVE();    
+   
+
+   while (1)
+
+      //iputs0("\n run...");  
+      Timer0_Delay1ms(1000);   
+
+
+------ 
+
+//i2c从机中断响应函数
+void I2C_ISR(void) interrupt 6
+
+    static UINT8 flg_firstdata=0; 
+   
+    switch (I2STAT)
+    {
+        case 0x00:
+            STO = 1;        
+            break;
+
+        case 0x60:           // SLAW addr 
+            AA = 1;           //返回ack   （接收数据时，会在第9位发出应答ACK——拉低数据线）
+            flg_firstdata=0;        
+            break;
+            
+        case 0x68:         //暂时没用到，先忽略
+            P02 = 0;        
+            while(1);
+            break;        
+        
+        case 0x80:        //sub addr， receive datas
+        
+            if(flg_firstdata==0)   //第1个数据保存为地址
+       
+                isubaddr = I2DAT;    //保存寄存器子地址到isubaddr 
+                AA = 1;                    //返回ack
+                flg_firstdata=1;
+               
+                data_num = isubaddr;  //从isubaddr 处写入数据
+               
+                //sprintf(soutstr, "the sub addr is %xH \r\n", isubaddr);
+                //iputs0(soutstr);    
+ 
+            else     //后面的数据保存为数据
+ 
+               irxdata = I2DAT; 
+               AA = 1;
+               
+               //sprintf(soutstr, "the sub addr is %xH \r\n", irxdata);
+               //iputs0(soutstr);  
+               
+               data_received[data_num++]=irxdata;   //从isubaddr的后面写入数据
+             
+            break;      
+        
+
+        case 0x88:         //暂时没用到，先忽略
+        
+            data_received[data_num] = I2DAT;
+            data_num = 0;
+            AA = 1;        
+            break;
+
+        case 0xA0:         //暂时没用到，先忽略
+            
+            AA = 1;
+            break;
+
+        
+        case 0xA8:        //SLAR addr
+        
+            data_num = isubaddr;                         //保存读取的子地址
+        
+            I2DAT = data_received[data_num];      //从子地址处读取第1个数据到i2c
+            data_num++;
+            AA = 1;                    //返回ack
+        
+            break;        
+        
+        case 0xB8:       // read data request           
+        
+            I2DAT = data_received[data_num];     //收到读取数据请求后，读取后面的数据
+            data_num++;
+            AA = 1;                        //返回ack
+        
+            break;
+
+        case 0xC0:       //暂时没用到，先忽略
+            AA = 1;
+            break; 
+
+        case 0xC8:        //暂时没用到，先忽略
+        
+            AA = 1;
+ 
+            break;        
+
+
+    SI = 0;       //I2CON.3 =0, 清除i2c中断标志
+    
+
+   
+
+
+
+
+
+
+
+
+
+
+
+

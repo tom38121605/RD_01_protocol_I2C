@@ -1,0 +1,406 @@
+//中文LCD  (2线串行)
+
+//#include "main.h"
+#include "r_modbyte.h"
+
+#include "7920.h"
+#include "delay.h"
+
+#define LINEWIDTH 18  //行宽
+#define LINES 2       //行数
+
+//#define	RW	 2      //RW(SID) 
+#define	E	 3      //E(sclk)
+
+void LCD_init(void)
+{
+	delay_nms(100);
+
+ 	//端口初始化
+	//LCD_DATA_DDR=0xFF;
+	LCD_CONTROL_DDR=0xFF; 
+
+	CLRBIT(LCD_CONTROL_PORT,E);
+	CLRBIT(LCD_CONTROL_PORT,RW);
+//	CLRBIT(LCD_CONTROL_PORT,RS);
+//	CLRBIT(LCD_CONTROL_PORT,PSB);
+	
+	//LCD_DATA_PORT|=0x0;	
+	//delay_nms(1500);
+		
+//	LCD_DATA_PORT|=0xFF;
+		
+	//SETBIT(LCD_CONTROL_PORT,_RES);
+//	CLRBIT(LCD_CONTROL_PORT,_RES);
+	delay_nms(1);
+//	SETBIT(LCD_CONTROL_PORT,_RES);
+
+	LCD_write_cmd(0x20);    // 8bit I/F, basic command, graphic off
+	LCD_write_cmd(0x20);    // 8bit I/F, basic command, graphic off
+	LCD_write_cmd(0x0C);    // display on
+	LCD_write_cmd(0x06);    // cursor right shift
+	LCD_write_cmd(0x01);    // cursor right shift
+
+}
+
+/*
+void LCD_init(void)
+{
+	delay_nms(100);
+
+ 	//端口初始化
+    //LCD_DATA_DDR|=LCD_DATA;   // 数据为输出  oxFF
+	//LCD_CONTROL_DDR|=(1<<RS|1<<RW|1<<E|1<<PSB|1<<_RES); //置位RS,EN等
+	LCD_DATA_DDR=0xFF;
+	LCD_CONTROL_DDR=0xFF; 
+
+	CLRBIT(LCD_CONTROL_PORT,E);
+//	CLRBIT(LCD_CONTROL_PORT,RW);
+	CLRBIT(LCD_CONTROL_PORT,RS);
+//	SETBIT(LCD_CONTROL_PORT,PSB);
+	
+	//LCD_DATA_PORT|=0x0;	
+	//delay_nms(1500);
+		
+	LCD_DATA_PORT|=0xFF;
+		
+//	SETBIT(LCD_CONTROL_PORT,_RES);
+//	CLRBIT(LCD_CONTROL_PORT,_RES);
+//	delay_nms(1);
+//	SETBIT(LCD_CONTROL_PORT,_RES);
+
+	LCD_write_cmd(0x30);    // 8bit I/F, basic command, graphic off
+	LCD_write_cmd(0x30);    // 8bit I/F, basic command, graphic off
+	LCD_write_cmd(0x06);    // cursor right shift
+	LCD_write_cmd(0x0C);    // display on
+	
+	LCD_write_cmd(0x01);  //清屏	
+	LCD_write_cmd(0x01);  //清屏		
+ 	delay_nms(1);
+}
+*/
+
+void  clearlcd(void)
+{
+   LCD_write_cmd(0x01);
+   delay_nms(1);
+}
+
+/*-----------------------------------------------------
+  状态检查函数,判断是否处于忙状态
+-------------------------------------------------------*/
+/*void  CheckState()
+{
+ 	unsigned char dat;
+ 	CLRBIT(LCD_CONTROL_PORT,RS);  //RS=0
+// 	SETBIT(LCD_CONTROL_PORT,RW);  //RW=1
+ 	LCD_DATA_DDR=0x00;			// portA as input
+ 	do
+ 	{
+ 	   	SETBIT(LCD_CONTROL_PORT,E);
+		NOP();
+		CLRBIT(LCD_CONTROL_PORT,E);
+    }
+ 	while (LCD_DATA_PIN&0x80);
+}
+*/
+
+void Send(unsigned char senddata)
+{
+	unsigned char i;
+
+	for(i=0;i<8;i++)
+	{
+		if((senddata)&0x80)
+		{
+			//D_OUT=1	   ;	
+			SETBIT(LCD_CONTROL_PORT,RW);	
+		}
+		else
+		{
+			//D_OUT=0;	
+			CLRBIT(LCD_CONTROL_PORT,RW);		
+		}
+		
+		//SCK=1;
+		SETBIT(LCD_CONTROL_PORT,E);	
+		NOP();
+		//SCK=0;
+		CLRBIT(LCD_CONTROL_PORT,E);	
+		
+		senddata<<=1;
+	}
+}
+
+void LCD_write_cmd(unsigned char scmd)   //send command
+{
+	//ST7920CS=1;
+//	SETBIT(LCD_CONTROL_PORT,RS);
+	Send(0xf8);
+	Send(scmd&0xf0);
+	Send(scmd<<4);	
+	
+	//ST7920CS=0;
+//	SETBIT(LCD_CONTROL_PORT,RS);
+	delay_nus(20);
+	
+}
+
+/*
+void LCD_write_cmd(unsigned char scmd)   //send command
+{
+ 	//CheckState();
+
+    //RW = 0;
+    //E = 0;
+    //RS = 0;
+    //LCDBUS = Command;
+	
+//	CLRBIT(LCD_CONTROL_PORT,RW);
+	CLRBIT(LCD_CONTROL_PORT,E);
+	CLRBIT(LCD_CONTROL_PORT,RS);
+	
+	LCD_DATA_DDR=0xFF;
+	LCD_DATA_PORT=scmd;
+
+	NOP();
+	SETBIT(LCD_CONTROL_PORT,E);
+	NOP();
+	CLRBIT(LCD_CONTROL_PORT,E);
+	delay_nus(20);
+	
+	delay_nms(1); //11.19
+}
+*/
+/*void SdData(unsigned char DData) 
+{
+ 	//CheckState();
+
+//	CLRBIT(LCD_CONTROL_PORT,RW);
+	CLRBIT(LCD_CONTROL_PORT,E);
+	SETBIT(LCD_CONTROL_PORT,RS);
+	
+	//LCD_DATA_PORT&=0X0;
+	//LCD_DATA_PORT|=DData&0xFF;
+	LCD_DATA_DDR=0xFF;
+	LCD_DATA_PORT=DData;
+	
+	NOP();
+	SETBIT(LCD_CONTROL_PORT,E);
+	NOP();
+	CLRBIT(LCD_CONTROL_PORT,E);
+	//NOP(); NOP();
+	//NOP(); NOP();
+	//NOP(); NOP();
+	//NOP(); NOP();
+	delay_nus(20);
+}
+*/
+void SdData(unsigned char DData) 
+{
+	//ST7920CS=1;
+//	SETBIT(LCD_CONTROL_PORT,RS);
+	Send(0xfa);
+	Send(DData&0xf0);
+	Send(DData<<4);	
+	
+	//ST7920CS=0;
+//	SETBIT(LCD_CONTROL_PORT,RS);
+	delay_nus(20);
+	
+}
+//-----------------------------------
+// Write a Screen
+//-----------------------------------
+
+void DispSetCursor(unsigned char LineNum, unsigned char ColumnNum)
+//先Y坐标后X坐标
+{
+
+    unsigned char i=0x00;
+    switch(LineNum&0x0f)   //确定行号
+    {
+	case 0x00:
+		i=0x80;
+		break;
+	case 0x01: 
+		i=0x90; 
+		break;
+	case 0x02: 
+		i=0x88;
+		break;
+	case 0x03:
+		i=0x98;
+		break;
+	default : 
+		break;
+    }
+    i = (ColumnNum&0x0f)|i; //确定列号
+   LCD_write_cmd(i);
+	
+}
+
+void WriteTextScreen2(unsigned char *pstr1)
+{
+//从显示屏的初始位置写入数据
+unsigned char i;
+unsigned char j;
+unsigned char *pstr = pstr1;
+
+   	LCD_write_cmd(0x34);        // 8bit I/F, basic command
+   	LCD_write_cmd(0x30);        // 8bit I/F, basic command, graphic off
+
+	 for(i=0;i<36;i++)       //清空屏幕
+	 {
+		 if (i%18==0)         //判断是否换行
+		 {
+			 DispSetCursor(i/18,0);   //如换行, 则光标移动到行首
+		 }
+
+		 SdData(' '); //
+	 }
+		
+     j=0;
+     //while (*pstr)
+     while (*pstr && j<36)
+     {
+		 if (j%18==0)         //判断是否换行
+		 {
+			 DispSetCursor(j/18,0);   //如换行, 则光标移动到行首
+		 }
+		 
+		 //避免最后一格写半个汉字, 把汉字写到下一行
+		 //if (((j+1)%18==0) && *pstr>127 && *(pstr-1)<128) 
+		 if (((j+1)%2==0) && *pstr>127 && *(pstr-1)<128) 
+		 {
+		 	//SdData(' ');
+		 	SdData(' '); //
+			j++;
+		 }
+		else
+		{	
+		 	SdData(*pstr++);
+		 	j++;
+		}
+		
+        //SdData(*pstr++);
+        //j++;		
+     }
+	 
+	 delay_nms(1); //11.19
+}
+
+void LCD_set_xy( unsigned char ColumnNum, unsigned char LineNum)
+//先X坐标后Y坐标
+{
+    unsigned char i=0x00;
+    switch(LineNum&0x0f)   //确定行号, Y坐标
+    {
+	case 0x00:
+		i=0x80;
+		break;
+	case 0x01: 
+		i=0x90; 
+		break;
+	case 0x02: 
+		i=0x88;
+		break;
+	case 0x03:
+		i=0x98;
+		break;
+	default : 
+		break;
+    }
+    i = (ColumnNum&0x0f)|i; //确定列号, X坐标
+   LCD_write_cmd(i);
+	
+}
+
+void LCD_write_str(unsigned char X,unsigned char Y,unsigned char *pstr1)
+{
+//从显示屏指定的行(Y),列(X)的位置写入数据
+unsigned char i;
+unsigned char j;
+unsigned char *pstr = pstr1;
+
+   	LCD_write_cmd(0x34);        // 8bit I/F, basic command
+   	LCD_write_cmd(0x30);        // 8bit I/F, basic command, graphic off
+
+     //j=0;
+	 LCD_set_xy(X,Y);
+	 
+	 j=Y * LINEWIDTH + X;
+     //while (*pstr)
+     while (*pstr && j< (LINEWIDTH * LINES))
+     {
+		 if (j%LINEWIDTH==0)         //判断是否换行
+		 {
+			 LCD_set_xy(0,j/LINEWIDTH);   //如换行, 则光标移动到行首
+		 }
+		 
+		 //避免最后一格写半个汉字, 把汉字写到下一行
+		 if (((j+1)%2==0) && *pstr>127 && *(pstr-1)<128) 
+		 {
+		 	SdData(' '); //
+			j++;
+		 }
+		else
+		{	
+		 	SdData(*pstr++);
+		 	j++;
+		}
+
+     }
+	 
+	 delay_nms(1); //11.19
+}
+
+
+
+/*void WriteTextScreen2(unsigned char *pstr)
+{
+unsigned char i;
+unsigned char j;
+
+const unsigned char LINEWIDTH =18;  //行宽
+const unsigned char LINES =2;       //行数
+
+   	LCD_write_cmd(0x34);        // 8bit I/F, basic command
+   	LCD_write_cmd(0x30);        // 8bit I/F, basic command, graphic off
+
+	 //for(i=0;i<36;i++)       //清空屏幕
+	 for(i=0; i< LINEWIDTH * LINES; i++)       //清空屏幕
+	 {
+		 if (i%LINEWIDTH==0)         //判断是否换行
+		 {
+			 DispSetCursor(i/LINEWIDTH,0);   //如换行, 则光标移动到行首
+		 }
+
+		 SdData(' '); //
+	 }
+		
+     j=0;
+     //while (*pstr)
+     while (*pstr && j< LINEWIDTH * LINES)
+     {
+		 if (j%LINEWIDTH==0)         //判断是否换行
+		 {
+			 DispSetCursor(j/LINEWIDTH,0);   //如换行, 则光标移动到行首
+		 }
+		 
+		 //避免最后一格写半个汉字, 把汉字写到下一行
+		 if (((j+1)%LINEWIDTH==0) && *pstr>127) 
+		 //if (j==17 ) 
+		 {
+		 	SdData(' '); //
+			j++;
+		 }
+		else
+		{	
+		 	SdData(*pstr++);
+		 	j++;
+		}
+
+     }
+
+ }*/

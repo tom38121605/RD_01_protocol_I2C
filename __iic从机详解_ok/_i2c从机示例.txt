@@ -1,0 +1,286 @@
+
+×¢Òâ£º´Ó»ú·¢ËÍÄ£Ê½Ê±£¬I2STATÈôÎªC8H£¬´Ó»ú·¢ËÍ×îºóÒ»¸ö×Ö½Ú¸øÖ÷»ú
+Ö®Ç°£¬Çå³ıAA£¬·¢ËÍÍê×îºóÒ»¸ö×Ö½ÚµÄÎ»ºó£¬´Ó»ú½«±ä³ÉÎ´±»¶¨Ö·µÄ´Ó»úÄ£Ê½£¬ºÍ
+Ö÷»ú¶Ï¿ª¡£
+
+
+//ºóÃæ²»ÄÜÊä¿Õ¸ñµÄÎÄ±¾
+write sto:
+
+  
+Have changed the slave module to test the communication with the master.
+
+------write---simp------
+
+write sta:                null
+
+write slaW addr:   
+ 60H    //´Ó»úÊÕµ½60HÖĞ¶Ï£¨Æ÷¼şĞ´µØÖ·£©£¬ ·µ»ØAA=1 £¨·µ»Øack -- ´ıÑéÖ¤£©
+  
+write sub addr:      80H    //´Ó»úÊÕµ½80HÖĞ¶Ï£¨×ÓµØÖ· £©£¬ isubaddr = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write data:      ÿ
+    80H    //´Ó»úÊÕµ½80HÖĞ¶Ï£¨ Êı¾İ£©£¬ irxbuf = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write sto:           ÿ
+ 
+ null   
+   
+ 
+-----read  1 byte---simp------
+
+write sta:                    null
+
+write slaW addr:   
+     
+ 60H   //´Ó»úÊÕµ½60HÖĞ¶Ï£¨Æ÷¼şĞ´µØÖ·£©£¬ ·µ»ØAA=1 £¨·µ»Øack -- ´ıÑéÖ¤£©
+
+write sub addr:       
+   80H   //´Ó»úÊÕµ½80HÖĞ¶Ï£¨×ÓµØÖ·£©£¬ isubaddr = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write REsta:              
+ null   
+
+write slaR addr:   
+    
+  A8H    //´Ó»úÊÕµ½A8HÖĞ¶Ï£¨Æ÷¼ş¶ÁµØÖ·£©£¬  I2DAT =   ibuf£¬ ·µ»ØAA=1
+  
+read data:      ÿ
+     
+  B8H    //´Ó»úÊÕµ½B8HÖĞ¶Ï£¨¶ÁÊı¾İÇëÇó£©£¬  I2DAT =   ibuf£¬ ·µ»ØAA=1
+
+write nack:      ÿ
+      
+ null
+
+write sto:           ÿ 
+   null
+   
+ 
+==========================================================
+
+
+main( )
+
+    Set_All_GPIO_Quasi_Mode;
+ 
+    Init_I2C_SLAVE();
+
+
+---------
+
+void Init_I2C_SLAVE( )
+ 
+    P13_Quasi_Mode;                     
+    P14_Quasi_Mode;                    
+
+    SDA = 1;            //´Ó»úµÄi2cÁ½¸ùÏßÒªÏÈÖÃ¸ßµçÆ½                       
+    SCL = 1;             //´Ó»úµÄi2cÁ½¸ùÏßÒªÏÈÖÃ¸ßµçÆ½    
+    
+    //set_P0SR_6;                          
+          SFRS.0=1, ÇĞ»»µ½±£»¤Ò³1 
+          P0SR.6=1, p06ÉèÖÃÎª¸ßËÙÊä³ö     -´ıÀí½â    £¨¸úsclÓĞ¹Ø£¿£©
+          SFRS.0=0, ÇĞ»»µ½±£»¤Ò³0 
+
+    set_EI2C;                                //IE1.0 =1, Ê¹ÄÜiicÖĞ¶Ï
+    set_EA;                                  //Ê¹ÄÜÈ«¾ÖÖĞ¶Ï
+
+    I2ADDR = EEPROM_SLA;          //ÉèÖÃ´Ó»úµØÖ· £¨×¢ÒâÊÇ¸ß7Î»£©
+    set_I2CEN;                              // I2CON.6=1,   Ê¹ÄÜI2C              
+    set_AA;                                   // I2CON.2=1, AA=1£¬ ÒÔºóÓ¦´ğÖ÷»úÎªack
+ 
+
+----------------------------------------------------------------------------------------------
+
+
+//´Ó»úÖĞ¶ÏÏìÓ¦º¯Êı
+void I2C_ISR(void) interrupt 6
+ 
+    switch (I2STAT)
+    {
+        case 0x00:
+
+            STO = 1;
+            break;
+
+        case 0x60:
+
+            AA = 1; 
+            break;
+            
+        case 0x68:
+           P02 = 0;
+            while(1);
+            break;
+
+        case 0x80:
+ 
+            data_received[data_num] = I2DAT;
+            data_num++;
+
+            if (data_num == 34)
+                AA = 0;
+            else
+                AA = 1;
+            break;
+
+        case 0x88:
+ 
+            data_received[data_num] = I2DAT;
+            data_num = 0;
+            AA = 1;
+            break;
+
+        case 0xA0:
+ 
+            AA = 1;
+            break;
+
+        case 0xA8:
+ 
+            I2DAT = data_received[data_num];
+            data_num++;
+            AA = 1;
+            break;
+        
+        case 0xB8:
+ 
+            I2DAT = data_received[data_num];
+            data_num++;
+            AA = 1;
+            break;
+
+        case 0xC0:
+            AA = 1;
+            break; 
+
+        case 0xC8:
+ 
+            AA = 1;
+            break;        
+    }
+
+    SI = 0;
+
+ 
+
+
+=============================²Î¿¼========================================
+
+
+
+------write---------
+
+write sta:                null
+
+write slaW addr:   
+ state is 60H      
+  
+write sub addr:      state is 60H
+ state is 80H    
+
+write data:      ÿ
+    state is 60H
+ state is 80H
+ state is 80H
+
+write sto:           ÿ
+ state is 60H
+ state is 80H
+ state is 80H
+ 
+
+-----read  1 byte---------
+
+write sta:                    null
+
+write slaW addr:   
+     
+ state is 60H
+
+write sub addr:       
+   state is 60H
+ state is 80H
+
+write REsta:              
+ state is 60H
+ state is 80H    
+
+write slaR addr:   
+    
+  state is 60H
+ state is 80H
+ state is A8H
+  
+read data:      ÿ
+     
+  state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+
+write nack:      ÿ
+      
+ state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+
+write sto:           ÿ 
+   state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+ 
+
+-----read  2 byte---------
+
+write sta:                    null
+
+write slaW addr:   
+     
+ state is 60H
+
+write sub addr:       
+   state is 60H
+ state is 80H
+
+write REsta:              
+ state is 60H
+ state is 80H    
+
+write slaR addr:   
+    
+  state is 60H
+ state is 80H
+ state is A8H
+  
+  
+read data:      ÿ
+     
+   
+ state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+ state is B8H
+
+write nack:     ÿ
+         state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+ state is B8H
+
+write sto:           ÿ 
+    state is 60H
+ state is 80H
+ state is A8H
+ state is B8H
+ state is B8H
+   
+ 
+
+
+
+

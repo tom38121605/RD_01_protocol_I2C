@@ -1,0 +1,1321 @@
+                        .module main.c
+                        .area data(ram, con, rel)
+ 0000           _RX_data::
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .blkb 11
+                        .area idata
+ 0001 00000000000000000000      .word 0,0,0,0,0
+ 000B 00                .byte 0
+                        .area data(ram, con, rel)
+ 000C                   .dbfile main.c
+ 000C                   .dbsym e RX_data _RX_data A[12:12]c
+ 000C           _RX_data2::
+ 000C                   .blkb 1
+                        .area idata
+ 000C 00                .byte 0
+                        .area data(ram, con, rel)
+ 000D                   .dbfile main.c
+ 000D                   .blkb 11
+                        .area idata
+ 000D 00000000000000000000      .word 0,0,0,0,0
+ 0017 00                .byte 0
+                        .area data(ram, con, rel)
+ 0018                   .dbfile main.c
+ 0018                   .dbsym e RX_data2 _RX_data2 A[12:12]c
+ 0018           _tmp1::
+ 0018                   .blkb 1
+                        .area idata
+ 0018 00                .byte 0
+                        .area data(ram, con, rel)
+ 0019                   .dbfile main.c
+ 0019                   .dbsym e tmp1 _tmp1 c
+ 0019           _tmp2::
+ 0019                   .blkb 1
+                        .area idata
+ 0019 00                .byte 0
+                        .area data(ram, con, rel)
+ 001A                   .dbfile main.c
+ 001A                   .dbsym e tmp2 _tmp2 c
+ 001A           _tmp3::
+ 001A                   .blkb 1
+                        .area idata
+ 001A 00                .byte 0
+                        .area data(ram, con, rel)
+ 001B                   .dbfile main.c
+ 001B                   .dbsym e tmp3 _tmp3 c
+ 001B           _tmp4::
+ 001B                   .blkb 1
+                        .area idata
+ 001B 00                .byte 0
+                        .area data(ram, con, rel)
+ 001C                   .dbfile main.c
+ 001C                   .dbsym e tmp4 _tmp4 c
+ 001C           _tmp5::
+ 001C                   .blkb 1
+                        .area idata
+ 001C 00                .byte 0
+                        .area data(ram, con, rel)
+ 001D                   .dbfile main.c
+ 001D                   .dbsym e tmp5 _tmp5 c
+ 001D           _tmp6::
+ 001D                   .blkb 1
+                        .area idata
+ 001D 00                .byte 0
+                        .area data(ram, con, rel)
+ 001E                   .dbfile main.c
+ 001E                   .dbsym e tmp6 _tmp6 c
+ 001E           _tmp7::
+ 001E                   .blkb 1
+                        .area idata
+ 001E 00                .byte 0
+                        .area data(ram, con, rel)
+ 001F                   .dbfile main.c
+ 001F                   .dbsym e tmp7 _tmp7 c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile main.c
+ 0000                   .dbfunc e Int0_Init _Int0_Init fV
+                        .even
+ 0000           _Int0_Init::
+ 0000                   .dbline -1
+ 0000                   .dbline 110
+ 0000           ; //TWI主机
+ 0000           ; 
+ 0000           ; unsigned char i2c_read(void);
+ 0000           ; unsigned char i2c_read2(void);
+ 0000           ; unsigned char i2c_maste_read(unsigned char addr);
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; #include <string.h>
+ 0000           ; //#include "config.h"
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //----串口------
+ 0000           ; #define  B9600  47    //波特率 7.3728MHz clock
+ 0000           ; #define  B19200 23
+ 0000           ; #define  B38400 11
+ 0000           ; #define  B57600 7
+ 0000           ; #define  BAUD B57600
+ 0000           ; 
+ 0000           ; #define RX_BUFFER_SIZE 12 
+ 0000           ; 
+ 0000           ; void UART_Init(void);               //串口初始化函数
+ 0000           ; void UART_Receive(void);            //串口接收函数
+ 0000           ; void UART_PutChar(unsigned char c); //串口输出字符
+ 0000           ; void UART_Puts(unsigned char *s);   //串口输出字符串
+ 0000           ; void UART_PutBytes(unsigned char *s, unsigned char ilen);  //串口输出字节
+ 0000           ; 
+ 0000           ; unsigned char RX_data[RX_BUFFER_SIZE]={0};   //串口接收缓冲区
+ 0000           ; unsigned char RX_data2[RX_BUFFER_SIZE]={0};
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; // defines and constants 
+ 0000           ; #define TWCR_CMD_MASK     0x0F 
+ 0000           ; #define TWSR_STATUS_MASK  0xF8 
+ 0000           ; 
+ 0000           ; //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下对SDA线作应答
+ 0000           ; #define Twi_Ack()       {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWEA)|(1<<TWINT);}
+ 0000           ; //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下不对SDA线作应答
+ 0000           ; #define Twi_NoAcK()     {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT);}
+ 0000           ; 
+ 0000           ; void i2c_start(void);
+ 0000           ; unsigned char i2c_write_addr(unsigned char addr,unsigned char r_w);
+ 0000           ; unsigned char i2c_write_data(unsigned char data);
+ 0000           ; void i2c_stop(void);
+ 0000           ; 
+ 0000           ; void twi_master_init(void);
+ 0000           ; void i2c_maste_transt(unsigned char addr, unsigned char data);
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void Delay_1us(void);  //1us精确延时函数
+ 0000           ; void Delay_nus(unsigned int n);  //nus延时函数, 10us以内为精确延时
+ 0000           ; 
+ 0000           ; void Delay_nus_Count(unsigned int n);     //精确nus延时函数，10us以上的精确延时
+ 0000           ; //Delay_10us： Delay_nus_Count(11);   //7.3728M
+ 0000           ; //Delay_20us： Delay_nus_Count(25);   //7.3728M
+ 0000           ; //Delay_50us： Delay_nus_Count(60);   //7.3728M
+ 0000           ; //Delay_100us： Delay_nus_Count(121);   //7.3728M
+ 0000           ; //Delay_500us： Delay_nus_Count(613);   //7.3728M
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void Delay_1ms_Preci(void);  //1ms精确延时函数
+ 0000           ; void Delay_nms(unsigned int n);  //nms精确延时函数
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //主机发送状态码
+ 0000           ; #define TW_START                              0x08    //START已发送
+ 0000           ; #define TW_REP_START  0x10   //重复START已发送
+ 0000           ; #define TW_MT_SLA_ACK         0x18   //SLA+W 已发送收到ACK
+ 0000           ; #define TW_MT_SLA_NACK        0x20   //SLA+W 已发送接收到NOT ACK
+ 0000           ; #define TW_MT_DATA_ACK        0x28   //数据已发送接收到ACK
+ 0000           ; #define TW_MT_DATA_NACK       0x30   //数据已发送接收到NOT ACK
+ 0000           ; #define TW_MT_ARB_LOST        0x38   //SLA+W 或数据的仲裁失败
+ 0000           ; 
+ 0000           ; //主机接收状态码
+ 0000           ; //#define TW_START                            0x08    //START已发送
+ 0000           ; //#define TW_REP_START                        0x10    //重复START已发送
+ 0000           ; #define TW_MR_ARB_LOST   0x38 //SLA+R 或NOT ACK 的仲裁失败
+ 0000           ; #define TW_MR_SLA_ACK   0x40  //SLA+R 已发送接收到ACK
+ 0000           ; #define TW_MR_SLA_NACK   0x48 //SLA+R 已发送接收到NOT ACK
+ 0000           ; #define TW_MR_DATA_ACK   0x50 //接收到数据ACK 已返回
+ 0000           ; //#define TW_MR_DATA_NACK 
+ 0000           ; volatile unsigned char tmp1=0;
+ 0000           ; volatile unsigned char tmp2=0;
+ 0000           ; volatile unsigned char tmp3=0;
+ 0000           ; volatile unsigned char tmp4=0;
+ 0000           ; volatile unsigned char tmp5=0;
+ 0000           ; volatile unsigned char tmp6=0;
+ 0000           ; volatile unsigned char tmp7=0;
+ 0000           ; 
+ 0000           ; void i2c_MAck(void);
+ 0000           ; void i2c_MNAck(void);
+ 0000           ; 
+ 0000           ; //--------int0 ----------
+ 0000           ; #define INT0_DDR  DDRD
+ 0000           ; #define INT0_PORT PORTD
+ 0000           ; #define INT0_PIN  PIND
+ 0000           ; #define INT0_IO   2 
+ 0000           ; 
+ 0000           ; unsigned char flg_Int0_In;
+ 0000           ; 
+ 0000           ; void Int0_Init(void);
+ 0000           ; void ISR_Int0(void);
+ 0000           ; void Int0_DoWithInt(void);
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void Int0_Init(void)
+ 0000           ; {
+ 0000                   .dbline 111
+ 0000           ;    GICR|= (1<<6);      //enable int0
+ 0000 8BB7              in R24,0x3b
+ 0002 8064              ori R24,64
+ 0004 8BBF              out 0x3b,R24
+ 0006                   .dbline 114
+ 0006           ; 
+ 0006           ;    //设置中断引脚为输入(示例为M16的PD3)
+ 0006           ;    INT0_DDR&=~(1<<INT0_IO);
+ 0006 8A98              cbi 0x11,2
+ 0008                   .dbline 117
+ 0008           ;    //INT0_PORT|=(1<<INT0_IO);          
+ 0008           ;   
+ 0008           ;    MCUCR|= (1<<1);   //mod set --下降沿方式
+ 0008 85B7              in R24,0x35
+ 000A 8260              ori R24,2
+ 000C 85BF              out 0x35,R24
+ 000E                   .dbline 118
+ 000E           ;    MCUCR&= ~(1<<0);  
+ 000E 85B7              in R24,0x35
+ 0010 8E7F              andi R24,254
+ 0012 85BF              out 0x35,R24
+ 0014                   .dbline -2
+ 0014           L1:
+ 0014                   .dbline 0 ; func end
+ 0014 0895              ret
+ 0016                   .dbend
+                        .area vector(rom, abs)
+                        .org 4
+ 0004 0C940B00          jmp _ISR_Int0
+                        .area text(rom, con, rel)
+ 0016                   .dbfile main.c
+ 0016                   .dbfunc e ISR_Int0 _ISR_Int0 fV
+                        .even
+ 0016           _ISR_Int0::
+ 0016 8A93              st -y,R24
+ 0018 8FB7              in R24,0x3f
+ 001A 8A93              st -y,R24
+ 001C                   .dbline -1
+ 001C                   .dbline 124
+ 001C           ; }
+ 001C           ; 
+ 001C           ; 
+ 001C           ; #pragma interrupt_handler ISR_Int0:iv_INT0
+ 001C           ; void ISR_Int0(void)
+ 001C           ; {
+ 001C                   .dbline 125
+ 001C           ;    flg_Int0_In=1;
+ 001C 81E0              ldi R24,1
+ 001E 80930000          sts _flg_Int0_In,R24
+ 0022                   .dbline 127
+ 0022           ; 
+ 0022           ;    GICR&= ~(1<<6);   //disable int0  -- 关闭中断  
+ 0022 8BB7              in R24,0x3b
+ 0024 8F7B              andi R24,191
+ 0026 8BBF              out 0x3b,R24
+ 0028                   .dbline -2
+ 0028           L2:
+ 0028 8991              ld R24,y+
+ 002A 8FBF              out 0x3f,R24
+ 002C 8991              ld R24,y+
+ 002E                   .dbline 0 ; func end
+ 002E 1895              reti
+ 0030                   .dbend
+ 0030                   .dbfunc e Int0_DoWithInt _Int0_DoWithInt fV
+                        .even
+ 0030           _Int0_DoWithInt::
+ 0030                   .dbline -1
+ 0030                   .dbline 132
+ 0030           ;     
+ 0030           ; }
+ 0030           ; 
+ 0030           ; void Int0_DoWithInt(void)
+ 0030           ; {                     
+ 0030                   .dbline 134
+ 0030           ;    //PORTA&=~(1<<4);  //PA4置低电平
+ 0030           ;    PORTB^=(1<<3);  //翻转PB3的电平
+ 0030 88E0              ldi R24,8
+ 0032 28B2              in R2,0x18
+ 0034 2826              eor R2,R24
+ 0036 28BA              out 0x18,R2
+ 0038                   .dbline 136
+ 0038           ;                  
+ 0038           ;    GIFR|= (1<<6);      //通过写入"1"到GIFR.6来清零中断int0的标志位
+ 0038 8AB7              in R24,0x3a
+ 003A 8064              ori R24,64
+ 003C 8ABF              out 0x3a,R24
+ 003E                   .dbline 137
+ 003E           ;    GICR|= (1<<6);      //enable int1  
+ 003E 8BB7              in R24,0x3b
+ 0040 8064              ori R24,64
+ 0042 8BBF              out 0x3b,R24
+ 0044                   .dbline -2
+ 0044           L3:
+ 0044                   .dbline 0 ; func end
+ 0044 0895              ret
+ 0046                   .dbend
+ 0046                   .dbfunc e twi_master_init _twi_master_init fV
+                        .even
+ 0046           _twi_master_init::
+ 0046                   .dbline -1
+ 0046                   .dbline 146
+ 0046           ; }
+ 0046           ; 
+ 0046           ; 
+ 0046           ; 
+ 0046           ; 
+ 0046           ; //TWI master initialize
+ 0046           ; // bit rate:100
+ 0046           ; void twi_master_init(void)
+ 0046           ; {
+ 0046                   .dbline 147
+ 0046           ;  TWCR= 0x00; //disable twi
+ 0046 2224              clr R2
+ 0048 26BE              out 0x36,R2
+ 004A                   .dbline 149
+ 004A           ;  
+ 004A           ;  TWBR= 14;//14;//0x64; //set bit rate  //14 -- 166.7K
+ 004A 8EE0              ldi R24,14
+ 004C 80B9              out 0x0,R24
+ 004E                   .dbline 152
+ 004E           ;  
+ 004E           ;  
+ 004E           ;  TWSR= 0x00; //set prescale
+ 004E 21B8              out 0x1,R2
+ 0050                   .dbline 153
+ 0050           ;  TWAR= 0x00; //set slave address
+ 0050 22B8              out 0x2,R2
+ 0052                   .dbline 155
+ 0052           ;  
+ 0052           ;  TWCR= 0x04; //enable twi
+ 0052 84E0              ldi R24,4
+ 0054 86BF              out 0x36,R24
+ 0056                   .dbline -2
+ 0056           L4:
+ 0056                   .dbline 0 ; func end
+ 0056 0895              ret
+ 0058                   .dbend
+ 0058                   .dbfunc e i2c_start _i2c_start fV
+                        .even
+ 0058           _i2c_start::
+ 0058                   .dbline -1
+ 0058                   .dbline 160
+ 0058           ; }
+ 0058           ; 
+ 0058           ; //总线上起动开始条件
+ 0058           ; void i2c_start(void)
+ 0058           ; {
+ 0058                   .dbline 161
+ 0058           ;    TWCR= (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);
+ 0058 84EA              ldi R24,164
+ 005A 86BF              out 0x36,R24
+ 005C           L6:
+ 005C                   .dbline 162
+ 005C           L7:
+ 005C                   .dbline 162
+ 005C           ;    while (!(TWCR & (1<<TWINT))); //等待START 信号成功发送
+ 005C 26B6              in R2,0x36
+ 005E 27FE              sbrs R2,7
+ 0060 FDCF              rjmp L6
+ 0062                   .dbline -2
+ 0062           L5:
+ 0062                   .dbline 0 ; func end
+ 0062 0895              ret
+ 0064                   .dbend
+ 0064                   .dbfunc e i2c_stop _i2c_stop fV
+                        .even
+ 0064           _i2c_stop::
+ 0064                   .dbline -1
+ 0064                   .dbline 167
+ 0064           ; }
+ 0064           ; 
+ 0064           ; //总线上起动停止条件 
+ 0064           ; void i2c_stop(void) 
+ 0064           ; { 
+ 0064                   .dbline 168
+ 0064           ;    TWCR = (1<<TWINT)|(1<<TWSTO)|(1<<TWEN); 
+ 0064 84E9              ldi R24,148
+ 0066 86BF              out 0x36,R24
+ 0068                   .dbline -2
+ 0068           L9:
+ 0068                   .dbline 0 ; func end
+ 0068 0895              ret
+ 006A                   .dbend
+ 006A                   .dbfunc e i2c_MAck _i2c_MAck fV
+                        .even
+ 006A           _i2c_MAck::
+ 006A                   .dbline -1
+ 006A                   .dbline 172
+ 006A           ; }
+ 006A           ; 
+ 006A           ; void i2c_MAck(void)
+ 006A           ; {
+ 006A                   .dbline 175
+ 006A           ;    //output_low(VSDA);
+ 006A           ;    //output_high(VSCL);
+ 006A           ;    PORTC&=~(1<<1);
+ 006A A998              cbi 0x15,1
+ 006C                   .dbline 176
+ 006C           ;    PORTC|=(1<<0);
+ 006C A89A              sbi 0x15,0
+ 006E                   .dbline 178
+ 006E           ;    
+ 006E           ;    Delay_nus(2);
+ 006E 02E0              ldi R16,2
+ 0070 10E0              ldi R17,0
+ 0072 CDD0              xcall _Delay_nus
+ 0074                   .dbline 182
+ 0074           ;    
+ 0074           ;    //output_low(VSCL);
+ 0074           ;    //output_high(VSDA);
+ 0074           ;    PORTC&=~(1<<0);
+ 0074 A898              cbi 0x15,0
+ 0076                   .dbline 183
+ 0076           ;    PORTC|=(1<<1);
+ 0076 A99A              sbi 0x15,1
+ 0078                   .dbline 185
+ 0078           ;    
+ 0078           ;    Delay_nus(1);
+ 0078 01E0              ldi R16,1
+ 007A 10E0              ldi R17,0
+ 007C C8D0              xcall _Delay_nus
+ 007E                   .dbline -2
+ 007E           L10:
+ 007E                   .dbline 0 ; func end
+ 007E 0895              ret
+ 0080                   .dbend
+ 0080                   .dbfunc e i2c_MNAck _i2c_MNAck fV
+                        .even
+ 0080           _i2c_MNAck::
+ 0080                   .dbline -1
+ 0080                   .dbline 189
+ 0080           ; }
+ 0080           ; 
+ 0080           ; void i2c_MNAck(void)
+ 0080           ; {
+ 0080                   .dbline 190
+ 0080           ;     DDRC|=(1<<0|1<<1); //SDA,SCL设置为输入 
+ 0080 84B3              in R24,0x14
+ 0082 8360              ori R24,3
+ 0084 84BB              out 0x14,R24
+ 0086                   .dbline 194
+ 0086           ;    
+ 0086           ;    //output_high(VSDA);
+ 0086           ;    //output_high(VSCL);
+ 0086           ;    PORTC|=(1<<1);
+ 0086 A99A              sbi 0x15,1
+ 0088                   .dbline 195
+ 0088           ;    PORTC|=(1<<0);
+ 0088 A89A              sbi 0x15,0
+ 008A                   .dbline 197
+ 008A           ; 
+ 008A           ;    Delay_nus(2);
+ 008A 02E0              ldi R16,2
+ 008C 10E0              ldi R17,0
+ 008E BFD0              xcall _Delay_nus
+ 0090                   .dbline 201
+ 0090           ; 
+ 0090           ;    //output_low(VSCL);
+ 0090           ;    //output_low(VSDA);
+ 0090           ;    PORTC&=~(1<<1);
+ 0090 A998              cbi 0x15,1
+ 0092                   .dbline 202
+ 0092           ;    PORTC&=~(1<<0);
+ 0092 A898              cbi 0x15,0
+ 0094                   .dbline 203
+ 0094           ;    Delay_nus(1);
+ 0094 01E0              ldi R16,1
+ 0096 10E0              ldi R17,0
+ 0098 BAD0              xcall _Delay_nus
+ 009A                   .dbline 205
+ 009A           ;    
+ 009A           ;     DDRC&=~(1<<0|1<<1); //SDA,SCL设置为输入
+ 009A 84B3              in R24,0x14
+ 009C 8C7F              andi R24,252
+ 009E 84BB              out 0x14,R24
+ 00A0                   .dbline -2
+ 00A0           L11:
+ 00A0                   .dbline 0 ; func end
+ 00A0 0895              ret
+ 00A2                   .dbend
+ 00A2                   .dbfunc e main _main fV
+                        .even
+ 00A2           _main::
+ 00A2                   .dbline -1
+ 00A2                   .dbline 209
+ 00A2           ; }
+ 00A2           ; 
+ 00A2           ; void main(void)
+ 00A2           ; {
+ 00A2                   .dbline 211
+ 00A2           ; 
+ 00A2           ;    CLI();         
+ 00A2 F894              cli
+ 00A4                   .dbline 214
+ 00A4           ;    
+ 00A4           ;    //设置PB1为输出,置高电平
+ 00A4           ;    DDRB|=(1<<3);
+ 00A4 BB9A              sbi 0x17,3
+ 00A6                   .dbline 215
+ 00A6           ;    PORTB|=(1<<3);      
+ 00A6 C39A              sbi 0x18,3
+ 00A8                   .dbline 216
+ 00A8           ;    Int0_Init();                                                                                               
+ 00A8 ABDF              xcall _Int0_Init
+ 00AA                   .dbline 218
+ 00AA           ;    
+ 00AA           ;    UART_Init();
+ 00AA DFD0              xcall _UART_Init
+ 00AC                   .dbline 220
+ 00AC           ;    
+ 00AC           ;    DDRC&=~(1<<0|1<<1); //SDA,SCL设置为输入
+ 00AC 84B3              in R24,0x14
+ 00AE 8C7F              andi R24,252
+ 00B0 84BB              out 0x14,R24
+ 00B2                   .dbline 221
+ 00B2           ;    PORTC|=(1<<0|1<<1); //使能内部上拉电阻   
+ 00B2 85B3              in R24,0x15
+ 00B4 8360              ori R24,3
+ 00B6 85BB              out 0x15,R24
+ 00B8                   .dbline 223
+ 00B8           ;    
+ 00B8           ;    twi_master_init();
+ 00B8 C6DF              xcall _twi_master_init
+ 00BA                   .dbline 225
+ 00BA           ;  
+ 00BA           ;    SEI();
+ 00BA 7894              sei
+ 00BC 47C0              xjmp L14
+ 00BE           L13:
+ 00BE                   .dbline 240
+ 00BE           ;    
+ 00BE           ;    /*while(1)    //循环
+ 00BE           ;    {        
+ 00BE           ;       if (flg_Int0_In==1) 
+ 00BE           ;       {                                       
+ 00BE           ;          flg_Int0_In=0;               
+ 00BE           ;          Int0_DoWithInt();
+ 00BE           ;          
+ 00BE           ;       }        
+ 00BE           ;               
+ 00BE           ;    }  
+ 00BE           ;    */
+ 00BE           ; 
+ 00BE           ;    while(1)
+ 00BE           ;    {
+ 00BE                   .dbline 259
+ 00BE           ;    
+ 00BE           ;       //---------- 写数据到i2c --------------
+ 00BE           ;       /*i2c_start();    
+ 00BE           ;   
+ 00BE           ;       //i2c_write_addr(0x5A, 0);   
+ 00BE           ;       i2c_write_data(0x5A);
+ 00BE           ;   
+ 00BE           ;       i2c_write_data(0x68);
+ 00BE           ;       i2c_write_data(0x27);
+ 00BE           ;       i2c_write_data(0x2b);
+ 00BE           ;       i2c_write_data(0x83);
+ 00BE           ;       i2c_write_data(0x35);
+ 00BE           ;       i2c_write_data(0x97);
+ 00BE           ;       i2c_write_data(0x10);  
+ 00BE           ; 
+ 00BE           ;       i2c_stop();
+ 00BE           ;       */
+ 00BE           ;       
+ 00BE           ;        if (flg_Int0_In==1) 
+ 00BE 80910000          lds R24,_flg_Int0_In
+ 00C2 8130              cpi R24,1
+ 00C4 09F0              breq X1
+ 00C6 3CC0              xjmp L16
+ 00C8           X1:
+ 00C8                   .dbline 260
+ 00C8           ;       {                                       
+ 00C8                   .dbline 261
+ 00C8           ;          flg_Int0_In=0;               
+ 00C8 2224              clr R2
+ 00CA 20920000          sts _flg_Int0_In,R2
+ 00CE                   .dbline 268
+ 00CE           ;          //Int0_DoWithInt();
+ 00CE           ;          
+ 00CE           ;      
+ 00CE           ; 
+ 00CE           ;          //--------- 从i2c读数据  -------------
+ 00CE           ;          
+ 00CE           ;          i2c_start();
+ 00CE C4DF              xcall _i2c_start
+ 00D0                   .dbline 270
+ 00D0           ;          
+ 00D0           ;          if(i2c_write_addr(0x5A, 1)==TW_MR_SLA_ACK)  //发送地址成功并收到ACK
+ 00D0 21E0              ldi R18,1
+ 00D2 0AE5              ldi R16,90
+ 00D4 57D0              xcall _i2c_write_addr
+ 00D6 0034              cpi R16,64
+ 00D8 A9F4              brne L18
+ 00DA                   .dbline 271
+ 00DA           ;          {
+ 00DA                   .dbline 272
+ 00DA           ;             tmp1=i2c_read();   //i2c_MAck();
+ 00DA 70D0              xcall _i2c_read
+ 00DC 00931800          sts _tmp1,R16
+ 00E0                   .dbline 273
+ 00E0           ;             tmp2=i2c_read();   //i2c_MAck();
+ 00E0 6DD0              xcall _i2c_read
+ 00E2 00931900          sts _tmp2,R16
+ 00E6                   .dbline 274
+ 00E6           ;             tmp3=i2c_read();   //i2c_MAck();
+ 00E6 6AD0              xcall _i2c_read
+ 00E8 00931A00          sts _tmp3,R16
+ 00EC                   .dbline 275
+ 00EC           ;             tmp4=i2c_read();   //i2c_MAck();
+ 00EC 67D0              xcall _i2c_read
+ 00EE 00931B00          sts _tmp4,R16
+ 00F2                   .dbline 276
+ 00F2           ;             tmp5=i2c_read();   //i2c_MAck();
+ 00F2 64D0              xcall _i2c_read
+ 00F4 00931C00          sts _tmp5,R16
+ 00F8                   .dbline 277
+ 00F8           ;             tmp6=i2c_read();   //i2c_MAck();
+ 00F8 61D0              xcall _i2c_read
+ 00FA 00931D00          sts _tmp6,R16
+ 00FE                   .dbline 278
+ 00FE           ;             tmp7=i2c_read2();   //i2c_MNAck();
+ 00FE 69D0              xcall _i2c_read2
+ 0100 00931E00          sts _tmp7,R16
+ 0104                   .dbline 280
+ 0104           ;                         
+ 0104           ;          }
+ 0104           L18:
+ 0104                   .dbline 281
+ 0104           ;          i2c_stop();
+ 0104 AFDF              xcall _i2c_stop
+ 0106                   .dbline 283
+ 0106           ;      
+ 0106           ;             UART_PutChar(0x80);
+ 0106 00E8              ldi R16,128
+ 0108 B7D0              xcall _UART_PutChar
+ 010A                   .dbline 284
+ 010A           ;             UART_PutChar(tmp1);
+ 010A 00911800          lds R16,_tmp1
+ 010E B4D0              xcall _UART_PutChar
+ 0110                   .dbline 285
+ 0110           ;             UART_PutChar(tmp2);
+ 0110 00911900          lds R16,_tmp2
+ 0114 B1D0              xcall _UART_PutChar
+ 0116                   .dbline 286
+ 0116           ;             UART_PutChar(tmp3);
+ 0116 00911A00          lds R16,_tmp3
+ 011A AED0              xcall _UART_PutChar
+ 011C                   .dbline 287
+ 011C           ;             UART_PutChar(tmp4);
+ 011C 00911B00          lds R16,_tmp4
+ 0120 ABD0              xcall _UART_PutChar
+ 0122                   .dbline 288
+ 0122           ;             UART_PutChar(tmp5);
+ 0122 00911C00          lds R16,_tmp5
+ 0126 A8D0              xcall _UART_PutChar
+ 0128                   .dbline 289
+ 0128           ;             UART_PutChar(tmp6);
+ 0128 00911D00          lds R16,_tmp6
+ 012C A5D0              xcall _UART_PutChar
+ 012E                   .dbline 290
+ 012E           ;             UART_PutChar(tmp7);
+ 012E 00911E00          lds R16,_tmp7
+ 0132 A2D0              xcall _UART_PutChar
+ 0134                   .dbline 292
+ 0134           ;           
+ 0134           ;          Delay_nms(8);
+ 0134 08E0              ldi R16,8
+ 0136 10E0              ldi R17,0
+ 0138 89D0              xcall _Delay_nms
+ 013A                   .dbline 293
+ 013A           ;          Delay_nus(300);
+ 013A 0CE2              ldi R16,300
+ 013C 11E0              ldi R17,1
+ 013E 67D0              xcall _Delay_nus
+ 0140                   .dbline 294
+ 0140           ;       }
+ 0140           L16:
+ 0140                   .dbline 296
+ 0140 8AB7              in R24,0x3a
+ 0142 8064              ori R24,64
+ 0144 8ABF              out 0x3a,R24
+ 0146                   .dbline 297
+ 0146 8BB7              in R24,0x3b
+ 0148 8064              ori R24,64
+ 014A 8BBF              out 0x3b,R24
+ 014C                   .dbline 299
+ 014C           L14:
+ 014C                   .dbline 239
+ 014C B8CF              xjmp L13
+ 014E           X0:
+ 014E                   .dbline -2
+ 014E           L12:
+ 014E                   .dbline 0 ; func end
+ 014E 0895              ret
+ 0150                   .dbend
+ 0150                   .dbfunc e i2c_maste_transt _i2c_maste_transt fV
+ 0150           ;           data -> R22
+ 0150           ;           addr -> R20
+                        .even
+ 0150           _i2c_maste_transt::
+ 0150 0E940000          xcall push_gset2
+ 0154 622F              mov R22,R18
+ 0156 402F              mov R20,R16
+ 0158                   .dbline -1
+ 0158                   .dbline 307
+ 0158           ;       
+ 0158           ;       GIFR|= (1<<6);      //通过写入"1"到GIFR.6来清零中断int0的标志位
+ 0158           ;       GICR|= (1<<6);      //enable int1
+ 0158           ;    
+ 0158           ;    }        
+ 0158           ;   
+ 0158           ; 
+ 0158           ; }
+ 0158           ; 
+ 0158           ; 
+ 0158           ; //操作步骤： 启动，发送地址，发送数据，关闭总线
+ 0158           ; void i2c_maste_transt(unsigned char addr, unsigned char data)
+ 0158           ; {
+ 0158                   .dbline 308
+ 0158           ;    i2c_start();
+ 0158 7FDF              xcall _i2c_start
+ 015A                   .dbline 319
+ 015A           ;       
+ 015A           ;  
+ 015A           ;    //if(i2c_write_addr(addr, 0)==TW_MT_SLA_ACK) //发送地址成功并收到ACK
+ 015A           ;    //{
+ 015A           ;    //   i2c_write_data(data);
+ 015A           ;    //}
+ 015A           ;    //else
+ 015A           ;    //    i2c_write_data(data);  //--test
+ 015A           ;    
+ 015A           ;   
+ 015A           ;    i2c_write_addr(addr, 0);   
+ 015A 2227              clr R18
+ 015C 042F              mov R16,R20
+ 015E 12D0              xcall _i2c_write_addr
+ 0160                   .dbline 322
+ 0160           ;    //i2c_write_data(0x5A);
+ 0160           ;   
+ 0160           ;    i2c_write_data(0x68);
+ 0160 08E6              ldi R16,104
+ 0162 22D0              xcall _i2c_write_data
+ 0164                   .dbline 323
+ 0164           ;    i2c_write_data(0x27);
+ 0164 07E2              ldi R16,39
+ 0166 20D0              xcall _i2c_write_data
+ 0168                   .dbline 324
+ 0168           ;    i2c_write_data(0x2b);
+ 0168 0BE2              ldi R16,43
+ 016A 1ED0              xcall _i2c_write_data
+ 016C                   .dbline 325
+ 016C           ;    i2c_write_data(0x83);
+ 016C 03E8              ldi R16,131
+ 016E 1CD0              xcall _i2c_write_data
+ 0170                   .dbline 326
+ 0170           ;    i2c_write_data(0x35);
+ 0170 05E3              ldi R16,53
+ 0172 1AD0              xcall _i2c_write_data
+ 0174                   .dbline 327
+ 0174           ;    i2c_write_data(0x97);
+ 0174 07E9              ldi R16,151
+ 0176 18D0              xcall _i2c_write_data
+ 0178                   .dbline 328
+ 0178           ;    i2c_write_data(0x10);     
+ 0178 00E1              ldi R16,16
+ 017A 16D0              xcall _i2c_write_data
+ 017C                   .dbline 331
+ 017C           ;     
+ 017C           ;    
+ 017C           ;    i2c_stop();
+ 017C 73DF              xcall _i2c_stop
+ 017E                   .dbline -2
+ 017E           L20:
+ 017E 0E940000          xcall pop_gset2
+ 0182                   .dbline 0 ; func end
+ 0182 0895              ret
+ 0184                   .dbsym r data 22 c
+ 0184                   .dbsym r addr 20 c
+ 0184                   .dbend
+ 0184                   .dbfunc e i2c_write_addr _i2c_write_addr fc
+ 0184           ;            r_w -> R18
+ 0184           ;           addr -> R16
+                        .even
+ 0184           _i2c_write_addr::
+ 0184                   .dbline -1
+ 0184                   .dbline 338
+ 0184           ;    
+ 0184           ; }
+ 0184           ; 
+ 0184           ; //把一个字节数据输入器件, 返回TWI状态
+ 0184           ; //发送地址,r_w：1为读，0为写
+ 0184           ; unsigned char i2c_write_addr(unsigned char addr,unsigned char r_w)
+ 0184           ; {
+ 0184                   .dbline 339
+ 0184           ;    if(r_w)
+ 0184 2223              tst R18
+ 0186 21F0              breq L22
+ 0188                   .dbline 340
+ 0188           ;    {
+ 0188                   .dbline 341
+ 0188           ;     TWDR = addr|r_w;     //RW 为1：读操作
+ 0188 202E              mov R2,R16
+ 018A 222A              or R2,R18
+ 018C 23B8              out 0x3,R2
+ 018E                   .dbline 342
+ 018E           ;    }
+ 018E 03C0              xjmp L23
+ 0190           L22:
+ 0190                   .dbline 344
+ 0190           ;    else
+ 0190           ;    {
+ 0190                   .dbline 345
+ 0190           ;    TWDR = addr & 0xFE;   // RW 为0: 写操作
+ 0190 802F              mov R24,R16
+ 0192 8E7F              andi R24,254
+ 0194 83B9              out 0x3,R24
+ 0196                   .dbline 346
+ 0196           ;    } 
+ 0196           L23:
+ 0196                   .dbline 348
+ 0196           ; 
+ 0196           ;    TWCR = (1<<TWINT)|(1<<TWEN); 
+ 0196 84E8              ldi R24,132
+ 0198 86BF              out 0x36,R24
+ 019A           L24:
+ 019A                   .dbline 349
+ 019A           L25:
+ 019A                   .dbline 349
+ 019A           ;    while (!(TWCR & (1<<TWINT)));
+ 019A 26B6              in R2,0x36
+ 019C 27FE              sbrs R2,7
+ 019E FDCF              rjmp L24
+ 01A0                   .dbline 350
+ 01A0           ;    asm("nop");
+ 01A0 0000              nop
+ 01A2                   .dbline 351
+ 01A2           ;    return(TWSR&0b11111000); //TWSR高五位为I2C工作状态。
+ 01A2 01B1              in R16,0x1
+ 01A4 087F              andi R16,248
+ 01A6                   .dbline -2
+ 01A6           L21:
+ 01A6                   .dbline 0 ; func end
+ 01A6 0895              ret
+ 01A8                   .dbsym r r_w 18 c
+ 01A8                   .dbsym r addr 16 c
+ 01A8                   .dbend
+ 01A8                   .dbfunc e i2c_write_data _i2c_write_data fc
+ 01A8           ;           data -> R16
+                        .even
+ 01A8           _i2c_write_data::
+ 01A8                   .dbline -1
+ 01A8                   .dbline 358
+ 01A8           ; }
+ 01A8           ; 
+ 01A8           ; 
+ 01A8           ; //把一个字节数据输入器件, 返回TWI状态
+ 01A8           ; //发送数据
+ 01A8           ; unsigned char i2c_write_data(unsigned char data)
+ 01A8           ; {
+ 01A8                   .dbline 359
+ 01A8           ;    TWDR = data;
+ 01A8 03B9              out 0x3,R16
+ 01AA                   .dbline 360
+ 01AA           ;    TWCR = (1<<TWINT)|(1<<TWEN); 
+ 01AA 84E8              ldi R24,132
+ 01AC 86BF              out 0x36,R24
+ 01AE           L28:
+ 01AE                   .dbline 361
+ 01AE           L29:
+ 01AE                   .dbline 361
+ 01AE           ;    while (!(TWCR & (1<<TWINT)));
+ 01AE 26B6              in R2,0x36
+ 01B0 27FE              sbrs R2,7
+ 01B2 FDCF              rjmp L28
+ 01B4                   .dbline 362
+ 01B4           ;    asm("nop");
+ 01B4 0000              nop
+ 01B6                   .dbline 363
+ 01B6           ;    return(TWSR&0b11111000); //TWSR高五位为I2C工作状态。
+ 01B6 01B1              in R16,0x1
+ 01B8 087F              andi R16,248
+ 01BA                   .dbline -2
+ 01BA           L27:
+ 01BA                   .dbline 0 ; func end
+ 01BA 0895              ret
+ 01BC                   .dbsym r data 16 c
+ 01BC                   .dbend
+ 01BC                   .dbfunc e i2c_read _i2c_read fc
+                        .even
+ 01BC           _i2c_read::
+ 01BC                   .dbline -1
+ 01BC                   .dbline 369
+ 01BC           ; }
+ 01BC           ; 
+ 01BC           ; 
+ 01BC           ; //从器件读出一个字节
+ 01BC           ; unsigned char i2c_read(void)
+ 01BC           ; {
+ 01BC                   .dbline 370
+ 01BC           ;    TWCR = (1<<TWINT)|(1<<TWEN); 
+ 01BC 84E8              ldi R24,132
+ 01BE 86BF              out 0x36,R24
+ 01C0                   .dbline 371
+ 01C0           ;    Twi_Ack();  //Twi_AcK(); 
+ 01C0                   .dbline 371
+ 01C0 86B7              in R24,0x36
+ 01C2 8F70              andi R24,15
+ 01C4 806C              ori R24,192
+ 01C6 86BF              out 0x36,R24
+ 01C8                   .dbline 371
+ 01C8                   .dbline 371
+ 01C8           L32:
+ 01C8                   .dbline 372
+ 01C8           L33:
+ 01C8                   .dbline 372
+ 01C8           ;    while (!(TWCR & (1<<TWINT)));
+ 01C8 26B6              in R2,0x36
+ 01CA 27FE              sbrs R2,7
+ 01CC FDCF              rjmp L32
+ 01CE                   .dbline 373
+ 01CE           ;    return(TWDR);
+ 01CE 03B1              in R16,0x3
+ 01D0                   .dbline -2
+ 01D0           L31:
+ 01D0                   .dbline 0 ; func end
+ 01D0 0895              ret
+ 01D2                   .dbend
+ 01D2                   .dbfunc e i2c_read2 _i2c_read2 fc
+                        .even
+ 01D2           _i2c_read2::
+ 01D2                   .dbline -1
+ 01D2                   .dbline 378
+ 01D2           ; }
+ 01D2           ; 
+ 01D2           ; //从器件读出一个字节
+ 01D2           ; unsigned char i2c_read2(void)
+ 01D2           ; {
+ 01D2                   .dbline 379
+ 01D2           ;    TWCR = (1<<TWINT)|(1<<TWEN); 
+ 01D2 84E8              ldi R24,132
+ 01D4 86BF              out 0x36,R24
+ 01D6                   .dbline 380
+ 01D6           ;    Twi_NoAcK();
+ 01D6                   .dbline 380
+ 01D6 86B7              in R24,0x36
+ 01D8 8F70              andi R24,15
+ 01DA 8068              ori R24,128
+ 01DC 86BF              out 0x36,R24
+ 01DE                   .dbline 380
+ 01DE                   .dbline 380
+ 01DE           L36:
+ 01DE                   .dbline 381
+ 01DE           L37:
+ 01DE                   .dbline 381
+ 01DE           ;    while (!(TWCR & (1<<TWINT)));
+ 01DE 26B6              in R2,0x36
+ 01E0 27FE              sbrs R2,7
+ 01E2 FDCF              rjmp L36
+ 01E4                   .dbline 382
+ 01E4           ;    return(TWDR);
+ 01E4 03B1              in R16,0x3
+ 01E6                   .dbline -2
+ 01E6           L35:
+ 01E6                   .dbline 0 ; func end
+ 01E6 0895              ret
+ 01E8                   .dbend
+ 01E8                   .dbfunc e i2c_maste_read _i2c_maste_read fc
+ 01E8           ;            tmp -> R20
+ 01E8           ;           addr -> R22
+                        .even
+ 01E8           _i2c_maste_read::
+ 01E8 0E940000          xcall push_gset2
+ 01EC 602F              mov R22,R16
+ 01EE                   .dbline -1
+ 01EE                   .dbline 388
+ 01EE           ; }
+ 01EE           ; 
+ 01EE           ; 
+ 01EE           ; //操作步骤，启动，发送地址，读数据，关闭总线
+ 01EE           ; unsigned char i2c_maste_read(unsigned char addr)
+ 01EE           ; {
+ 01EE                   .dbline 389
+ 01EE           ;   unsigned char tmp=0; 
+ 01EE 4427              clr R20
+ 01F0                   .dbline 390
+ 01F0           ;   i2c_start();
+ 01F0 33DF              xcall _i2c_start
+ 01F2                   .dbline 391
+ 01F2           ;   if(i2c_write_addr(addr, 1)==TW_MR_SLA_ACK)  //发送地址成功并收到ACK
+ 01F2 21E0              ldi R18,1
+ 01F4 062F              mov R16,R22
+ 01F6 C6DF              xcall _i2c_write_addr
+ 01F8 0034              cpi R16,64
+ 01FA 11F4              brne L40
+ 01FC                   .dbline 392
+ 01FC           ;   {
+ 01FC                   .dbline 393
+ 01FC           ;    tmp=i2c_read();
+ 01FC DFDF              xcall _i2c_read
+ 01FE 402F              mov R20,R16
+ 0200                   .dbline 394
+ 0200           ;   }
+ 0200           L40:
+ 0200                   .dbline 395
+ 0200           ;   i2c_stop();
+ 0200 31DF              xcall _i2c_stop
+ 0202                   .dbline 396
+ 0202           ;   return tmp;
+ 0202 042F              mov R16,R20
+ 0204                   .dbline -2
+ 0204           L39:
+ 0204 0E940000          xcall pop_gset2
+ 0208                   .dbline 0 ; func end
+ 0208 0895              ret
+ 020A                   .dbsym r tmp 20 c
+ 020A                   .dbsym r addr 22 c
+ 020A                   .dbend
+ 020A                   .dbfunc e Delay_1us _Delay_1us fV
+                        .even
+ 020A           _Delay_1us::
+ 020A                   .dbline -1
+ 020A                   .dbline 406
+ 020A           ; }
+ 020A           ; 
+ 020A           ; 
+ 020A           ; /*-----------------------------------------------------------------------
+ 020A           ; 延时函数
+ 020A           ; 系统时钟：7.3728M
+ 020A           ; -----------------------------------------------------------------------*/
+ 020A           ; //1us精确延时函数
+ 020A           ; void Delay_1us(void)     // 实际 8/7.3728＝1.085 us
+ 020A           ; {
+ 020A                   .dbline 407
+ 020A           ;    asm("nop");
+ 020A 0000              nop
+ 020C                   .dbline -2
+ 020C           L42:
+ 020C                   .dbline 0 ; func end
+ 020C 0895              ret
+ 020E                   .dbend
+ 020E                   .dbfunc e Delay_nus _Delay_nus fV
+ 020E           ;              n -> R20,R21
+                        .even
+ 020E           _Delay_nus::
+ 020E 0E940000          xcall push_gset1
+ 0212 A801              movw R20,R16
+ 0214                   .dbline -1
+ 0214                   .dbline 412
+ 0214           ; }
+ 0214           ; 
+ 0214           ; //nus延时函数, 10us以内为精确延时
+ 0214           ; void Delay_nus(unsigned int n)     
+ 0214           ; {
+ 0214 01C0              xjmp L45
+ 0216           L44:
+ 0216                   .dbline 414
+ 0216 F9DF              xcall _Delay_1us
+ 0218           L45:
+ 0218                   .dbline 413
+ 0218           ;    while (n--)
+ 0218 1A01              movw R2,R20
+ 021A 4150              subi R20,1
+ 021C 5040              sbci R21,0
+ 021E 2220              tst R2
+ 0220 D1F7              brne L44
+ 0222 3320              tst R3
+ 0224 C1F7              brne L44
+ 0226           X2:
+ 0226                   .dbline -2
+ 0226           L43:
+ 0226 0E940000          xcall pop_gset1
+ 022A                   .dbline 0 ; func end
+ 022A 0895              ret
+ 022C                   .dbsym r n 20 i
+ 022C                   .dbend
+ 022C                   .dbfunc e Delay_nus_Count _Delay_nus_Count fV
+ 022C           ;              n -> R16,R17
+                        .even
+ 022C           _Delay_nus_Count::
+ 022C                   .dbline -1
+ 022C                   .dbline 419
+ 022C           ;       Delay_1us();   
+ 022C           ; }  
+ 022C           ; 
+ 022C           ; //精确nus延时函数，10us以上的精确延时
+ 022C           ; void Delay_nus_Count(unsigned int n)   
+ 022C           ; { 
+ 022C 02C0              xjmp L49
+ 022E           L48:
+ 022E                   .dbline 427
+ 022E 0150              subi R16,1
+ 0230 1040              sbci R17,0
+ 0232           L49:
+ 0232                   .dbline 426
+ 0232           ;    //Delay_10us： Delay_nus_Count(11);   //7.3728M
+ 0232           ;    //Delay_20us： Delay_nus_Count(25);   //7.3728M
+ 0232           ;    //Delay_50us： Delay_nus_Count(60);   //7.3728M
+ 0232           ;    //Delay_100us： Delay_nus_Count(121);   //7.3728M
+ 0232           ;    //Delay_500us： Delay_nus_Count(613);   //7.3728M
+ 0232           ; 
+ 0232           ;    while(n) 
+ 0232 0030              cpi R16,0
+ 0234 0107              cpc R16,R17
+ 0236 D9F7              brne L48
+ 0238           X3:
+ 0238                   .dbline -2
+ 0238           L47:
+ 0238                   .dbline 0 ; func end
+ 0238 0895              ret
+ 023A                   .dbsym r n 16 i
+ 023A                   .dbend
+ 023A                   .dbfunc e Delay_1ms_Preci _Delay_1ms_Preci fV
+ 023A           ;              n -> R16,R17
+                        .even
+ 023A           _Delay_1ms_Preci::
+ 023A                   .dbline -1
+ 023A                   .dbline 432
+ 023A           ;       n--;    
+ 023A           ; }
+ 023A           ; 
+ 023A           ; //1ms精确延时函数
+ 023A           ; void Delay_1ms_Preci(void)    //7.3728M             
+ 023A           ; {
+ 023A                   .dbline 434
+ 023A           ;    unsigned int n;
+ 023A           ;    n=1225; 
+ 023A 09EC              ldi R16,1225
+ 023C 14E0              ldi R17,4
+ 023E 02C0              xjmp L53
+ 0240           L52:
+ 0240                   .dbline 436
+ 0240 0150              subi R16,1
+ 0242 1040              sbci R17,0
+ 0244           L53:
+ 0244                   .dbline 435
+ 0244           ;    while (n) 
+ 0244 0030              cpi R16,0
+ 0246 0107              cpc R16,R17
+ 0248 D9F7              brne L52
+ 024A           X4:
+ 024A                   .dbline -2
+ 024A           L51:
+ 024A                   .dbline 0 ; func end
+ 024A 0895              ret
+ 024C                   .dbsym r n 16 i
+ 024C                   .dbend
+ 024C                   .dbfunc e Delay_nms _Delay_nms fV
+ 024C           ;              n -> R20,R21
+                        .even
+ 024C           _Delay_nms::
+ 024C 0E940000          xcall push_gset1
+ 0250 A801              movw R20,R16
+ 0252                   .dbline -1
+ 0252                   .dbline 441
+ 0252           ;       n--;
+ 0252           ; }
+ 0252           ; 
+ 0252           ; //nms精确延时函数
+ 0252           ; void Delay_nms(unsigned int n)       
+ 0252           ; {
+ 0252 01C0              xjmp L57
+ 0254           L56:
+ 0254                   .dbline 443
+ 0254 F2DF              xcall _Delay_1ms_Preci
+ 0256           L57:
+ 0256                   .dbline 442
+ 0256           ;    while(n--)
+ 0256 1A01              movw R2,R20
+ 0258 4150              subi R20,1
+ 025A 5040              sbci R21,0
+ 025C 2220              tst R2
+ 025E D1F7              brne L56
+ 0260 3320              tst R3
+ 0262 C1F7              brne L56
+ 0264           X5:
+ 0264                   .dbline -2
+ 0264           L55:
+ 0264 0E940000          xcall pop_gset1
+ 0268                   .dbline 0 ; func end
+ 0268 0895              ret
+ 026A                   .dbsym r n 20 i
+ 026A                   .dbend
+ 026A                   .dbfunc e UART_Init _UART_Init fV
+                        .even
+ 026A           _UART_Init::
+ 026A                   .dbline -1
+ 026A                   .dbline 448
+ 026A           ;      Delay_1ms_Preci();
+ 026A           ; }
+ 026A           ; 
+ 026A           ; //串口初始化函数
+ 026A           ; void UART_Init(void)
+ 026A           ; {
+ 026A                   .dbline 449
+ 026A           ;    UCSRB = (1<<RXCIE)| (1<<RXEN) |(1<<TXEN);   //允许串口发送和接收，并响应接收完成中断
+ 026A 88E9              ldi R24,152
+ 026C 8AB9              out 0xa,R24
+ 026E                   .dbline 450
+ 026E           ;    UBRR = BAUD;
+ 026E 87E0              ldi R24,7
+ 0270 89B9              out 0x9,R24
+ 0272                   .dbline 451
+ 0272           ;    UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);   //8位数据＋1位stop位
+ 0272 86E8              ldi R24,134
+ 0274 80BD              out 0x20,R24
+ 0276                   .dbline -2
+ 0276           L59:
+ 0276                   .dbline 0 ; func end
+ 0276 0895              ret
+ 0278                   .dbend
+ 0278                   .dbfunc e UART_PutChar _UART_PutChar fV
+ 0278           ;              c -> R16
+                        .even
+ 0278           _UART_PutChar::
+ 0278                   .dbline -1
+ 0278                   .dbline 456
+ 0278           ; }
+ 0278           ; 
+ 0278           ; //串口输出字符
+ 0278           ; void UART_PutChar(unsigned char c)  
+ 0278           ; {
+ 0278           L61:
+ 0278                   .dbline 457
+ 0278           L62:
+ 0278                   .dbline 457
+ 0278           ;    while (!(UCSRA&(1 << UDRE)));    //判断上次发送有没有完成
+ 0278 5D9B              sbis 0xb,5
+ 027A FECF              rjmp L61
+ 027C                   .dbline 458
+ 027C           ;    UDR = c;
+ 027C 0CB9              out 0xc,R16
+ 027E                   .dbline -2
+ 027E           L60:
+ 027E                   .dbline 0 ; func end
+ 027E 0895              ret
+ 0280                   .dbsym r c 16 c
+ 0280                   .dbend
+ 0280                   .dbfunc e UART_Puts _UART_Puts fV
+ 0280           ;              s -> R20,R21
+                        .even
+ 0280           _UART_Puts::
+ 0280 0E940000          xcall push_gset1
+ 0284 A801              movw R20,R16
+ 0286                   .dbline -1
+ 0286                   .dbline 463
+ 0286           ; }
+ 0286           ; 
+ 0286           ; //串口输出字符串
+ 0286           ; void UART_Puts(unsigned char *s)
+ 0286           ; {
+ 0286 04C0              xjmp L66
+ 0288           L65:
+ 0288                   .dbline 465
+ 0288                   .dbline 466
+ 0288 FA01              movw R30,R20
+ 028A 0191              ld R16,Z+
+ 028C AF01              movw R20,R30
+ 028E F4DF              xcall _UART_PutChar
+ 0290                   .dbline 467
+ 0290           L66:
+ 0290                   .dbline 464
+ 0290           ;    while (*s)
+ 0290 FA01              movw R30,R20
+ 0292 2080              ldd R2,z+0
+ 0294 2220              tst R2
+ 0296 C1F7              brne L65
+ 0298                   .dbline -2
+ 0298           L64:
+ 0298 0E940000          xcall pop_gset1
+ 029C                   .dbline 0 ; func end
+ 029C 0895              ret
+ 029E                   .dbsym r s 20 pc
+ 029E                   .dbend
+ 029E                   .dbfunc e UART_PutBytes _UART_PutBytes fV
+ 029E           ;              i -> R20
+ 029E           ;           ilen -> R22
+ 029E           ;              s -> R10,R11
+                        .even
+ 029E           _UART_PutBytes::
+ 029E 0E940000          xcall push_gset3
+ 02A2 622F              mov R22,R18
+ 02A4 5801              movw R10,R16
+ 02A6                   .dbline -1
+ 02A6                   .dbline 472
+ 02A6           ;    {
+ 02A6           ;       UART_PutChar(*s++);
+ 02A6           ;    }
+ 02A6           ; }
+ 02A6           ; 
+ 02A6           ; //串口输出字节
+ 02A6           ; void UART_PutBytes(unsigned char *s, unsigned char ilen)
+ 02A6           ; {
+ 02A6                   .dbline 475
+ 02A6           ; unsigned char i;
+ 02A6           ; 
+ 02A6           ;    for(i=0;i<ilen;i++)
+ 02A6 4427              clr R20
+ 02A8 05C0              xjmp L72
+ 02AA           L69:
+ 02AA                   .dbline 476
+ 02AA                   .dbline 477
+ 02AA F501              movw R30,R10
+ 02AC 0191              ld R16,Z+
+ 02AE 5F01              movw R10,R30
+ 02B0 E3DF              xcall _UART_PutChar
+ 02B2                   .dbline 478
+ 02B2           L70:
+ 02B2                   .dbline 475
+ 02B2 4395              inc R20
+ 02B4           L72:
+ 02B4                   .dbline 475
+ 02B4 4617              cp R20,R22
+ 02B6 C8F3              brlo L69
+ 02B8                   .dbline -2
+ 02B8           L68:
+ 02B8 0E940000          xcall pop_gset3
+ 02BC                   .dbline 0 ; func end
+ 02BC 0895              ret
+ 02BE                   .dbsym r i 20 c
+ 02BE                   .dbsym r ilen 22 c
+ 02BE                   .dbsym r s 10 pc
+ 02BE                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile main.c
+ 0000           _flg_Int0_In::
+ 0000                   .blkb 1
+ 0001                   .dbsym e flg_Int0_In _flg_Int0_In c

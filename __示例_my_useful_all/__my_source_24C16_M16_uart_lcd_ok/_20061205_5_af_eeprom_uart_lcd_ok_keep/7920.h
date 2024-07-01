@@ -1,0 +1,35 @@
+//中文LCD
+#include <iom16v.h>
+#include <macros.h>
+
+//#define LCD_DATA_PORT  PORTA
+//#define LCD_DATA_DDR   DDRA
+//#define LCD_DATA_PIN   PINA
+//#define LCD_DATA       0x0ff   //portA   out
+
+#define LCD_CONTROL_PORT    PORTC
+#define LCD_CONTROL_DDR     DDRC
+
+//#define	RS	 1
+//#define	E	 0
+
+#define	RW	 2      //RW(SID) 
+//#define	E	 3      //E(sclk)    //问题: 为什么把这句加上,会出现重复编译的错误提示
+
+/*--------------------------------------------------------------------------------------------------
+Public function prototypes
+--------------------------------------------------------------------------------------------------*/
+
+//void CheckState();
+void LCD_init(void);
+void LCD_write_cmd(unsigned char scmd);
+void SdData(unsigned char DData); 
+void Send(unsigned char senddata);
+//void WriteTextScreen(unsigned char *TxtData);
+void WriteTextScreen2(unsigned char *pstr);
+//void LCD_write_str(unsigned char Y,unsigned char X,unsigned char *pstr);  //问题: 为什么加上这句就出现编译错误
+
+void DispSetCursor(unsigned char LineNum, unsigned char ColumnNum);
+void LCD_set_xy( unsigned char ColumnNum, unsigned char LineNum);
+void clearlcd(void);
+

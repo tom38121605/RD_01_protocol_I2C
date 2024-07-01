@@ -1,0 +1,1032 @@
+                        .module main.c
+                        .area data(ram, con, rel)
+ 0000           _RX_data::
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .blkb 11
+                        .area idata
+ 0001 00000000000000000000      .word 0,0,0,0,0
+ 000B 00                .byte 0
+                        .area data(ram, con, rel)
+ 000C                   .dbfile E:\__test\source\main.c
+ 000C                   .dbsym e RX_data _RX_data A[12:12]c
+ 000C           _RX_data2::
+ 000C                   .blkb 1
+                        .area idata
+ 000C 00                .byte 0
+                        .area data(ram, con, rel)
+ 000D                   .dbfile E:\__test\source\main.c
+ 000D                   .blkb 11
+                        .area idata
+ 000D 00000000000000000000      .word 0,0,0,0,0
+ 0017 00                .byte 0
+                        .area data(ram, con, rel)
+ 0018                   .dbfile E:\__test\source\main.c
+ 0018                   .dbsym e RX_data2 _RX_data2 A[12:12]c
+ 0018           _tmp1::
+ 0018                   .blkb 1
+                        .area idata
+ 0018 00                .byte 0
+                        .area data(ram, con, rel)
+ 0019                   .dbfile E:\__test\source\main.c
+ 0019                   .dbsym e tmp1 _tmp1 c
+ 0019           _tmp2::
+ 0019                   .blkb 1
+                        .area idata
+ 0019 00                .byte 0
+                        .area data(ram, con, rel)
+ 001A                   .dbfile E:\__test\source\main.c
+ 001A                   .dbsym e tmp2 _tmp2 c
+ 001A           _tmp3::
+ 001A                   .blkb 1
+                        .area idata
+ 001A 00                .byte 0
+                        .area data(ram, con, rel)
+ 001B                   .dbfile E:\__test\source\main.c
+ 001B                   .dbsym e tmp3 _tmp3 c
+ 001B           _tmp4::
+ 001B                   .blkb 1
+                        .area idata
+ 001B 00                .byte 0
+                        .area data(ram, con, rel)
+ 001C                   .dbfile E:\__test\source\main.c
+ 001C                   .dbsym e tmp4 _tmp4 c
+ 001C           _tmp5::
+ 001C                   .blkb 1
+                        .area idata
+ 001C 00                .byte 0
+                        .area data(ram, con, rel)
+ 001D                   .dbfile E:\__test\source\main.c
+ 001D                   .dbsym e tmp5 _tmp5 c
+ 001D           _tmp6::
+ 001D                   .blkb 1
+                        .area idata
+ 001D 00                .byte 0
+                        .area data(ram, con, rel)
+ 001E                   .dbfile E:\__test\source\main.c
+ 001E                   .dbsym e tmp6 _tmp6 c
+ 001E           _tmp7::
+ 001E                   .blkb 1
+                        .area idata
+ 001E 00                .byte 0
+                        .area data(ram, con, rel)
+ 001F                   .dbfile E:\__test\source\main.c
+ 001F                   .dbsym e tmp7 _tmp7 c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\__test\source\main.c
+ 0000                   .dbfunc e i2c_StartIC _i2c_StartIC fV
+                        .even
+ 0000           _i2c_StartIC::
+ 0000                   .dbline -1
+ 0000                   .dbline 70
+ 0000           ; //模拟IIC主机
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; #include <string.h>
+ 0000           ; //#include "config.h"
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //----串口------
+ 0000           ; #define  B9600  47    //波特率 7.3728MHz clock
+ 0000           ; #define  B19200 23
+ 0000           ; #define  B38400 11
+ 0000           ; #define  B57600 7
+ 0000           ; #define  BAUD B19200
+ 0000           ; 
+ 0000           ; #define RX_BUFFER_SIZE 12 
+ 0000           ; 
+ 0000           ; void UART_Init(void);               //串口初始化函数
+ 0000           ; void UART_Receive(void);            //串口接收函数
+ 0000           ; void UART_PutChar(unsigned char c); //串口输出字符
+ 0000           ; void UART_Puts(unsigned char *s);   //串口输出字符串
+ 0000           ; void UART_PutBytes(unsigned char *s, unsigned char ilen);  //串口输出字节
+ 0000           ; 
+ 0000           ; unsigned char RX_data[RX_BUFFER_SIZE]={0};   //串口接收缓冲区
+ 0000           ; unsigned char RX_data2[RX_BUFFER_SIZE]={0};
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void Delay_1us(void);  //1us精确延时函数
+ 0000           ; void Delay_nus(unsigned int n);  //nus延时函数, 10us以内为精确延时
+ 0000           ; 
+ 0000           ; void Delay_nus_Count(unsigned int n);     //精确nus延时函数，10us以上的精确延时
+ 0000           ; //Delay_10us： Delay_nus_Count(11);   //7.3728M
+ 0000           ; //Delay_20us： Delay_nus_Count(25);   //7.3728M
+ 0000           ; //Delay_50us： Delay_nus_Count(60);   //7.3728M
+ 0000           ; //Delay_100us： Delay_nus_Count(121);   //7.3728M
+ 0000           ; //Delay_500us： Delay_nus_Count(613);   //7.3728M
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void Delay_1ms_Preci(void);  //1ms精确延时函数
+ 0000           ; void Delay_nms(unsigned int n);  //nms精确延时函数
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //#define TW_MR_DATA_NACK 
+ 0000           ; volatile unsigned char tmp1=0;
+ 0000           ; volatile unsigned char tmp2=0;
+ 0000           ; volatile unsigned char tmp3=0;
+ 0000           ; volatile unsigned char tmp4=0;
+ 0000           ; volatile unsigned char tmp5=0;
+ 0000           ; volatile unsigned char tmp6=0;
+ 0000           ; volatile unsigned char tmp7=0;
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #define VSCL 0
+ 0000           ; #define VSDA 1
+ 0000           ; 
+ 0000           ; void i2c_StartIC(void);
+ 0000           ; void i2c_StopIC(void);
+ 0000           ; void i2c_MAck(void);
+ 0000           ; void i2c_MNAck(void);
+ 0000           ; unsigned char i2c_WaitAck(void);
+ 0000           ; void i2c_WriteByte(unsigned char iByte);
+ 0000           ; unsigned char  i2c_ReadByte(void);
+ 0000           ; 
+ 0000           ; 
+ 0000           ; void i2c_StartIC(void)
+ 0000           ; {
+ 0000                   .dbline 73
+ 0000           ;    //output_high(VSDA);
+ 0000           ;    //output_high(VSCL);
+ 0000           ;    PORTC|=(1<<VSDA);
+ 0000 A99A              sbi 0x15,1
+ 0002                   .dbline 74
+ 0002           ;    PORTC|=(1<<VSCL);
+ 0002 A89A              sbi 0x15,0
+ 0004                   .dbline 76
+ 0004           ;    
+ 0004           ;    Delay_nus(5);
+ 0004 05E0              ldi R16,5
+ 0006 10E0              ldi R17,0
+ 0008 AFD0              xcall _Delay_nus
+ 000A                   .dbline 79
+ 000A           ; 
+ 000A           ;    //output_low(VSDA);
+ 000A           ;    PORTC&=~(1<<VSDA);
+ 000A A998              cbi 0x15,1
+ 000C                   .dbline 81
+ 000C           ;    
+ 000C           ;    Delay_nus(4);
+ 000C 04E0              ldi R16,4
+ 000E 10E0              ldi R17,0
+ 0010 ABD0              xcall _Delay_nus
+ 0012                   .dbline 84
+ 0012           ; 
+ 0012           ;    //output_low(VSCL);
+ 0012           ;    PORTC&=~(1<<VSCL);
+ 0012 A898              cbi 0x15,0
+ 0014                   .dbline -2
+ 0014           L1:
+ 0014                   .dbline 0 ; func end
+ 0014 0895              ret
+ 0016                   .dbend
+ 0016                   .dbfunc e i2c_StopIC _i2c_StopIC fV
+                        .even
+ 0016           _i2c_StopIC::
+ 0016                   .dbline -1
+ 0016                   .dbline 88
+ 0016           ; }
+ 0016           ; 
+ 0016           ; void i2c_StopIC(void)
+ 0016           ; {
+ 0016                   .dbline 91
+ 0016           ;    //output_low(VSDA);
+ 0016           ;    //output_high(VSCL);
+ 0016           ;    PORTC&=~(1<<VSDA);
+ 0016 A998              cbi 0x15,1
+ 0018                   .dbline 92
+ 0018           ;    PORTC|=(1<<VSCL);
+ 0018 A89A              sbi 0x15,0
+ 001A                   .dbline 94
+ 001A           ; 
+ 001A           ;    Delay_nus(4);
+ 001A 04E0              ldi R16,4
+ 001C 10E0              ldi R17,0
+ 001E A4D0              xcall _Delay_nus
+ 0020                   .dbline 97
+ 0020           ; 
+ 0020           ;    //output_high(VSDA);
+ 0020           ;    PORTC|=(1<<VSDA);
+ 0020 A99A              sbi 0x15,1
+ 0022                   .dbline 99
+ 0022           ; 
+ 0022           ;    Delay_nus(5);
+ 0022 05E0              ldi R16,5
+ 0024 10E0              ldi R17,0
+ 0026 A0D0              xcall _Delay_nus
+ 0028                   .dbline 103
+ 0028           ; 
+ 0028           ;    //output_low(VSDA);
+ 0028           ;    //output_low(VSCL);
+ 0028           ;    PORTC&=~(1<<VSDA);   //--这句应可去掉
+ 0028 A998              cbi 0x15,1
+ 002A                   .dbline 104
+ 002A           ;    PORTC&=~(1<<VSCL);
+ 002A A898              cbi 0x15,0
+ 002C                   .dbline -2
+ 002C           L2:
+ 002C                   .dbline 0 ; func end
+ 002C 0895              ret
+ 002E                   .dbend
+ 002E                   .dbfunc e i2c_MAck _i2c_MAck fV
+                        .even
+ 002E           _i2c_MAck::
+ 002E                   .dbline -1
+ 002E                   .dbline 108
+ 002E           ; }
+ 002E           ; 
+ 002E           ; void i2c_MAck(void)
+ 002E           ; {
+ 002E                   .dbline 111
+ 002E           ;    //output_low(VSDA);
+ 002E           ;    //output_high(VSCL);
+ 002E           ;    PORTC&=~(1<<VSDA);
+ 002E A998              cbi 0x15,1
+ 0030                   .dbline 112
+ 0030           ;    PORTC|=(1<<VSCL);
+ 0030 A89A              sbi 0x15,0
+ 0032                   .dbline 114
+ 0032           ;    
+ 0032           ;    Delay_nus(4);
+ 0032 04E0              ldi R16,4
+ 0034 10E0              ldi R17,0
+ 0036 98D0              xcall _Delay_nus
+ 0038                   .dbline 118
+ 0038           ;    
+ 0038           ;    //output_low(VSCL);
+ 0038           ;    //output_high(VSDA);
+ 0038           ;    PORTC&=~(1<<VSCL);
+ 0038 A898              cbi 0x15,0
+ 003A                   .dbline 119
+ 003A           ;    PORTC|=(1<<VSDA);
+ 003A A99A              sbi 0x15,1
+ 003C                   .dbline -2
+ 003C           L3:
+ 003C                   .dbline 0 ; func end
+ 003C 0895              ret
+ 003E                   .dbend
+ 003E                   .dbfunc e i2c_MNAck _i2c_MNAck fV
+                        .even
+ 003E           _i2c_MNAck::
+ 003E                   .dbline -1
+ 003E                   .dbline 124
+ 003E           ; }
+ 003E           ; 
+ 003E           ; 
+ 003E           ; void i2c_MNAck(void)
+ 003E           ; {
+ 003E                   .dbline 127
+ 003E           ;    //output_high(VSDA);
+ 003E           ;    //output_high(VSCL);
+ 003E           ;    PORTC|=(1<<VSDA);
+ 003E A99A              sbi 0x15,1
+ 0040                   .dbline 128
+ 0040           ;    PORTC|=(1<<VSCL);
+ 0040 A89A              sbi 0x15,0
+ 0042                   .dbline 130
+ 0042           ; 
+ 0042           ;    Delay_nus(4);
+ 0042 04E0              ldi R16,4
+ 0044 10E0              ldi R17,0
+ 0046 90D0              xcall _Delay_nus
+ 0048                   .dbline 134
+ 0048           ; 
+ 0048           ;    //output_low(VSCL);
+ 0048           ;    //output_low(VSDA);
+ 0048           ;    PORTC&=~(1<<VSDA);
+ 0048 A998              cbi 0x15,1
+ 004A                   .dbline 135
+ 004A           ;    PORTC&=~(1<<VSCL);
+ 004A A898              cbi 0x15,0
+ 004C                   .dbline -2
+ 004C           L4:
+ 004C                   .dbline 0 ; func end
+ 004C 0895              ret
+ 004E                   .dbend
+ 004E                   .dbfunc e i2c_WaitAck _i2c_WaitAck fc
+ 004E           ;           iRet -> R20
+ 004E           ;     iErrorTime -> R22
+                        .even
+ 004E           _i2c_WaitAck::
+ 004E 0E940000          xcall push_gset2
+ 0052                   .dbline -1
+ 0052                   .dbline 140
+ 0052           ; }
+ 0052           ; 
+ 0052           ; 
+ 0052           ; unsigned char i2c_WaitAck(void)
+ 0052           ; {
+ 0052                   .dbline 141
+ 0052           ;    unsigned char iErrorTime=255;
+ 0052 6FEF              ldi R22,255
+ 0054                   .dbline 145
+ 0054           ;    unsigned char iRet;
+ 0054           ; 
+ 0054           ;    //output_high(VSDA);
+ 0054           ;    PORTC|=(1<<VSDA);
+ 0054 A99A              sbi 0x15,1
+ 0056                   .dbline 146
+ 0056           ;    Delay_nus(1);
+ 0056 01E0              ldi R16,1
+ 0058 10E0              ldi R17,0
+ 005A 86D0              xcall _Delay_nus
+ 005C                   .dbline 148
+ 005C           ;    //output_high(VSCL);
+ 005C           ;    PORTC|=(1<<VSCL);
+ 005C A89A              sbi 0x15,0
+ 005E                   .dbline 150
+ 005E           ;    
+ 005E           ;    iRet=1;
+ 005E 41E0              ldi R20,1
+ 0060 03C0              xjmp L7
+ 0062           L6:
+ 0062                   .dbline 153
+ 0062           ; 
+ 0062           ;    while( PINC|=(1<<VSDA) )
+ 0062           ;    {
+ 0062                   .dbline 154
+ 0062           ;       iErrorTime--;
+ 0062 6A95              dec R22
+ 0064                   .dbline 155
+ 0064           ;       if(!iErrorTime)
+ 0064 09F4              brne L9
+ 0066                   .dbline 156
+ 0066           ;       {
+ 0066                   .dbline 158
+ 0066           ;          //return 0;
+ 0066           ;          iRet=0;
+ 0066 4427              clr R20
+ 0068                   .dbline 159
+ 0068           ;       }
+ 0068           L9:
+ 0068                   .dbline 160
+ 0068           L7:
+ 0068                   .dbline 152
+ 0068 83B3              in R24,0x13
+ 006A 8260              ori R24,2
+ 006C 83BB              out 0x13,R24
+ 006E 8823              tst R24
+ 0070 C1F7              brne L6
+ 0072                   .dbline 163
+ 0072           ;    }
+ 0072           ; 
+ 0072           ;    //output_low(VSCL);
+ 0072           ;    PORTC&=~(1<<VSCL);
+ 0072 A898              cbi 0x15,0
+ 0074                   .dbline 166
+ 0074           ; 
+ 0074           ;    //output_high(VSDA);  //test
+ 0074           ;    PORTC|=(1<<VSDA);
+ 0074 A99A              sbi 0x15,1
+ 0076                   .dbline 169
+ 0076           ;    
+ 0076           ;    //return 1;
+ 0076           ;    return iRet;
+ 0076 042F              mov R16,R20
+ 0078                   .dbline -2
+ 0078           L5:
+ 0078 0E940000          xcall pop_gset2
+ 007C                   .dbline 0 ; func end
+ 007C 0895              ret
+ 007E                   .dbsym r iRet 20 c
+ 007E                   .dbsym r iErrorTime 22 c
+ 007E                   .dbend
+ 007E                   .dbfunc e i2c_WriteByte _i2c_WriteByte fV
+ 007E           ;              i -> R20
+ 007E           ;          iByte -> R22
+                        .even
+ 007E           _i2c_WriteByte::
+ 007E 0E940000          xcall push_gset2
+ 0082 602F              mov R22,R16
+ 0084                   .dbline -1
+ 0084                   .dbline 175
+ 0084           ; 
+ 0084           ; }
+ 0084           ; 
+ 0084           ; 
+ 0084           ; void i2c_WriteByte(unsigned char iByte)
+ 0084           ; {
+ 0084                   .dbline 178
+ 0084           ;    unsigned char  i;
+ 0084           ; 
+ 0084           ;    for (i=0; i<0x08; i++)
+ 0084 4427              clr R20
+ 0086 0CC0              xjmp L15
+ 0088           L12:
+ 0088                   .dbline 179
+ 0088           ;    {
+ 0088                   .dbline 180
+ 0088           ;       if(iByte & 0x80)
+ 0088 67FF              sbrs R22,7
+ 008A 02C0              rjmp L16
+ 008C                   .dbline 182
+ 008C           ;          //output_high(VSDA);
+ 008C           ;          PORTC|=(1<<VSDA);
+ 008C A99A              sbi 0x15,1
+ 008E 01C0              xjmp L17
+ 0090           L16:
+ 0090                   .dbline 185
+ 0090           ;       else
+ 0090           ;          //output_low(VSDA);
+ 0090           ;          PORTC&=~(1<<VSDA);
+ 0090 A998              cbi 0x15,1
+ 0092           L17:
+ 0092                   .dbline 188
+ 0092 A89A              sbi 0x15,0
+ 0094                   .dbline 190
+ 0094 04E0              ldi R16,4
+ 0096 10E0              ldi R17,0
+ 0098 67D0              xcall _Delay_nus
+ 009A                   .dbline 193
+ 009A A898              cbi 0x15,0
+ 009C                   .dbline 196
+ 009C 660F              lsl R22
+ 009E                   .dbline 197
+ 009E           L13:
+ 009E                   .dbline 178
+ 009E 4395              inc R20
+ 00A0           L15:
+ 00A0                   .dbline 178
+ 00A0 4830              cpi R20,8
+ 00A2 90F3              brlo L12
+ 00A4                   .dbline -2
+ 00A4           L11:
+ 00A4 0E940000          xcall pop_gset2
+ 00A8                   .dbline 0 ; func end
+ 00A8 0895              ret
+ 00AA                   .dbsym r i 20 c
+ 00AA                   .dbsym r iByte 22 c
+ 00AA                   .dbend
+ 00AA                   .dbfunc e i2c_ReadByte _i2c_ReadByte fc
+ 00AA           ;          iByte -> R20
+ 00AA           ;              i -> R22
+                        .even
+ 00AA           _i2c_ReadByte::
+ 00AA 0E940000          xcall push_gset2
+ 00AE                   .dbline -1
+ 00AE                   .dbline 203
+ 00AE           ; 
+ 00AE           ;       //output_high(VSCL);
+ 00AE           ;       PORTC|=(1<<VSCL);
+ 00AE           ; 
+ 00AE           ;       Delay_nus(4);
+ 00AE           ; 
+ 00AE           ;       //output_low(VSCL);
+ 00AE           ;       PORTC&=~(1<<VSCL);
+ 00AE           ;       
+ 00AE           ; 
+ 00AE           ;       iByte <<= 0x01;
+ 00AE           ;    }
+ 00AE           ; 
+ 00AE           ; }
+ 00AE           ; 
+ 00AE           ; 
+ 00AE           ; unsigned char i2c_ReadByte(void)
+ 00AE           ; {
+ 00AE                   .dbline 207
+ 00AE           ;    unsigned char   i;
+ 00AE           ;    unsigned char   iByte;
+ 00AE           ; 
+ 00AE           ;    for (i=0; i<0x08; i++)
+ 00AE 6627              clr R22
+ 00B0 0DC0              xjmp L22
+ 00B2           L19:
+ 00B2                   .dbline 208
+ 00B2           ;    {
+ 00B2                   .dbline 209
+ 00B2           ;       iByte <<= 0x01;
+ 00B2 440F              lsl R20
+ 00B4                   .dbline 211
+ 00B4           ;       //output_high(VSCL);
+ 00B4           ;       PORTC|=(1<<VSCL);
+ 00B4 A89A              sbi 0x15,0
+ 00B6                   .dbline 213
+ 00B6           ; 
+ 00B6           ;       if( PINC|=(1<<VSDA) )
+ 00B6 83B3              in R24,0x13
+ 00B8 8260              ori R24,2
+ 00BA 83BB              out 0x13,R24
+ 00BC 8823              tst R24
+ 00BE 09F0              breq L23
+ 00C0                   .dbline 214
+ 00C0           ;          iByte |= 0x01;
+ 00C0 4160              ori R20,1
+ 00C2           L23:
+ 00C2                   .dbline 216
+ 00C2 04E0              ldi R16,4
+ 00C4 10E0              ldi R17,0
+ 00C6 50D0              xcall _Delay_nus
+ 00C8                   .dbline 219
+ 00C8 A898              cbi 0x15,0
+ 00CA                   .dbline 220
+ 00CA           L20:
+ 00CA                   .dbline 207
+ 00CA 6395              inc R22
+ 00CC           L22:
+ 00CC                   .dbline 207
+ 00CC 6830              cpi R22,8
+ 00CE 88F3              brlo L19
+ 00D0                   .dbline 222
+ 00D0           ; 
+ 00D0           ;       Delay_nus(4);
+ 00D0           ; 
+ 00D0           ;       //output_low(VSCL);
+ 00D0           ;       PORTC&=~(1<<VSCL);
+ 00D0           ;    }
+ 00D0           ; 
+ 00D0           ;    return iByte;
+ 00D0 042F              mov R16,R20
+ 00D2                   .dbline -2
+ 00D2           L18:
+ 00D2 0E940000          xcall pop_gset2
+ 00D6                   .dbline 0 ; func end
+ 00D6 0895              ret
+ 00D8                   .dbsym r iByte 20 c
+ 00D8                   .dbsym r i 22 c
+ 00D8                   .dbend
+ 00D8                   .dbfunc e main _main fV
+                        .even
+ 00D8           _main::
+ 00D8                   .dbline -1
+ 00D8                   .dbline 229
+ 00D8           ; 
+ 00D8           ; }
+ 00D8           ; 
+ 00D8           ; 
+ 00D8           ; 
+ 00D8           ; void main(void)
+ 00D8           ; {
+ 00D8                   .dbline 231
+ 00D8           ; 
+ 00D8           ;    CLI();                                                                                                     
+ 00D8 F894              cli
+ 00DA                   .dbline 233
+ 00DA           ;    
+ 00DA           ;    UART_Init();
+ 00DA 74D0              xcall _UART_Init
+ 00DC                   .dbline 237
+ 00DC           ;    
+ 00DC           ;    //DDRC&=~(1<<VSCL|1<<VSDA); //SDA,SCL设置为输入
+ 00DC           ;    //PORTC|=(1<<VSCL|1<<VSDA); //使能内部上拉电阻   
+ 00DC           ;    DDRC|=(1<<VSCL|1<<VSDA); //SDA,SCL设置为输入
+ 00DC 84B3              in R24,0x14
+ 00DE 8360              ori R24,3
+ 00E0 84BB              out 0x14,R24
+ 00E2                   .dbline 238
+ 00E2           ;    PORTC&=~(1<<VSCL|1<<VSDA); //使能内部上拉电阻   
+ 00E2 85B3              in R24,0x15
+ 00E4 8C7F              andi R24,252
+ 00E6 85BB              out 0x15,R24
+ 00E8                   .dbline 241
+ 00E8           ;    
+ 00E8           ;  
+ 00E8           ;    SEI();
+ 00E8 7894              sei
+ 00EA 3AC0              xjmp L27
+ 00EC           L26:
+ 00EC                   .dbline 247
+ 00EC                   .dbline 267
+ 00EC 89DF              xcall _i2c_StartIC
+ 00EE                   .dbline 268
+ 00EE 0BE5              ldi R16,91
+ 00F0 C6DF              xcall _i2c_WriteByte
+ 00F2                   .dbline 272
+ 00F2 DBDF              xcall _i2c_ReadByte
+ 00F4 00931800          sts _tmp1,R16
+ 00F8                   .dbline 272
+ 00F8 9ADF              xcall _i2c_MAck
+ 00FA                   .dbline 273
+ 00FA D7DF              xcall _i2c_ReadByte
+ 00FC 00931900          sts _tmp2,R16
+ 0100                   .dbline 273
+ 0100 96DF              xcall _i2c_MAck
+ 0102                   .dbline 274
+ 0102 D3DF              xcall _i2c_ReadByte
+ 0104 00931A00          sts _tmp3,R16
+ 0108                   .dbline 274
+ 0108 92DF              xcall _i2c_MAck
+ 010A                   .dbline 275
+ 010A CFDF              xcall _i2c_ReadByte
+ 010C 00931B00          sts _tmp4,R16
+ 0110                   .dbline 275
+ 0110 8EDF              xcall _i2c_MAck
+ 0112                   .dbline 276
+ 0112 CBDF              xcall _i2c_ReadByte
+ 0114 00931C00          sts _tmp5,R16
+ 0118                   .dbline 276
+ 0118 8ADF              xcall _i2c_MAck
+ 011A                   .dbline 277
+ 011A C7DF              xcall _i2c_ReadByte
+ 011C 00931D00          sts _tmp6,R16
+ 0120                   .dbline 277
+ 0120 86DF              xcall _i2c_MAck
+ 0122                   .dbline 278
+ 0122 C3DF              xcall _i2c_ReadByte
+ 0124 00931E00          sts _tmp7,R16
+ 0128                   .dbline 281
+ 0128 76DF              xcall _i2c_StopIC
+ 012A                   .dbline 284
+ 012A 00911800          lds R16,_tmp1
+ 012E 51D0              xcall _UART_PutChar
+ 0130                   .dbline 285
+ 0130 00911900          lds R16,_tmp2
+ 0134 4ED0              xcall _UART_PutChar
+ 0136                   .dbline 286
+ 0136 00911A00          lds R16,_tmp3
+ 013A 4BD0              xcall _UART_PutChar
+ 013C                   .dbline 287
+ 013C 00911B00          lds R16,_tmp4
+ 0140 48D0              xcall _UART_PutChar
+ 0142                   .dbline 288
+ 0142 00911C00          lds R16,_tmp5
+ 0146 45D0              xcall _UART_PutChar
+ 0148                   .dbline 289
+ 0148 00911D00          lds R16,_tmp6
+ 014C 42D0              xcall _UART_PutChar
+ 014E                   .dbline 290
+ 014E 00911E00          lds R16,_tmp7
+ 0152 3FD0              xcall _UART_PutChar
+ 0154                   .dbline 292
+ 0154 08E0              ldi R16,8
+ 0156 10E0              ldi R17,0
+ 0158 26D0              xcall _Delay_nms
+ 015A                   .dbline 293
+ 015A 0CE2              ldi R16,300
+ 015C 11E0              ldi R17,1
+ 015E 04D0              xcall _Delay_nus
+ 0160                   .dbline 294
+ 0160           L27:
+ 0160                   .dbline 246
+ 0160 C5CF              xjmp L26
+ 0162           X0:
+ 0162                   .dbline -2
+ 0162           L25:
+ 0162                   .dbline 0 ; func end
+ 0162 0895              ret
+ 0164                   .dbend
+ 0164                   .dbfunc e Delay_1us _Delay_1us fV
+                        .even
+ 0164           _Delay_1us::
+ 0164                   .dbline -1
+ 0164                   .dbline 306
+ 0164           ;    
+ 0164           ;    
+ 0164           ;    //return;
+ 0164           ; 
+ 0164           ;    while(1)
+ 0164           ;    {   
+ 0164           ; 
+ 0164           ;       //--------- 从i2c读数据  -------------
+ 0164           ;       
+ 0164           ;       /*i2c_start();
+ 0164           ;       if(i2c_write_addr(0x5A, 1)==TW_MR_SLA_ACK)  //发送地址成功并收到ACK
+ 0164           ;       {     
+ 0164           ;          tmp1=i2c_read();                          
+ 0164           ;          tmp2=i2c_read();
+ 0164           ;          tmp3=i2c_read();
+ 0164           ;          tmp4=i2c_read();
+ 0164           ;          tmp5=i2c_read();
+ 0164           ;          tmp6=i2c_read();   
+ 0164           ;          tmp7=i2c_read();         
+ 0164           ;                      
+ 0164           ;       }
+ 0164           ;       i2c_stop();
+ 0164           ;       */
+ 0164           ; 
+ 0164           ; 
+ 0164           ;       i2c_StartIC(); 
+ 0164           ;       i2c_WriteByte(0x5b);
+ 0164           ;       
+ 0164           ;       //if (i2c_WaitAck() ==1 )
+ 0164           ;       //{
+ 0164           ;          tmp1=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp2=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp3=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp4=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp5=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp6=i2c_ReadByte(); i2c_MAck();
+ 0164           ;          tmp7=i2c_ReadByte(); //i2c_MAck();
+ 0164           ;       //}
+ 0164           ;       
+ 0164           ;       i2c_StopIC();
+ 0164           ;       
+ 0164           ;   
+ 0164           ;          UART_PutChar(tmp1);      
+ 0164           ;          UART_PutChar(tmp2);      
+ 0164           ;          UART_PutChar(tmp3);      
+ 0164           ;          UART_PutChar(tmp4);      
+ 0164           ;          UART_PutChar(tmp5);      
+ 0164           ;          UART_PutChar(tmp6);      
+ 0164           ;          UART_PutChar(tmp7);      
+ 0164           ;        
+ 0164           ;       Delay_nms(8);
+ 0164           ;       Delay_nus(300);
+ 0164           ;    } 
+ 0164           ; 
+ 0164           ; }
+ 0164           ; 
+ 0164           ; 
+ 0164           ; 
+ 0164           ; /*-----------------------------------------------------------------------
+ 0164           ; 延时函数
+ 0164           ; 系统时钟：7.3728M
+ 0164           ; -----------------------------------------------------------------------*/
+ 0164           ; //1us精确延时函数
+ 0164           ; void Delay_1us(void)     // 实际 8/7.3728＝1.085 us
+ 0164           ; {
+ 0164                   .dbline 307
+ 0164           ;    asm("nop");
+ 0164 0000              nop
+ 0166                   .dbline -2
+ 0166           L29:
+ 0166                   .dbline 0 ; func end
+ 0166 0895              ret
+ 0168                   .dbend
+ 0168                   .dbfunc e Delay_nus _Delay_nus fV
+ 0168           ;              n -> R20,R21
+                        .even
+ 0168           _Delay_nus::
+ 0168 0E940000          xcall push_gset1
+ 016C A801              movw R20,R16
+ 016E                   .dbline -1
+ 016E                   .dbline 312
+ 016E           ; }
+ 016E           ; 
+ 016E           ; //nus延时函数, 10us以内为精确延时
+ 016E           ; void Delay_nus(unsigned int n)     
+ 016E           ; {
+ 016E 01C0              xjmp L32
+ 0170           L31:
+ 0170                   .dbline 314
+ 0170 F9DF              xcall _Delay_1us
+ 0172           L32:
+ 0172                   .dbline 313
+ 0172           ;    while (n--)
+ 0172 1A01              movw R2,R20
+ 0174 4150              subi R20,1
+ 0176 5040              sbci R21,0
+ 0178 2220              tst R2
+ 017A D1F7              brne L31
+ 017C 3320              tst R3
+ 017E C1F7              brne L31
+ 0180           X1:
+ 0180                   .dbline -2
+ 0180           L30:
+ 0180 0E940000          xcall pop_gset1
+ 0184                   .dbline 0 ; func end
+ 0184 0895              ret
+ 0186                   .dbsym r n 20 i
+ 0186                   .dbend
+ 0186                   .dbfunc e Delay_nus_Count _Delay_nus_Count fV
+ 0186           ;              n -> R16,R17
+                        .even
+ 0186           _Delay_nus_Count::
+ 0186                   .dbline -1
+ 0186                   .dbline 319
+ 0186           ;       Delay_1us();   
+ 0186           ; }  
+ 0186           ; 
+ 0186           ; //精确nus延时函数，10us以上的精确延时
+ 0186           ; void Delay_nus_Count(unsigned int n)   
+ 0186           ; { 
+ 0186 02C0              xjmp L36
+ 0188           L35:
+ 0188                   .dbline 327
+ 0188 0150              subi R16,1
+ 018A 1040              sbci R17,0
+ 018C           L36:
+ 018C                   .dbline 326
+ 018C           ;    //Delay_10us： Delay_nus_Count(11);   //7.3728M
+ 018C           ;    //Delay_20us： Delay_nus_Count(25);   //7.3728M
+ 018C           ;    //Delay_50us： Delay_nus_Count(60);   //7.3728M
+ 018C           ;    //Delay_100us： Delay_nus_Count(121);   //7.3728M
+ 018C           ;    //Delay_500us： Delay_nus_Count(613);   //7.3728M
+ 018C           ; 
+ 018C           ;    while(n) 
+ 018C 0030              cpi R16,0
+ 018E 0107              cpc R16,R17
+ 0190 D9F7              brne L35
+ 0192           X2:
+ 0192                   .dbline -2
+ 0192           L34:
+ 0192                   .dbline 0 ; func end
+ 0192 0895              ret
+ 0194                   .dbsym r n 16 i
+ 0194                   .dbend
+ 0194                   .dbfunc e Delay_1ms_Preci _Delay_1ms_Preci fV
+ 0194           ;              n -> R16,R17
+                        .even
+ 0194           _Delay_1ms_Preci::
+ 0194                   .dbline -1
+ 0194                   .dbline 332
+ 0194           ;       n--;    
+ 0194           ; }
+ 0194           ; 
+ 0194           ; //1ms精确延时函数
+ 0194           ; void Delay_1ms_Preci(void)    //7.3728M             
+ 0194           ; {
+ 0194                   .dbline 334
+ 0194           ;    unsigned int n;
+ 0194           ;    n=1225; 
+ 0194 09EC              ldi R16,1225
+ 0196 14E0              ldi R17,4
+ 0198 02C0              xjmp L40
+ 019A           L39:
+ 019A                   .dbline 336
+ 019A 0150              subi R16,1
+ 019C 1040              sbci R17,0
+ 019E           L40:
+ 019E                   .dbline 335
+ 019E           ;    while (n) 
+ 019E 0030              cpi R16,0
+ 01A0 0107              cpc R16,R17
+ 01A2 D9F7              brne L39
+ 01A4           X3:
+ 01A4                   .dbline -2
+ 01A4           L38:
+ 01A4                   .dbline 0 ; func end
+ 01A4 0895              ret
+ 01A6                   .dbsym r n 16 i
+ 01A6                   .dbend
+ 01A6                   .dbfunc e Delay_nms _Delay_nms fV
+ 01A6           ;              n -> R20,R21
+                        .even
+ 01A6           _Delay_nms::
+ 01A6 0E940000          xcall push_gset1
+ 01AA A801              movw R20,R16
+ 01AC                   .dbline -1
+ 01AC                   .dbline 341
+ 01AC           ;       n--;
+ 01AC           ; }
+ 01AC           ; 
+ 01AC           ; //nms精确延时函数
+ 01AC           ; void Delay_nms(unsigned int n)       
+ 01AC           ; {
+ 01AC 01C0              xjmp L44
+ 01AE           L43:
+ 01AE                   .dbline 343
+ 01AE F2DF              xcall _Delay_1ms_Preci
+ 01B0           L44:
+ 01B0                   .dbline 342
+ 01B0           ;    while(n--)
+ 01B0 1A01              movw R2,R20
+ 01B2 4150              subi R20,1
+ 01B4 5040              sbci R21,0
+ 01B6 2220              tst R2
+ 01B8 D1F7              brne L43
+ 01BA 3320              tst R3
+ 01BC C1F7              brne L43
+ 01BE           X4:
+ 01BE                   .dbline -2
+ 01BE           L42:
+ 01BE 0E940000          xcall pop_gset1
+ 01C2                   .dbline 0 ; func end
+ 01C2 0895              ret
+ 01C4                   .dbsym r n 20 i
+ 01C4                   .dbend
+ 01C4                   .dbfunc e UART_Init _UART_Init fV
+                        .even
+ 01C4           _UART_Init::
+ 01C4                   .dbline -1
+ 01C4                   .dbline 348
+ 01C4           ;      Delay_1ms_Preci();
+ 01C4           ; }
+ 01C4           ; 
+ 01C4           ; //串口初始化函数
+ 01C4           ; void UART_Init(void)
+ 01C4           ; {
+ 01C4                   .dbline 349
+ 01C4           ;    UCSRB = (1<<RXCIE)| (1<<RXEN) |(1<<TXEN);   //允许串口发送和接收，并响应接收完成中断
+ 01C4 88E9              ldi R24,152
+ 01C6 8AB9              out 0xa,R24
+ 01C8                   .dbline 350
+ 01C8           ;    UBRR = BAUD;
+ 01C8 87E1              ldi R24,23
+ 01CA 89B9              out 0x9,R24
+ 01CC                   .dbline 351
+ 01CC           ;    UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);   //8位数据＋1位stop位
+ 01CC 86E8              ldi R24,134
+ 01CE 80BD              out 0x20,R24
+ 01D0                   .dbline -2
+ 01D0           L46:
+ 01D0                   .dbline 0 ; func end
+ 01D0 0895              ret
+ 01D2                   .dbend
+ 01D2                   .dbfunc e UART_PutChar _UART_PutChar fV
+ 01D2           ;              c -> R16
+                        .even
+ 01D2           _UART_PutChar::
+ 01D2                   .dbline -1
+ 01D2                   .dbline 356
+ 01D2           ; }
+ 01D2           ; 
+ 01D2           ; //串口输出字符
+ 01D2           ; void UART_PutChar(unsigned char c)  
+ 01D2           ; {
+ 01D2           L48:
+ 01D2                   .dbline 357
+ 01D2           L49:
+ 01D2                   .dbline 357
+ 01D2           ;    while (!(UCSRA&(1 << UDRE)));    //判断上次发送有没有完成
+ 01D2 5D9B              sbis 0xb,5
+ 01D4 FECF              rjmp L48
+ 01D6                   .dbline 358
+ 01D6           ;    UDR = c;
+ 01D6 0CB9              out 0xc,R16
+ 01D8                   .dbline -2
+ 01D8           L47:
+ 01D8                   .dbline 0 ; func end
+ 01D8 0895              ret
+ 01DA                   .dbsym r c 16 c
+ 01DA                   .dbend
+ 01DA                   .dbfunc e UART_Puts _UART_Puts fV
+ 01DA           ;              s -> R20,R21
+                        .even
+ 01DA           _UART_Puts::
+ 01DA 0E940000          xcall push_gset1
+ 01DE A801              movw R20,R16
+ 01E0                   .dbline -1
+ 01E0                   .dbline 363
+ 01E0           ; }
+ 01E0           ; 
+ 01E0           ; //串口输出字符串
+ 01E0           ; void UART_Puts(unsigned char *s)
+ 01E0           ; {
+ 01E0 04C0              xjmp L53
+ 01E2           L52:
+ 01E2                   .dbline 365
+ 01E2                   .dbline 366
+ 01E2 FA01              movw R30,R20
+ 01E4 0191              ld R16,Z+
+ 01E6 AF01              movw R20,R30
+ 01E8 F4DF              xcall _UART_PutChar
+ 01EA                   .dbline 367
+ 01EA           L53:
+ 01EA                   .dbline 364
+ 01EA           ;    while (*s)
+ 01EA FA01              movw R30,R20
+ 01EC 2080              ldd R2,z+0
+ 01EE 2220              tst R2
+ 01F0 C1F7              brne L52
+ 01F2                   .dbline -2
+ 01F2           L51:
+ 01F2 0E940000          xcall pop_gset1
+ 01F6                   .dbline 0 ; func end
+ 01F6 0895              ret
+ 01F8                   .dbsym r s 20 pc
+ 01F8                   .dbend
+ 01F8                   .dbfunc e UART_PutBytes _UART_PutBytes fV
+ 01F8           ;              i -> R20
+ 01F8           ;           ilen -> R22
+ 01F8           ;              s -> R10,R11
+                        .even
+ 01F8           _UART_PutBytes::
+ 01F8 0E940000          xcall push_gset3
+ 01FC 622F              mov R22,R18
+ 01FE 5801              movw R10,R16
+ 0200                   .dbline -1
+ 0200                   .dbline 372
+ 0200           ;    {
+ 0200           ;       UART_PutChar(*s++);
+ 0200           ;    }
+ 0200           ; }
+ 0200           ; 
+ 0200           ; //串口输出字节
+ 0200           ; void UART_PutBytes(unsigned char *s, unsigned char ilen)
+ 0200           ; {
+ 0200                   .dbline 375
+ 0200           ; unsigned char i;
+ 0200           ; 
+ 0200           ;    for(i=0;i<ilen;i++)
+ 0200 4427              clr R20
+ 0202 05C0              xjmp L59
+ 0204           L56:
+ 0204                   .dbline 376
+ 0204                   .dbline 377
+ 0204 F501              movw R30,R10
+ 0206 0191              ld R16,Z+
+ 0208 5F01              movw R10,R30
+ 020A E3DF              xcall _UART_PutChar
+ 020C                   .dbline 378
+ 020C           L57:
+ 020C                   .dbline 375
+ 020C 4395              inc R20
+ 020E           L59:
+ 020E                   .dbline 375
+ 020E 4617              cp R20,R22
+ 0210 C8F3              brlo L56
+ 0212                   .dbline -2
+ 0212           L55:
+ 0212 0E940000          xcall pop_gset3
+ 0216                   .dbline 0 ; func end
+ 0216 0895              ret
+ 0218                   .dbsym r i 20 c
+ 0218                   .dbsym r ilen 22 c
+ 0218                   .dbsym r s 10 pc
+ 0218                   .dbend

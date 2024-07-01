@@ -1,0 +1,374 @@
+
+https://www.cnblogs.com/zhugeanran/p/9294144.html       //网文精选  -- i2c主从流程
+
+
+
+
+===========================i2c 初始化=================================
+
+main( )
+ 
+    Set_All_GPIO_Quasi_Mode;
+
+    InitialUART0_Timer3(115200);  
+
+    //i2c初始化
+    Init_I2C();       
+    
+    //写入1页数据到eeprom的第0页 
+    One_Page_Write(0,0x55);                 
+
+     //从eeprom读出一页数据
+    One_Page_Read (0,0x55);  
+
+
+
+---
+
+
+//i2c初始化
+void Init_I2C(void)
+ 
+    P13_OpenDrain_Mode; 
+    P14_OpenDrain_Mode;                    
+ 
+    I2CLK = I2C_CLOCK;    // I2CLK=2， 
+  
+    set_I2CEN;                  // I2CON.6=1,   使能I2C                        
+ 
+
+
+=================================i2c 写入1页数据=====================================
+
+
+//写入1页数据到eeprom的第0页 （都是相同的数据0x55）
+//参数列表： 0, 0x55
+void One_Page_Write( u8PageNumber, u8DAT)
+
+    u16Address = (UINT16)u8PageNumber*32;
+
+    //----- Step1 发送起始位-----   // 认为 clr_SI放在set_STA前面更合理一点
+
+    set_STA;                               // I2CON.5=1,  发送起始位      
+    clr_SI;                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x08)               // 不等于8，表示起始位没有发送成功   -- 强记住这种状态 
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send STA' error");
+        goto Write_Error_Stop;
+ 
+
+    //----- Step2 发送器件写地址-----
+    clr_STA;                                                     // I2CON.5=0,  清除起始位 （需软件手动清0）     
+    I2DAT = EEPROM_SLA | EEPROM_WR;         //I2DAT=0xA0 | 0 , 发送器件写地址
+    clr_SI;                                                        // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                                 //等待新的i2c中断标志
+
+    if (I2STAT != 0x18)                     // 不等于0x18，表示器件地址没有发送成功，没有收到ack    -- 强记住这种状态          
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send SLA+W' error");
+        goto Write_Error_Stop;
+    }
+
+    //----- Step3 发送子地址高字节-----
+
+    I2DAT = HIBYTE(u16Address);            //发送子地址高字节
+    clr_SI;                                                // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                         //等待新的i2c中断标志
+
+    if (I2STAT != 0x28)                             // 不等于0x28，表示子地址高字节没有发送成功，没有收到ack   -- 强记住这种状态          
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send High byte address' error");
+        goto Write_Error_Stop;
+    }
+
+    //----- Step4 发送子地址低字节-----
+
+    I2DAT = LOBYTE(u16Address);              //发送子地址低字节
+    clr_SI;                                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x28)                              // 不等于0x28，表示子地址低字节没有发送成功，没有收到ack   -- 强记住这种状态         
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send Low byte address' error");
+        goto Write_Error_Stop;
+    }
+
+    //----- Step5 连续写入1页数据-----  //这里是写入同一个数据
+                                           
+    for (u8Count = 0; u8Count < 32; u8Count++)
+ 
+        I2DAT = u8DAT;                       //写入数据到eeprom
+        clr_SI;                                      // I2CON.3=0,  清i2c中断标志
+        while (!SI);                                //等待新的i2c中断标志
+
+        if (I2STAT != 0x28)                // 不等于0x28，表示数据没有写入成功，没有收到ack   -- 强记住这种状态 
+            I2C_Reset_Flag = 1;                         
+            goto Write_Error_Stop;
+    
+        //u8DAT = ~u8DAT;        
+ 
+    
+      //After STOP condition, a inner EEPROM timed-write-cycle will occure and will not response to out command
+      //好像这里的发送停止位，要等eeprom内部处理一段过程
+
+    //----- Step6 发送停止位-----
+    do
+    {
+        set_STO;         // I2CON.4=1,  发送停止位到eeprom  (注意： 如 I2STAT为00H的错误状态，STO也会置1，则这时set_STO不会发送出去
+        clr_SI;             // I2CON.3=0,  清i2c中断标志
+
+        while (STO)               //I2CON.4=0，等待STO发送后由硬件自动清0   （如果 I2STAT为00H的错误状态，则跳转到复位i2c）
+ 
+           I2C_SI_Check();                     //SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+           if (I2C_Reset_Flag)                //出现错误
+              goto Write_Error_Stop;
+ 
+
+        set_STA;                               // I2CON.5=1,  发送起始位    (检查ack是否返回，这是在timed-write cycle中)  
+        clr_SI;                                  // I2CON.3=0,  清i2c中断标志
+        while (!SI);                           //等待新的i2c中断标志
+
+        if (I2STAT != 0x08)                  // 不等于8，表示起始位没有发送成功   -- 强记住这种状态  
+            I2C_Reset_Flag = 1; 
+            goto Write_Error_Stop;
+ 
+        clr_STA;                                                     // I2CON.5=0,  清除起始位 （需软件手动清0）     
+        I2DAT = EEPROM_SLA | EEPROM_WR;         //I2DAT=0xA0 | 0 , 发送器件写地址
+        clr_SI;                                                        // I2CON.3=0,  清i2c中断标志
+        while (!SI);                                                 //等待新的i2c中断标志
+
+    }while(I2STAT != 0x18);      // 不等于0x18，表示器件地址没有发送成功，没有收到ack    -- 强记住这种状态    
+ 
+
+    //----- Step7 再发送停止位-----   （待理解）
+
+    set_STO;         // I2CON.4=1,  发送停止位到eeprom  (注意： 如 I2STAT为00H的错误状态，STO也会置1，则这时set_STO不会发送出去
+    clr_SI;             // I2CON.3=0,  清i2c中断标志
+
+    while (STO)                              //等待STO发送后由硬件自动清0   （如果 I2STAT为00H的错误状态，则跳转到复位i2c）
+ 
+           I2C_SI_Check();                     //SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+           if (I2C_Reset_Flag)                //出现错误
+              goto Write_Error_Stop;
+
+        
+Write_Error_Stop: 
+        if (I2C_Reset_Flag) 
+                I2C_SI_Check();                //SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+                I2C_Reset_Flag    = 0;
+                printf("\nI2C Write error, test stop");
+ 
+
+
+---
+
+
+//SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+void I2C_SI_Check( )
+ 
+   if (I2STAT == 0x00)        // 如果状态寄存器I2STAT为0（表示发送停止位后出错），则進行下面的操作    --待理解
+ 
+      I2C_Reset_Flag = 1;   
+
+      set_STO;                     // I2CON.4=1,  发送停止位到eeprom
+      SI = 0;                       // I2CON.3=0,  清i2c中断标志
+
+      if(SI)                       //如果I2CON.3=1, 则如下操作   --待理解
+      {
+         clr_I2CEN;           //I2CON.6=0, 禁止i2c
+         set_I2CEN;          //I2CON.6=1, 使能i2c 
+         clr_SI;                 //I2CON.3=0,  清i2c中断标志
+         clr_I2CEN;             //I2CON.6=0, 禁止i2c    
+      }     
+     
+ 
+
+=============================i2c 读出1页数据 =======================================
+
+
+
+//校验eeprom数据，读出来的数据跟0x55比较
+//参数列表： 0,  0x55
+void One_Page_Read(  u8PageNumber,  u8DAT)
+ 
+ 
+    u16Address = (UINT16)u8PageNumber*32;
+
+    //----- Step1 发送起始位-----
+
+    set_STA;                               // I2CON.5=1,  发送起始位      
+    clr_SI;                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x08)               // 不等于8，表示起始位没有发送成功   -- 强记住这种状态 
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send STA' error");
+        goto Write_Error_Stop;
+
+
+    /* Step2 */
+    I2DAT = (EEPROM_SLA | EEPROM_WR);       /* Send (SLA+W) to EEPROM */
+    clr_STA;                                /* Clear STA and Keep SI value in I2CON */    
+    clr_SI;
+    while (!SI);
+
+
+    //----- Step2 发送器件写地址-----
+
+    I2DAT = EEPROM_SLA | EEPROM_WR;         //I2DAT=0xA0 | 0 , 发送器件写地址
+    clr_STA;                                                     // I2CON.5=0,  清除起始位 （需软件手动清0）     
+    clr_SI;                                                        // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                                 //等待新的i2c中断标志
+
+    if (I2STAT != 0x18)                     // 不等于0x18，表示器件地址没有发送成功，没有收到ack    -- 强记住这种状态          
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send SLA+W' error");
+        goto Write_Error_Stop;
+    }
+
+
+    //----- Step3 发送子地址高字节-----
+
+    I2DAT = HIBYTE(u16Address);            //发送子地址高字节
+    clr_SI;                                                // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                         //等待新的i2c中断标志
+
+    if (I2STAT != 0x28)                             // 不等于0x28，表示子地址高字节没有发送成功，没有收到ack   -- 强记住这种状态          
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send High byte address' error");
+        goto Write_Error_Stop;
+    }
+ 
+
+    //----- Step4 发送子地址低字节-----
+
+    I2DAT = LOBYTE(u16Address);              //发送子地址低字节
+    clr_SI;                                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x28)                              // 不等于0x28，表示子地址低字节没有发送成功，没有收到ack   -- 强记住这种状态         
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send Low byte address' error");
+        goto Write_Error_Stop;
+    }
+
+
+    //----- Step5  发送重复起始位-----
+
+    set_STA;                               // I2CON.5=1,  发送起始位      
+    clr_SI;                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x10)               // 不等于0x10，表示重复起始位没有发送成功   -- 强记住这种状态 
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send STA' error");
+        goto Write_Error_Stop;
+ 
+
+    //----- Step6 发送器件读地址-----
+
+    clr_STA;                                                     // I2CON.5=0,  清除起始位 （需软件手动清0）     
+    I2DAT = EEPROM_SLA | EEPROM_RD;          //I2DAT=0xA0 | 1 , 发送器件读地址
+    clr_SI;                                                        // I2CON.3=0,  清i2c中断标志
+    while (!SI);                                                 //等待新的i2c中断标志
+      
+    if (I2STAT != 0x40)                                     // 不等于0x40，表示器件地址没有发送成功，没有收到ack    -- 强记住这种状态          
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Send SLA+W' error");
+        goto Write_Error_Stop;
+    }
+
+    //----- Step7 连续读出1页数据-----  校验每一个数据是否跟0x55相同
+
+    for (u8Count = 0; u8Count <32; u8Count++)
+    {
+        set_AA;                // I2CON.2=1,  表示接收完后发送ack   （疑问：在标准协议中是主机先接收数据，然后发送ack  -- 已理解：是判断发送ack还是nack的条件）
+        clr_SI;                 // I2CON.3=0,  清i2c中断标志
+        while (!SI);          //等待新的i2c中断标志
+         
+        if (I2STAT != 0x50)                    // 不等于0x50，表示数据没有读取成功，没有收到NACK   //待理解
+            I2C_Reset_Flag = 1;                         
+            goto Write_Error_Stop;
+       
+        if (I2DAT != u8DAT)                   // 如果数据校验不成功，则打印错误信息
+ 
+            I2C_Reset_Flag = 1;
+            goto Read_Error_Stop;
+     }
+
+
+    //----- 发送NACK 到eeprom-----   
+
+    clr_AA;                                 //  I2CON.1=1，发送NACK 到eeprom
+    clr_SI;                                  // I2CON.3=0,  清i2c中断标志
+    while (!SI);                           //等待新的i2c中断标志
+
+    if (I2STAT != 0x58)                     // 不等于0x50，没有收到ACK    --待理解
+    {
+        I2C_Reset_Flag = 1;
+        printf("\nI2C 'Ack' error");
+        goto Read_Error_Stop;
+    }
+    
+    //----- Step9 发送停止位-----
+
+        clr_SI;             // I2CON.3=0,  清i2c中断标志
+        set_STO;         // I2CON.4=1,  发送停止位到eeprom  (注意： 如 I2STAT为00H的错误状态，STO也会置1，则这时set_STO不会发送出去
+
+        while (STO)         //I2CON.4=0，等待STO发送后由硬件自动清0   （如果 I2STAT为00H的错误状态，则跳转到复位i2c）
+ 
+           I2C_SI_Check();                     //SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+           if (I2C_Reset_Flag)                //出现错误
+              goto Write_Error_Stop;
+        
+
+Read_Error_Stop: 
+
+        if (I2C_Reset_Flag) 
+                I2C_SI_Check();                //SI检查，主要是对停止位STO，使能位I2CEN，中断标志位操作SI   --待理解
+                I2C_Reset_Flag    = 0;
+                printf("\nI2C Write error, test stop");
+
+}
+
+
+
+
+
+============================补充： 发送停止位可简化成下面3句 =====================================
+
+    //----- Step9 发送停止位-----
+
+        clr_SI;                    // I2CON.3=0,  清i2c中断标志
+        set_STO;               // I2CON.4=1,  发送停止位到eeprom  (注意： 如 I2STAT为00H的错误状态，STO也会置1，则这时set_STO不会发送出去
+
+        while (STO) ;         //等待STO发送后由硬件自动清0   （如果 I2STAT为00H的错误状态，则跳转到复位i2c）
+
+
+
+
+
+
+
+
+=================================参考===========================================
+
+
+高级技术员 | 2018-7-18 10:03 | 只看该作者
+start->addr+w->reg->start->addr+r->(data1)->ack->(data2)->nack->stop
+主机与从机的协议一致就可正常的读写，需双方一致，你也可以自己定义为
+start->addr+r->(data1)->ack->(data2)->nack->stop进行读操作，双方协议一致就能解析数据。
+
+
+https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-15987418095.7.c2b35a68hyLxyB&id=545509364910    //i2c从机
+
+

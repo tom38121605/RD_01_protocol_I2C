@@ -1,0 +1,228 @@
+
+
+ÒÉÎÊ1£º ÈçºÎÇĞ»»i2cÖ÷´Ó»ú
+·ÖÎö£º Ã»ÓĞÃ÷È·ËµÃ÷£¬¿É¾ßÌå¿´ÏÂÃæµÄi2cÖ÷»ú£¬i2c´Ó»úµÄ³õÊ¼»¯±È½Ï
+
+      void Init_I2C_Master(void)
+      {
+         P13_OpenDrain_Mode;				 
+         P14_OpenDrain_Mode;				 
+
+         // Set I2C clock rate  
+         I2CLK =  I2C_CLOCK_400KHz; 
+
+         // Enable I2C  
+         set_I2CEN;                                   
+      }
+
+
+      void Init_I2C_SLAVE(void)
+      {
+         
+          P13_Quasi_Mode;                         //set SCL (P13) is Quasi mode
+          P14_Quasi_Mode;                         //set SDA (P14) is Quasi mode
+          
+          SDA = 1;                                //set SDA and SCL pins high
+          SCL = 1;
+          
+          //set_P1SR_3;                           //set SCL (P13) is  Schmitt triggered input select  //»ò¼Ó¿ìi2cÍ¨Ñ¶ËÙÂÊ
+          
+          set_EI2C;                               //enable I2C interrupt by setting IE1 bit 0
+          set_EA;
+
+          I2ADDR = EEPROM_SLA2;                   //define own slave address
+          set_I2CEN;                              //enable I2C circuit
+          set_AA;
+         
+      }
+
+
+ÒÉÎÊ2£º ´Ó»úµÄËÙÂÊÔõÃ´È·¶¨
+·ÖÎö£º Ã»ÓĞÃ÷È·ËµÃ÷£¬Ó¦¸ÃÊÇÓÉi2cÖ÷»úµÄËÙÂÊ¾ö¶¨£¬¿É°Ñscl(p13)ÉèÖÃÎª¸ßËÙ
+          set_P1SR_3;        //P1SR|=  (1<<3)  ;
+
+
+
+ 
+======================i2c´Ó»úÊ¾Àı´úÂëËµÃ÷====================================
+
+
+main( )
+
+    Set_All_GPIO_Quasi_Mode;
+ 
+    Init_I2C_SLAVE();
+
+
+---------
+
+void Init_I2C_SLAVE( )
+ 
+    P13_Quasi_Mode;                     
+    P14_Quasi_Mode;                    
+
+    SDA = 1;            //´Ó»úµÄi2cÁ½¸ùÏßÒªÏÈÖÃ¸ßµçÆ½                       
+    SCL = 1;             //´Ó»úµÄi2cÁ½¸ùÏßÒªÏÈÖÃ¸ßµçÆ½    
+    
+    //set_P0SR_6;             £¨¾­²âÊÔ£¬ÕâÓï¾ä¼°ÏÂÃæµÄÃ»Ê²Ã´ÓÃ£¬¿ÉÒÔ×¢ÊÍµô£©       //¿¼ÂÇĞŞ¸ÄÎª set_P1SR_3  
+    //       SFRS.0=1, ÇĞ»»µ½±£»¤Ò³1 
+    //       P0SR.6=1, p06ÉèÖÃÎª¸ßËÙÊä³ö     -´ıÀí½â    £¨¸úsclÓĞ¹Ø£¿£©
+    //       SFRS.0=0, ÇĞ»»µ½±£»¤Ò³0 
+
+    //set_P1SR_3;                           //set SCL (P13) is  Schmitt triggered input select  //»ò¼Ó¿ìi2cÍ¨Ñ¶ËÙÂÊ
+
+    set_EI2C;                                //IE1.0 =1, Ê¹ÄÜiicÖĞ¶Ï
+    set_EA;                                  //Ê¹ÄÜÈ«¾ÖÖĞ¶Ï
+
+    I2ADDR = EEPROM_SLA;          //ÉèÖÃ´Ó»úµØÖ· £¨×¢ÒâÊÇ¸ß7Î»£©
+    set_I2CEN;                              // I2CON.6=1,   Ê¹ÄÜI2C              
+    set_AA;                                   // I2CON.2=1, AA=1£¬ ÒÔºóÓ¦´ğÖ÷»úÎªack
+ 
+
+----------------------------------------------------------------------------------------------
+
+ËµÃ÷1£º data_receivedÊı×éÖĞ°üº¬×ÓµØÖ·ºÍÊı¾İ
+
+//´Ó»úÖĞ¶ÏÏìÓ¦º¯Êı
+void I2C_ISR(void) interrupt 6
+ 
+    switch (I2STAT)
+    {
+        case 0x00:   //.   (ÔİÊ±Ã»ÓĞµ÷ÊÔµ½)
+
+            STO = 1;
+            break;
+
+        case 0x60:         // SLAW addr 
+
+            AA = 1; 
+            break;
+            
+        case 0x68:   //.    
+
+            //ÏÂÃæÕâÁ½¾ä»òÓ¦È¥µô
+           ///P02 = 0;            
+            //while(1);
+
+            break;
+
+        case 0x80:      //sub addr£¬ receive data
+ 
+            data_received[data_num] = I2DAT;
+            data_num++;
+
+            if (data_num == 34)
+                AA = 0;
+            else
+                AA = 1;
+            break;
+
+        case 0x88:     //ËÆºõÃ»ÓĞÓÃµ½  £¨´ıÑéÖ¤£©
+ 
+            data_received[data_num] = I2DAT;
+            data_num = 0;
+            AA = 1;
+            break;
+
+        case 0xA0:   //.    
+ 
+            AA = 1;
+            break;
+
+        case 0xA8:           //SLAR addr
+
+            I2DAT = data_received[data_num];
+            data_num++;
+            AA = 1;
+            break;
+        
+        case 0xB8:     // read data request      
+ 
+            I2DAT = data_received[data_num];
+            data_num++;
+            AA = 1;
+            break;
+
+        case 0xC0:   //.    
+            AA = 1;
+            break; 
+
+        case 0xC8:   //.    
+ 
+            AA = 1;
+            break;        
+    }
+
+    SI = 0;
+
+ 
+
+
+=============================slave ÖĞ¶Ï Ïê½â========================================
+
+
+------write---simp------
+
+write sta:                null
+
+write slaW addr:   
+ 60H    //´Ó»úÊÕµ½60HÖĞ¶Ï£¨Æ÷¼şĞ´µØÖ·£©£¬ ·µ»ØAA=1 £¨·µ»Øack -- ´ıÑéÖ¤£©
+  
+write sub addr:      80H    //´Ó»úÊÕµ½80HÖĞ¶Ï£¨×ÓµØÖ· £©£¬ isubaddr = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write data:      ÿ
+    80H    //´Ó»úÊÕµ½80HÖĞ¶Ï£¨ Êı¾İ£©£¬ irxbuf = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write sto:           ÿ
+ 
+ null   
+   
+ 
+-----read  1 byte---simp------
+
+write sta:                    null
+
+write slaW addr:   
+     
+ 60H   //´Ó»úÊÕµ½60HÖĞ¶Ï£¨Æ÷¼şĞ´µØÖ·£©£¬ ·µ»ØAA=1 £¨·µ»Øack -- ´ıÑéÖ¤£©
+
+write sub addr:       
+   80H   //´Ó»úÊÕµ½80HÖĞ¶Ï£¨×ÓµØÖ·£©£¬ isubaddr = I2DAT£¬ Èç¹ûÓĞÄÚ´æ½ÓÊÕ£¬·µ»ØAA=1
+
+write REsta:              
+ null   
+
+write slaR addr:   
+    
+  A8H    //´Ó»úÊÕµ½A8HÖĞ¶Ï£¨Æ÷¼ş¶ÁµØÖ·£©£¬  I2DAT =   ibuf£¬ ·µ»ØAA=1
+  
+read data:      ÿ
+     
+  B8H    //´Ó»úÊÕµ½B8HÖĞ¶Ï£¨¶ÁÊı¾İÇëÇó£©£¬  I2DAT =   ibuf£¬ ·µ»ØAA=1
+
+write nack:      ÿ
+      
+ null
+
+write sto:           ÿ 
+   null
+   
+
+
+
+
+
+
+
+
+
+
+
+
+==================²Î¿¼£¨²»ÖªËùÔÆ£¬½ö×÷²Î¿¼£©=======================================
+
+
+×¢Òâ£º´Ó»ú·¢ËÍÄ£Ê½Ê±£¬I2STATÈôÎªC8H£¬´Ó»ú·¢ËÍ×îºóÒ»¸ö×Ö½Ú¸øÖ÷»ú
+Ö®Ç°£¬Çå³ıAA£¬·¢ËÍÍê×îºóÒ»¸ö×Ö½ÚµÄÎ»ºó£¬´Ó»ú½«±ä³ÉÎ´±»¶¨Ö·µÄ´Ó»úÄ£Ê½£¬ºÍ
+Ö÷»ú¶Ï¿ª¡£
+

@@ -1,0 +1,552 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="poetic 000, default">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#666666" link="#666699" vlink="#339999" alink="#996699" background><!--mstheme--></font>
+<h1 align="center"><!--mstheme--><font color="#CC9900"><b><font size="2" face="宋体"><font lang="ZH-CN" color="#666666">&nbsp;            
+</font><font color="#666666"><a name="home"></a>技巧</font></font></b><!--mstheme--></font></h1>        
+<p align="left"><b><font color="#666666"><a href="#Tips0001"><font size="2"><font face="宋体">01</font></font></a><font size="2" face="宋体">&nbsp;以下讲解属于Atmega16系列<br>        
+<a href="#Tips0002">02</a>&nbsp;<font LANG="ZH-CN">SCL 和SDA 引脚</font><br>        
+<a href="#Tips0003">03</a>&nbsp;<font LANG="ZH-CN">比特率发生器单元&nbsp;&nbsp;</font></font></font><font size="2" face="宋体" color="#666666"><font LANG="ZH-CN">&nbsp;</font>&nbsp;&nbsp; 
+--***<br>        
+<a href="#Tips0004">04</a>&nbsp;<br>        
+<a href="#Tips0005">05</a>&nbsp;<font LANG="ZH-CN">总线接口单元</font><br>        
+<a href="#Tips0006">06</a>  </font></b><font face="宋体"><b><font LANG="ZH-CN" SIZE="2"></font><font SIZE="2">(N)ACK 
+</font><font LANG="ZH-CN" SIZE="2">寄存器不能由程序直接访问&nbsp;&nbsp;</font></b></font><b><font size="2" face="宋体" color="#666666"><font LANG="ZH-CN">&nbsp;</font>&nbsp;&nbsp; 
+--***</font></b><b><font size="2" face="宋体" color="#666666"><br>        
+<a href="#Tips0007">07</a>&nbsp;<font LANG="ZH-CN">控制单元</font><br>        
+<a href="#Tips0008">08</a>&nbsp;<font LANG="ZH-CN">TWI 词汇</font><br>        
+<a href="#Tips0009">09</a>&nbsp;<br>        
+<a href="#Tips0010">10</a>&nbsp;<font LANG="ZH-CN">比特率寄存器 (TWBR)&nbsp;</font>&nbsp;&nbsp; 
+--***<br>        
+<a href="#tips0011">11</a>&nbsp;<font LANG="ZH-CN"></font><font LANG="ZH-CN">控制寄存器 
+(TWCR)&nbsp;</font>&nbsp;&nbsp; --***                  
+<a href="#tips0012"><br>                 
+12</a>&nbsp;<font LANG="ZH-CN">状态寄存器 (TWSR)&nbsp;</font>&nbsp;&nbsp; 
+--***<br>                 
+<a href="#tips0013">13</a>&nbsp;<font LANG="ZH-CN">数据寄存器 (TWDR)&nbsp;</font>&nbsp;&nbsp; 
+--***<br>                 
+<a href="#tips0014">14</a>&nbsp;<font LANG="ZH-CN">(从机</font>)<font LANG="ZH-CN">地址寄存器 
+(TWAR)&nbsp;</font><br>                 
+<a href="#tips0015">15</a>&nbsp;<br>                 
+<a href="#tips0016">16</a>&nbsp;<a href="#tips0017"><br>                 
+17</a>&nbsp;<br>                 
+<a href="#tips0018">18</a>&nbsp;<br>                 
+<a href="#tips0019">19</a>&nbsp;<br>                 
+<a href="#tips0020">20</a>&nbsp;<br>                 
+<a href="#tips0021">21</a>&nbsp;TWI的初始化示例<a href="#tips0022"><br>                
+22</a>&nbsp;<br>                
+<a href="#tips0023">23</a></font><font size="2" color="#666666" face="宋体">&nbsp;<br>                
+<a href="#tips0024">24</a>&nbsp;<br>                
+<a href="#tips0025">25</a>&nbsp;<font LANG="ZH-CN">TWI连续发送和接收的</font>程序示例&nbsp;&nbsp; 
+--***<br>                
+<a href="#tips0026">26</a>&nbsp;<a href="#tips0027"><br>               
+27</a>&nbsp;<br>               
+<a href="#tips0028">28</a>&nbsp;<br>               
+<a href="#tips0029">29</a>&nbsp;<br>               
+<a href="#tips0030">30</a>&nbsp;<br>               
+<a href="#tips0031">31</a>&nbsp;<a href="#tips0032"><br>                      
+32</a>&nbsp;<a href="#tips0032"><br>           
+</a><a href="#tips0033">33</a>&nbsp;&nbsp;<a href="#tips0033"><br>           
+</a><a href="#tips0034">34</a>&nbsp;<br>                    
+<a href="#tips0035">35</a>&nbsp;<br>                    
+<a href="#tips0036">36</a>&nbsp;<a href="#tips0037"><br>                  
+37</a>&nbsp;<br>                 
+<a href="#tips0038">38</a>&nbsp;&nbsp;<br>                
+<a href="#tips0039">39</a>&nbsp;<br>                
+<a href="#tips0040">40</a>&nbsp;<br>                
+<a href="#Tips0041">41</a>&nbsp;&nbsp;<a href="#tips0032"><br>                     
+</a>               
+<a href="#tips0042">42</a>&nbsp;<a href="#tips0032"><br>          
+</a><a href="#tips0043">43</a>&nbsp;&nbsp;&nbsp;<a href="#tips0033"><br>          
+</a><a href="#tips0044">44</a>&nbsp;<br>                   
+<a href="#tips0045">45</a>&nbsp;<br>                   
+<a href="#tips0046">46</a>&nbsp;&nbsp;<a href="#tips0037"><br>                 
+</a><a href="#tips0047">47</a>&nbsp;&nbsp;<br>               
+<a href="#tips0048">48</a>&nbsp;<br>              
+<a href="#tips0049">49</a>&nbsp;<br>              
+<a href="#tips0050">50</a>&nbsp;&nbsp;<br>              
+<br>             
+-----------------------------------------------------------------<br>
+</font></b><font size="2"><b><font face="宋体" color="#666666"><a name="Tips0001"><br>             
+</a>             
+1             
+</font></b></font>             
+<b><font size="2" face="宋体" color="#666666">以下讲解属于Atmega16系列<br>
+ </font></b><font size="2"><b><font face="宋体" color="#666666">            
+<br>            
+<a href="#home">返回</a>            
+</font></b></font>             
+</p>            
+<p><a name="Tips0002"><b><font size="2"><font color="#666666" face="宋体">2</font></font></b></a><font face="宋体" size="2"><b><font color="#666666"> 
+</font></b><b><font color="#666666"><font LANG="ZH-CN">SCL 和SDA 引脚</font><br> 
+<br>
+</font><font color="#666666">&nbsp; .</font>SCL <font LANG="ZH-CN">与</font>SDA<font LANG="ZH-CN">为</font>MCU<font LANG="ZH-CN">的</font>TWI<font LANG="ZH-CN">接口引脚。<br> 
+<br>
+&nbsp; .引脚的输出驱动器包含一个波形斜率限制器以满足</font></b></font><font size="2"><b><font face="宋体">TWI<font LANG="ZH-CN">规范。<br> 
+<br>
+&nbsp; .引脚的输入部分包括尖峰抑制单元以去除小于</font>50 ns  
+</font><font LANG="ZH-CN" face="宋体">的毛刺。<br>
+<br>
+&nbsp; .当相应的端口设</font><font face="宋体"><font LANG="ZH-CN">置为</font>SCL  
+<font LANG="ZH-CN">与</font>SDA <font LANG="ZH-CN">引脚时，可以使能</font>I/O  
+</font><font LANG="ZH-CN" face="宋体">口内部的上拉电阻，这样可省掉外部的上拉电阻。</font></b></font></p>            
+<p><font color="#666666"><b><font size="2" face="宋体">            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0003"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">3  
+</font></b></font><b><font size="2" face="宋体" color="#666666"><font LANG="ZH-CN">比特率发生器单元</font></font></b></p>            
+<p ALIGN="LEFT"><font face="宋体"><b><font SIZE="2">&nbsp; .TWI</font><font LANG="ZH-CN" SIZE="2">工作于主机模式时，比特率发生器控制时钟信号</font><font SIZE="2">SCL</font><font LANG="ZH-CN" SIZE="2">的周期。<br> 
+<br>
+&nbsp; .具体由</font><font SIZE="2">TWI</font><font LANG="ZH-CN" SIZE="2">状态寄存器</font><font SIZE="2">TWSR</font><font LANG="ZH-CN" SIZE="2">的预分频系数以及比特率寄存器</font><font SIZE="2">TWBR</font><font LANG="ZH-CN" SIZE="2">设定。<br> 
+<br>
+&nbsp; .当</font><font SIZE="2">TWI</font><font LANG="ZH-CN" SIZE="2">工作在从机模式时，不需要对比特率或预分频进行设定，但从机的</font><font SIZE="2">CPU  
+</font><font LANG="ZH-CN" SIZE="2">时钟频率必须大于</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">时钟线</font><font SIZE="2">SCL </font><font LANG="ZH-CN" SIZE="2">频率的</font><font SIZE="2">16</font><font LANG="ZH-CN" SIZE="2">倍。<br> 
+<br>
+&nbsp; .注意，从机可能会延长</font><font SIZE="2">SCL </font><font LANG="ZH-CN" SIZE="2">低电平的时间，从而降低</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">总线的平均时钟周期。</font><font SIZE="2">SCL  
+</font></b><font LANG="ZH-CN" SIZE="2"><b>的频率根据以下的公式产生：</b></font></font></p>
+<p><font size="2"><b><font color="#666666" face="宋体">&nbsp; <img border="0" src="skl_TW1.gif" width="535" height="134"><br> 
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0004"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">4<br>            
+&nbsp;<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0005"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">5  
+<font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">总线接口单</font></font><font face="ArialUnicodeMS" lang="ZH-CN" color="#666666">元</font><font color="#666666" face="宋体"><br>
+<br>
+</font></b></font><font face="宋体"><b><font color="#666666" size="2">&nbsp; .</font><font LANG="ZH-CN" SIZE="2">该单元包括数据与地址移位寄存器</font><font SIZE="2">TWDR</font><font LANG="ZH-CN" SIZE="2">，  
+</font><font SIZE="2">START/STOP </font><font LANG="ZH-CN" SIZE="2">控制器和总线仲裁判定硬件电路。<br> 
+<br>
+</font><font size="2"><font lang="ZH-CN">&nbsp; </font>.</font><font SIZE="2">TWDR  
+</font><font LANG="ZH-CN" SIZE="2">寄存器用于存放发送或接收的数据或地址。<br>
+<br>
+&nbsp; .除了</font><font SIZE="2">8 </font><font LANG="ZH-CN" SIZE="2">位的</font><font SIZE="2">TWDR</font><font LANG="ZH-CN" SIZE="2">，总线接口单元还有一个寄存器，包含了用于发送或接收应答的</font><font SIZE="2">(N)ACK</font><font LANG="ZH-CN" SIZE="2">。<br> 
+<br>
+&nbsp; .这个</font><font SIZE="2">(N)ACK </font><font LANG="ZH-CN" SIZE="2">寄存器不能由程序直接访问。当接收数据时，它可以通过</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">控制寄存器</font><font SIZE="2">TWCR </font><font LANG="ZH-CN" SIZE="2">来置位或清零；<br> 
+<br>
+&nbsp; .在发送数据时， </font><font SIZE="2">(N)ACK </font><font LANG="ZH-CN" SIZE="2">值由</font><font SIZE="2">TWCR  
+</font><font LANG="ZH-CN" SIZE="2">的设置决定。</font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0006"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">6  
+</font></b></font><font face="宋体"><b><font LANG="ZH-CN" SIZE="2"></font><font SIZE="2">(N)ACK 
+</font><font LANG="ZH-CN" SIZE="2">寄存器不能由程序直接访问<br>
+<br>
+&nbsp; (这一点跟虚拟IIC的程序不一样, 虚拟IIC需要程序手动处理,  
+而在TWI中是自动的)<br>
+<br>
+&nbsp; .这个</font><font SIZE="2">(N)ACK </font><font LANG="ZH-CN" SIZE="2">寄存器不能由程序直接访问。当接收数据时，它可以通过</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">控制寄存器</font><font SIZE="2">TWCR </font><font LANG="ZH-CN" SIZE="2">来置位或清零；<br> 
+<br>
+&nbsp; .在发送数据时， </font><font SIZE="2">(N)ACK </font><font LANG="ZH-CN" SIZE="2">值由</font><font SIZE="2">TWCR  
+</font><font LANG="ZH-CN" SIZE="2">的设置决定。</font></b></font><font size="2"><b><font color="#666666" face="宋体"><br>
+<br>
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0007"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">7  
+控制单元</font></b></font></p>            
+<p ALIGN="LEFT"><b><font size="2" face="宋体"><font LANG="ZH-CN">控制单元监听</font>TWI  
+<font LANG="ZH-CN">总线，并根据 </font>TWI <font LANG="ZH-CN">控制寄存器</font>TWCR  
+<font LANG="ZH-CN">的设置作出相应的响应。当</font>TWI<font LANG="ZH-CN">总线上产生需要应用程序干预处理的事件时，</font>TWI  
+<font LANG="ZH-CN">中断标志位</font>TWINT <font LANG="ZH-CN">置位。在下一个时钟周期，  
+</font>TWI <font LANG="ZH-CN">状态寄存器</font>TWSR <font LANG="ZH-CN">被表示这个事件的状态码字所更新。在其它时间里，</font>TWSR  
+<font LANG="ZH-CN">的内容为一个表示无事件发生的特殊状态字。一旦</font>TWINT  
+<font LANG="ZH-CN">标志位置</font>&quot;1”<font LANG="ZH-CN">，时钟线</font>SCL  
+<font LANG="ZH-CN">即被拉低，暂停</font>TWI <font LANG="ZH-CN">总线上的数据传输，让用户程序处理事件。</font></font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体"><font LANG="ZH-CN">在下列状况出现时， 
+</font>TWINT <font LANG="ZH-CN">标志位置位：</font></font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体"><font LANG="ZH-CN">&nbsp; .在</font>TWI  
+<font LANG="ZH-CN">传送完</font>START/REPEATED START <font LANG="ZH-CN">信号之后</font></font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体">&nbsp; .<font LANG="ZH-CN">在</font>TWI  
+<font LANG="ZH-CN">传送完</font>SLA+R/W <font LANG="ZH-CN">数据之后</font></font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体"><font LANG="ZH-CN">&nbsp; .在</font>TWI  
+<font LANG="ZH-CN">传送完地址字节之后</font></font></b></p>
+<p ALIGN="LEFT"><b><font size="2" face="宋体"><font LANG="ZH-CN">&nbsp; .在</font>TWI  
+<font LANG="ZH-CN">总线仲裁失败之后</font></font></b></p>
+<p ALIGN="LEFT"><b><font size="2" face="宋体">&nbsp; .<font LANG="ZH-CN">在</font>TWI  
+<font LANG="ZH-CN">被主机寻址之后</font>( <font LANG="ZH-CN">广播方式或从机地址匹配</font>)</font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体">&nbsp; .<font LANG="ZH-CN">在</font>TWI  
+<font LANG="ZH-CN">接收到一个数据字节之后</font></font></b></p>
+<p ALIGN="LEFT"><b><font size="2" face="宋体">&nbsp; .<font LANG="ZH-CN">作为从机工作时，  
+</font>TWI <font LANG="ZH-CN">接收到</font>STOP <font LANG="ZH-CN">或</font>REPEATED  
+START <font LANG="ZH-CN">信号之后</font></font></b></p> 
+<p ALIGN="LEFT"><b><font size="2" face="宋体">&nbsp; .<font LANG="ZH-CN">由于非法的</font>START  
+<font LANG="ZH-CN">或</font>STOP <font LANG="ZH-CN">信号造成总线错误时</font></font></b></p> 
+<p><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><b><font size="2"><a name="Tips0008"><font color="#666666" face="宋体"></font></a><font face="宋体"><font color="#666666">8&nbsp;</font> 
+TWI <font LANG="ZH-CN">词汇</font></font></font></b></p>             
+<p ALIGN="LEFT"><b><font LANG="ZH-CN" face="宋体" size="2">单词说明</font></b></p>
+<p ALIGN="LEFT"><b><font face="宋体" size="2"><font LANG="ZH-CN">.主机:&nbsp;&nbsp;&nbsp;  
+启动和停止传输的设备。主机同时要产生</font>SCL <font LANG="ZH-CN">时钟</font></font></b></p> 
+<p ALIGN="LEFT"><b><font LANG="ZH-CN" face="宋体" size="2">.从机:&nbsp;&nbsp;&nbsp;  
+被主机寻址的设备</font></b></p>
+<p ALIGN="LEFT"><b><font LANG="ZH-CN" face="宋体" size="2">.发送器:  
+将数据放到总线上的设备</font></b></p>
+<p ALIGN="LEFT"><b><font LANG="ZH-CN" face="宋体" size="2">.接收器:  
+从总线读取数据的设备</font></b></p>
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0009"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">9<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0010"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">10 
+</font></b></font><b><font LANG="ZH-CN">比特率寄存器－ TWBR<br> 
+<br>
+</font></b><font face="宋体"><b><font SIZE="2"><br>
+ .TWI</font><font LANG="ZH-CN" SIZE="2">工作于主机模式时，比特率发生器控制时钟信号</font><font SIZE="2">SCL</font><font LANG="ZH-CN" SIZE="2">的周期。<br>
+<br>
+&nbsp; .具体由</font><font SIZE="2">TWI</font><font LANG="ZH-CN" SIZE="2">状态寄存器</font><font SIZE="2">TWSR</font><font LANG="ZH-CN" SIZE="2">的预分频系数以及比特率寄存器</font><font SIZE="2">TWBR</font><font LANG="ZH-CN" SIZE="2">设定。<br> 
+<br>
+&nbsp; .当</font><font SIZE="2">TWI</font><font LANG="ZH-CN" SIZE="2">工作在从机模式时，不需要对比特率或预分频进行设定，但从机的</font><font SIZE="2">CPU  
+</font><font LANG="ZH-CN" SIZE="2">时钟频率必须大于</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">时钟线</font><font SIZE="2">SCL </font><font LANG="ZH-CN" SIZE="2">频率的</font><font SIZE="2">16</font><font LANG="ZH-CN" SIZE="2">倍。<br> 
+<br>
+&nbsp; .注意，从机可能会延长</font><font SIZE="2">SCL </font><font LANG="ZH-CN" SIZE="2">低电平的时间，从而降低</font><font SIZE="2">TWI  
+</font><font LANG="ZH-CN" SIZE="2">总线的平均时钟周期。</font><font SIZE="2">SCL  
+</font></b><font LANG="ZH-CN" SIZE="2"><b>的频率根据以下的公式产生：</b></font></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体">&nbsp; <img border="0" src="skl_TW1.gif" width="535" height="134"><br> 
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0011"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">11 
+<font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">控制寄存器－ TWCR<br>
+<br>
+</font></font><font face="ArialUnicodeMS" lang="ZH-CN" color="#666666">是TWI最主要的寄存器</font><font color="#666666" face="宋体" LANG="ZH-CN" SIZE="2"><br>
+<br>
+<img border="0" src="skl_TW2.gif" width="533" height="160"><br>
+</font></b></font><b><font SIZE="2"><br>
+.</font><font FACE="Arial,Bold" SIZE="2">Bit 7 – TWINT: TWI </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">中断标志</p>            
+<p ALIGN="LEFT">当</font><font FACE="Arial" SIZE="2">TWI </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">完成当前工作，希望应用程序介入时</font><font FACE="Arial" SIZE="2">TWINT 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">置位。若</font><font FACE="Arial" SIZE="2">SREG 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">的</font><font FACE="Arial" SIZE="2">I 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">标志以及</font><font FACE="Arial" SIZE="2">TWCR</p>
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">
+<p ALIGN="LEFT">寄存器的</font><font FACE="Arial" SIZE="2">TWIE </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">标志也置位，则</font><font FACE="Arial" SIZE="2">MCU 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">执行</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">中断例程。当</font><font FACE="Arial" SIZE="2">TWINT 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">置位时， </font><font FACE="Arial" SIZE="2">SCL 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">信</p>
+<p ALIGN="LEFT">号的低电平被延长。</font><font FACE="Arial" SIZE="2">TWINT 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">标志的清零必须通过软件写</font><font FACE="Arial" SIZE="2">&quot;1” 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">来完成。执行中断时硬件不</p>
+<p ALIGN="LEFT">会自动将其改写为</font><font FACE="Arial" SIZE="2">&quot;0”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。要注意的是，只要这一位被清零， 
+</font><font FACE="Arial" SIZE="2">TWI </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">立即开始工作。因此，在</p>
+<p ALIGN="LEFT">清零</font><font FACE="Arial" SIZE="2">TWINT </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">之前一定要首先完成对地址寄存器</font><font FACE="Arial" SIZE="2">TWAR</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">，状态寄存器</font><font FACE="Arial" SIZE="2">TWSR</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">，以及数据寄</p>
+<p ALIGN="LEFT">存器</font><font FACE="Arial" SIZE="2">TWDR </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">的访问。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2">Bit 6 
+– TWEA: </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">使能</font><b><font FACE="Arial,Bold" SIZE="2">TWI 
+</font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">应答</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">TWEA </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">标志控制应答脉冲的产生。若</font><font FACE="Arial" SIZE="2">TWEA 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">置位，出现如下条件时接口发出</font><font FACE="Arial" SIZE="2">ACK 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">脉冲：</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">1. </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">器件的从机地址与主机发出的地址相符合</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">2. TWAR </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">的</font><font FACE="Arial" SIZE="2">TWGCE 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">置位时接收到广播呼叫</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">3. </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">在主机/ 
+从机接收模式下接收到一个字节的数据</p>
+<p ALIGN="LEFT">将</font><font FACE="Arial" SIZE="2">TWEA </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">清零可以使器件暂时脱离总线。置位后器件重新恢复地址识别。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 5 
+– TWSTA: TWI START </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态标志</p>
+<p ALIGN="LEFT">当</font><font FACE="Arial" SIZE="2">CPU </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">希望自己成为总线上的主机时需要置位</font><font FACE="Arial" SIZE="2">TWSTA</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">硬件检测总线是否可用。</p>
+<p ALIGN="LEFT">若总线空闲，接口就在总线上产生</font><font FACE="Arial" SIZE="2">START 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态。若总线忙，接口就一直等待，直到检测</p>
+<p ALIGN="LEFT">到一个</font><font FACE="Arial" SIZE="2">STOP </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态 
+，然后产生</font><font FACE="Arial" SIZE="2">START </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">以声明自己希望成为主机。发送</font><font FACE="Arial" SIZE="2">START 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">之后软件</p>
+<p ALIGN="LEFT">必须清零</font><font FACE="Arial" SIZE="2">TWSTA</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 4 
+– TWSTO: TWI STOP </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态标志</p>
+<p ALIGN="LEFT">在主机模式下，如果置位</font><font FACE="Arial" SIZE="2">TWSTO</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">，</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">接口将在总线上产生</font><font FACE="Arial" SIZE="2">STOP 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态，然后</font><font FACE="Arial" SIZE="2">TWSTO</p>
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">
+<p ALIGN="LEFT">自动清零。在从机模式下，置位</font><font FACE="Arial" SIZE="2">TWSTO 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">可以使接口从错误状态恢复到未被寻址的状态。</p>
+<p ALIGN="LEFT">此时总线上不会有</font><font FACE="Arial" SIZE="2">STOP </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态产生，但</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">返回一个定义好的未被寻址的从机模式且释</p>
+<p ALIGN="LEFT">放</font><font FACE="Arial" SIZE="2">SCL </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">与</font><font FACE="Arial" SIZE="2">SDA 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">为高阻态。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 3 
+– TWWC: TWI </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">写碰撞标志</p>
+<p ALIGN="LEFT">当</font><font FACE="Arial" SIZE="2">TWINT </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">为低时写数据寄存器</font><font FACE="Arial" SIZE="2">TWDR 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">将置位</font><font FACE="Arial" SIZE="2">TWWC</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。当</font><font FACE="Arial" SIZE="2">TWINT 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">为高时，每一次对</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">TWDR </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">的写访问都将更新此标志。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 2 
+– TWEN: TWI </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">使能</p>
+</font><font FACE="Arial" SIZE="2">
+<p ALIGN="LEFT">TWEN </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">位用于使能</font><font FACE="Arial" SIZE="2">TWI</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">操作与激活</font><font FACE="Arial" SIZE="2">TWI</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">接口。当</font><font FACE="Arial" SIZE="2">TWEN</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">位被写为</font><font FACE="Arial" SIZE="2">&quot;1”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">时，</font><font FACE="Arial" SIZE="2">TWI</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">引脚将</font><font FACE="Arial" SIZE="2">I/O</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">引</p>
+<p ALIGN="LEFT">脚切换到</font><font FACE="Arial" SIZE="2">SCL </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">与</font><font FACE="Arial" SIZE="2">SDA 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">引脚，使能波形斜率限制器与尖峰滤波器。如果该位清零， 
+</font><font FACE="Arial" SIZE="2">TWI</p>
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">
+<p ALIGN="LEFT">接口模块将被关闭，所有</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">传输将被终止。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 1 
+– Res: </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">保留</p>
+<p ALIGN="LEFT">保留，读返回值为</font><font FACE="Arial" SIZE="2">”0”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2">Bit 0 
+– TWIE: </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">使能</font><b><font FACE="Arial,Bold" SIZE="2">TWI 
+</font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">中断</p>
+<p ALIGN="LEFT">当</font><font FACE="Arial" SIZE="2">SREG </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">的</font><font FACE="Arial" SIZE="2">I 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">以及</font><font FACE="Arial" SIZE="2">TWIE 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">置位时，只要</font><font FACE="Arial" SIZE="2">TWINT 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">为</font><font FACE="Arial" SIZE="2">&quot;1”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">， 
+</font><font FACE="Arial" SIZE="2">TWI </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">中断就激活。</p>
+</font>            
+<p><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0012" href="#tips0012"></a>12 <font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态寄存器</font></font><font face="ArialUnicodeMS" lang="ZH-CN" color="#666666">及状态码讲解</font><font color="#666666" face="宋体" LANG="ZH-CN" SIZE="2">－ 
+TWSR<br>
+<br>
+<img border="0" src="skl_TW3.gif" width="524" height="86"><br>
+<br>
+</font></b></font><b><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> 
+Bits 7..3 – TWS: TWI </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">状态</p>            
+<p ALIGN="LEFT">这</font><font FACE="Arial" SIZE="2">5 </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">位用来反映</font><font FACE="Arial" SIZE="2">TWI 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">逻辑和总线的状态。不同的状态代码将会在后面的部分描述。<br>
+<br>
+注意从</font><font FACE="Arial" SIZE="2">TWSR </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">读出的值包括</font><font FACE="Arial" SIZE="2">5 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">位状态值与</font><font FACE="Arial" SIZE="2">2 
+</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">位预分频值。检测状态位时设计者应屏蔽预分频位为</font><font FACE="Arial" SIZE="2">&quot;0”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。<br>
+<br>
+这使状态检测独立于预分频器设置。在无特殊声明的情况下，在手册中使用该方法。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2"> Bit 2 
+– Res: </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">保留</p>
+<p ALIGN="LEFT">保留，读返回值为</font><font FACE="Arial" SIZE="2">&quot;0”</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">。</p>
+</font><b>
+<p ALIGN="LEFT"><font SIZE="2">.</font><font FACE="Arial,Bold" SIZE="2">Bits 
+1..0 – TWPS: TWI </font></b><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">预分频位</p>
+<p ALIGN="LEFT">这两位可读</font><font FACE="Arial" SIZE="2">/ </font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">写，用于控制比特率预分频因子。</p>
+</font>            
+<p><img border="0" src="skl_TW4.gif" width="524" height="164"><br>
+<br>
+<img border="0" src="skl_TW5.gif" width="746" height="419"><br>
+<font size="2"><b><font color="#666666" face="宋体"><br>
+<br>
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0013" href="#tips0013"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">13 
+<font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">数据寄存器－ TWDR<br>
+<br>
+</font></font><font face="ArialUnicodeMS" lang="ZH-CN" color="#666666">.发送时是</font><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2"><font color="#666666" face="宋体">要发送的下一个字节<br>
+<br>
+</font></font><font color="#666666" face="宋体" lang="ZH-CN">.</font><font face="ArialUnicodeMS" lang="ZH-CN" color="#666666">接收时</font><font color="#666666" face="宋体"><font FACE="ArialUnicodeMS" LANG="ZH-CN" SIZE="2">是接收到的数据。</font><br>
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0014" href="#tips0014"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">14 
+</font></b></font><b><font size="2" face="宋体" color="#666666"><font LANG="ZH-CN">TWI</font>( <font LANG="ZH-CN">从机</font>)  
+<font LANG="ZH-CN">地址寄存器－TWAR<br>
+<br>
+MCU做主机时不用考虑<br>
+<br>
+MCU做从机时才考虑</font></font></b><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0015" href="#tips0015"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">15<br>            
+<br>            
+<a href="#home">返回<br>            
+<br>            
+</a><a name="tips0016"></a>16<br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0017" href="#tips0012"></a>17<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0018" href="#tips0018"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">18<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0019" href="#tips0019"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">19<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0020" href="#tips0015"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">20<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0021" href="#Tips0021"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">21 
+</font></b></font><b><font size="2" face="宋体" color="#666666">TWI的初始化示例<br>
+<br>
+<font SIZE="2" COLOR="#008000">//TWI initialize</font><font SIZE="2"><br>
+</font><font SIZE="2" COLOR="#008000">// bit rate:100</font><font SIZE="2"><br>
+void twi_init(void)<br>
+{<br>
+&nbsp;&nbsp; TWCR= 0X00; </font><font SIZE="2" COLOR="#008000">//disable twi<br>
+</font><font SIZE="2"><br>
+&nbsp;&nbsp; TWBR= 0x64; </font><font SIZE="2" COLOR="#008000">//set bit rate<br>
+</font><font SIZE="2"><br>
+&nbsp;&nbsp; TWSR= 0x00; </font><font SIZE="2" COLOR="#008000">//set prescale<br>
+</font><font SIZE="2"><br>
+&nbsp;&nbsp; TWAR= 0x00; </font><font SIZE="2" COLOR="#008000">//set slave 
+address<br>
+</font><font SIZE="2"><br>
+&nbsp;&nbsp; TWCR= 0x04; </font><font SIZE="2" COLOR="#008000">//enable twi</font><font SIZE="2"><br>
+}</font></font></b><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0022" href="#tips0012"></a>22<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0023" href="#tips0023"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">23<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0024" href="#tips0019"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">24<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0025" href="#tips0015"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">25  
+</font></b></font><b><font size="2" color="#666666" face="宋体"><font LANG="ZH-CN">TWI连续发送和接收的</font>程序示例<br>
+<br>
+</font></b><font size="2"><b><font color="#666666" face="宋体"><br>            
+<br>            
+<a href="#home">返回<br>            
+</a><a name="tips0026" href="#Tips0026"><br>          
+</a>26<br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0027" href="#tips0027"></a>27<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0028" href="#tips0028"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">28<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0029" href="#tips0029"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">29<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0030" href="#tips0030"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">30<br>            
+<br>            
+<a href="#home">返回<br>            
+</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0031" href="#Tips0031"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">31&nbsp;<br>                              
+<br>                 
+<br>                 
+<a href="#home">返回</a>                 
+<a href="#Return"><br>                 
+<br>                 
+</a><a name="tips0032" href="#tips0012"></a>32&nbsp;</font></b></font></p>                
+<p><font size="2"><b>                
+<a href="#home"><font color="#666666" face="宋体" size="2">                
+返回</font></a></b></font></p>                
+<p><b><font size="2"><a name="tips0033" href="#tips0023"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">33&nbsp;            
+<br>            
+</font></font></b></p>               
+<p><font size="2"><b>               
+<a href="#home"><font color="#666666" face="宋体" size="2">               
+返回</font></a></b></font></p>               
+<p><font size="2"><b><a name="tips0034" href="#tips0019"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">34&nbsp;&nbsp;<br>             
+<br>                
+<a href="#home">返回</a>             
+</font></b></font></p>                
+<p><font size="2"><b><a name="tips0035" href="#tips0015"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">35<br>               
+<br>               
+<a href="#home">返回</a><a name="tips0036" href="#tips0015"><br>            
+<br>            
+</a>36&nbsp;                
+<br>              
+<br>              
+<a href="#home">返回</a>              
+<a href="#Return"><br>              
+<br>              
+</a><a name="tips0037" href="#tips0027"></a>37&nbsp;         
+<br>         
+<br>             
+<a href="#home">返回</a> </font></b></font></p>             
+<p><font size="2"><b><a name="tips0038" href="#tips0028"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">38&nbsp;&nbsp;            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0039" href="#tips0029"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">39<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0040" href="#tips0030"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">40<br>            
+<br>            
+<a href="#home">返回<br>            
+</a></font></b></font></p>            
+<p><font size="2"><b><a name="Tips0041"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">41&nbsp;<br>                              
+<br>                 
+<br>                 
+<a href="#home">返回</a>                 
+<a href="#Return"><br>                 
+<br>                 
+</a><a name="tips0042"></a>42&nbsp;</font></b></font></p>                
+<p><font size="2"><b>                
+<a href="#home"><font color="#666666" face="宋体" size="2">                
+返回</font></a></b></font></p>                
+<p><b><font size="2"><a name="tips0043"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">43&nbsp;            
+<br>            
+</font></font></b></p>               
+<p><font size="2"><b>               
+<a href="#home"><font color="#666666" face="宋体" size="2">               
+返回</font></a></b></font></p>               
+<p><font size="2"><b><a name="tips0044"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">44&nbsp;&nbsp;<br>             
+<br>                
+<a href="#home">返回</a>             
+</font></b></font></p>                
+<p><font size="2"><b><a name="tips0045"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">45<br>               
+<br>               
+<a href="#home">返回</a><br>        
+<br>        
+<a name="tips0046"></a>46&nbsp;                
+<br>              
+<br>              
+<a href="#home">返回</a>              
+<a href="#Return"><br>              
+<br>              
+</a><a name="tips0047"></a>47&nbsp;         
+<br>         
+<br>             
+<a href="#home">返回</a> </font></b></font></p>             
+<p><font size="2"><b><a name="tips0048"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">48&nbsp;&nbsp;            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0049"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">49<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><a name="tips0050"><font color="#666666" face="宋体"></font></a><font color="#666666" face="宋体">50<br>            
+<br>            
+<a href="#home">返回<br>  
+</a>            
+<br>            
+</font></b></font></p>            
+<!--mstheme--></font></body>       
+       
+</html>       

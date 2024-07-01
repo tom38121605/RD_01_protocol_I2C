@@ -1,0 +1,1302 @@
+
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta name="Microsoft Theme" content="poetic 000, default">
+<meta name="Microsoft Border" content="t, default">
+</head>
+
+<body bgcolor="#FFFFFF" text="#666666" link="#666699" vlink="#339999" alink="#996699" background><!--mstheme--></font>
+<h1 align="center"><!--mstheme--><font color="#CC9900"><b><font size="2" face="宋体"><font lang="ZH-CN" color="#666666">&nbsp;             
+</font><font color="#666666"><a name="home"></a>技巧</font></font></b><!--mstheme--></font></h1>        
+<p align="left"><b><font color="#666666"><a href="#Tips0001"><font size="2"><font face="宋体">01</font></font></a><font size="2" face="宋体">&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">IIC</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">的应用范围</span><br>        
+<a href="#Tips0002">02</a>&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02 – AT24C512</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:  
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的大小及各参数表</span><br>        
+<a href="#Tips0003">03</a>&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">系列的开漏结构</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">与M16的硬件连接图</span><br>        
+<a href="#Tips0004">04</a>&nbsp;<br>        
+<a href="#Tips0005">05</a>&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">IIC</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">的总线驱动能力讲解</span><br>        
+<a href="#Tips0006">06</a>&nbsp;<br>        
+<a href="#Tips0007">07</a>&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">SCL, SDA</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;     
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">时序及时钟钟控制的讲解</span></font></font><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">及代码示例</span><br>        
+<a href="#Tips0008">08</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">MCU主机对</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">AT24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的器件寻址和节点地址及读写数据格式</span><br>        
+<a href="#Tips0009">09</a>&nbsp;<br>        
+<a href="#Tips0010">10</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">关于</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">A0,A1,A2</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">引脚的器件选择及引脚无效情况的讲解</span><br>        
+<a href="#tips0011">11</a>        
+&nbsp;                             
+<a href="#tips0012"><br>                 
+12</a>&nbsp;<br>                 
+<a href="#tips0013">13</a>&nbsp;<br>                 
+<a href="#tips0014">14</a>&nbsp;<br>                 
+<a href="#tips0015">15</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">读操作和写操作</span><br>                 
+<a href="#tips0016">16</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">字节写和页写的讲解</span><a href="#tips0017"><br>                 
+17</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">字节读和连续读的讲解 
+（注意不是“页读”，读可以跨页）</span><br>                 
+<a href="#tips0018">18</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">读写完成后的处理</span><br>                 
+<a href="#tips0019">19</a>&nbsp;主机读应答位的处理<br>                 
+<a href="#tips0020">20</a>&nbsp;<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">引脚</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">WP</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">和写保护</span><br>                 
+<a href="#tips0021">21</a>&nbsp;<a href="#tips0022"><br>                
+22</a>&nbsp;关于对AT24C02(从机)写数据后，从机是否拉低SCL时钟线等思考__ (?)<br>                    
+<a href="#tips0023">23</a></font><font size="2" color="#666666" face="宋体">&nbsp;<br>                
+<a href="#tips0024">24</a>&nbsp;<br>                
+<a href="#tips0025">25</a>&nbsp;<br>                
+<a href="#tips0026">26</a>&nbsp;<a href="#tips0027"><br>               
+27</a>&nbsp;<br>               
+<a href="#tips0028">28</a>&nbsp;<br>               
+<a href="#tips0029">29</a>&nbsp;<br>               
+<a href="#tips0030">30</a>&nbsp;<br>               
+<a href="#tips0031">31</a>&nbsp;<a href="#tips0032"><br>                      
+32</a>&nbsp;<a href="#tips0032"><br>           
+</a><a href="#tips0033">33</a>&nbsp;&nbsp;<a href="#tips0033"><br>           
+</a><a href="#tips0034">34</a>&nbsp;<br>                    
+<a href="#tips0035">35</a>&nbsp;<br>                    
+<a href="#tips0036">36</a>&nbsp;<a href="#tips0037"><br>                  
+37</a>&nbsp;<br>                 
+<a href="#tips0038">38</a>&nbsp;&nbsp;<br>                
+<a href="#tips0039">39</a>&nbsp;<br>                
+<a href="#tips0040">40</a>&nbsp;<br>                
+<a href="#Tips0041">41</a>&nbsp;&nbsp;<a href="#tips0032"><br>                     
+</a>               
+<a href="#tips0042">42</a>&nbsp;<a href="#tips0032"><br>          
+</a><a href="#tips0043">43</a>&nbsp;&nbsp;&nbsp;<a href="#tips0033"><br>          
+</a><a href="#tips0044">44</a>&nbsp;<br>                   
+<a href="#tips0045">45</a>&nbsp;<br>                   
+<a href="#tips0046">46</a>&nbsp;&nbsp;<a href="#tips0037"><br>                 
+</a><a href="#tips0047">47</a>&nbsp;&nbsp;<br>               
+<a href="#tips0048">48</a>&nbsp;<br>              
+<a href="#tips0049">49</a>&nbsp;<br>              
+<a href="#tips0050">50</a>&nbsp;&nbsp;<br>              
+<br>             
+-----------------------------------------------------------------</font></b><font size="2"><b><font face="宋体" color="#666666"><a name="Tips0001"><br>             
+</a>             
+1             
+</font>             
+</b></font>             
+<b><font size="2" face="宋体" color="#666666"><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">IIC</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">的应用范围<br>
+<br>
+<img border="0" src="skl_II4.gif" width="707" height="429"><br>
+<br>
+</span></font></b><font size="2"><b><font face="宋体" color="#666666">            
+<br>            
+<a href="#home">返回</a>            
+</font>             
+</b></font>             
+</p>            
+<p><a name="Tips0002"><b><font size="2"><font face="宋体" color="#666666">2</font></font></b></a><font face="宋体" size="2"><b><font color="#666666"> 
+ <span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:        
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02 – AT24C512</span><span style="mso-bidi-font-size: 12.0pt; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">的大小及各参数表
+<br>
+</span> 
+</font></b></font></p>            
+<!--mstheme--></font>
+<table border="1" width="88%" bordercolorlight="#CCCC99" bordercolordark="#999900">
+  <tr>
+    <td width="5%"><font face="宋体" size="2">序号</font><!--mstheme--></font></td>
+  <td width="9%"><font face="宋体" size="2">型号</font><!--mstheme--></font></td>
+<td width="9%"><font face="宋体" size="2">大小(字节)</font><!--mstheme--></font></td>
+<td width="14%"><font face="宋体" size="2">页面大小(字节)</font><!--mstheme--></font></td>
+<td width="23%"><font face="宋体" size="2">器件地址及寻址字节SLA</font><!--mstheme--></font></td>
+<td width="10%"><font face="宋体" size="2">可接片数</font><!--mstheme--></font></td>
+<td width="14%"><font face="宋体" size="2">子地址字节数</font><!--mstheme--></font></td>
+<td width="21%"><font face="宋体" size="2">可选址引脚</font><!--mstheme--></font></td>
+<td width="10%"><font face="宋体" size="2">备注</font><!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#C0C0C0"><font face="宋体" size="2">1</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">AT24C01</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">128</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#C0C0C0"><font face="宋体" size="2">1010 A2 A1 A0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0">1<!--mstheme--></font></td>
+<td width="21%" bgcolor="#C0C0C0"><font face="宋体" size="2">A2 A1 A0</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#C0C0C0"><font face="宋体" size="2">2</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">AT24C02</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">256</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#C0C0C0"><font face="宋体" size="2">1010 A2 A1 A0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0">1<!--mstheme--></font></td>
+<td width="21%" bgcolor="#C0C0C0"><font face="宋体" size="2">A2 A1 A0</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#C0C0C0"><font face="宋体" size="2">3</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">AT24C04</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">512</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0"><font face="宋体" size="2">16</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#C0C0C0"><font face="宋体" size="2">1010 A2 A1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0"><font face="宋体" size="2">4</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0">1<!--mstheme--></font></td>       
+<td width="21%" bgcolor="#C0C0C0"><font face="宋体" size="2">A2 A1&nbsp;</font><!--mstheme--></font></td>        
+<td width="10%" bgcolor="#C0C0C0">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#C0C0C0"><font face="宋体" size="2">4</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">AT24C08</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">1K</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0"><font face="宋体" size="2">16</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#C0C0C0"><font face="宋体" size="2">1010 A2 p1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0"><font face="宋体" size="2">2</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0">1<!--mstheme--></font></td>
+<td width="21%" bgcolor="#C0C0C0"><font face="宋体" size="2">A2&nbsp;</font><!--mstheme--></font></td>
+<td width="10%" bgcolor="#C0C0C0">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#C0C0C0"><font face="宋体" size="2">5</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">AT24C16</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#C0C0C0"><font face="宋体" size="2">2K</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0"><font face="宋体" size="2">16</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#C0C0C0"><font face="宋体" size="2">1010 p2 p1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#C0C0C0"><font face="宋体" size="2">1</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#C0C0C0">1<!--mstheme--></font></td>
+<td width="21%" bgcolor="#C0C0C0"><font face="宋体" size="2">全部悬空（或接地）</font><!--mstheme--></font></td>
+<td width="10%" bgcolor="#C0C0C0">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#FFFF00"><font face="宋体" size="2">6</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">AT24C32</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">4K</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00"><font face="宋体" size="2">32</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#FFFF00"><font face="宋体" size="2">1010 A2 A1 A0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00">2<!--mstheme--></font></td>
+<td width="21%" bgcolor="#FFFF00"><font face="宋体" size="2">A2 A1 A0</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#FFFF00"><font face="宋体" size="2">7</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">AT24C64</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">8K</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00"><font face="宋体" size="2">32</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#FFFF00"><font face="宋体" size="2">1010 A2 A1 A0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00">2<!--mstheme--></font></td>
+<td width="21%" bgcolor="#FFFF00"><font face="宋体" size="2">A2 A1 A0</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#FFFF00"><font face="宋体" size="2">8</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">AT24C128</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">16K</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00"><font face="宋体" size="2">64</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#FFFF00"><font face="宋体" size="2">1010 A2 A1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00"><font face="宋体" size="2">4</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00">2<!--mstheme--></font></td>
+<td width="21%" bgcolor="#FFFF00"><font face="宋体" size="2">A2 A1</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#FFFF00"><font face="宋体" size="2">9</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">AT24C256</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">32K　</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00"><font face="宋体" size="2">64</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#FFFF00"><font face="宋体" size="2">1010 A2 p1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00"><font face="宋体" size="2">2</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00">2<!--mstheme--></font></td>
+<td width="21%" bgcolor="#FFFF00"><font face="宋体" size="2">A2&nbsp;</font><!--mstheme--></font></td>
+<td width="10%" bgcolor="#FFFF00">　<!--mstheme--></font></td>
+</tr>
+<tr>
+  <td width="5%" bgcolor="#FFFF00"><font face="宋体" size="2">10</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">AT24C512</font><!--mstheme--></font></td>
+<td width="9%" bgcolor="#FFFF00"><font face="宋体" size="2">64k</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00"><font face="宋体" size="2">128</font><!--mstheme--></font></td>
+<td width="23%" bgcolor="#FFFF00"><font face="宋体" size="2">1010 p2 p1 p0 R/W</font><!--mstheme--></font></td> 
+<td width="10%" bgcolor="#FFFF00"><font face="宋体" size="2">1</font><!--mstheme--></font></td>
+<td width="14%" bgcolor="#FFFF00">2<!--mstheme--></font></td>
+<td width="21%" bgcolor="#FFFF00"><font face="宋体" size="2">全部悬空（或接地）</font><!--mstheme--></font></td>
+<td width="10%" bgcolor="#FFFF00">　<!--mstheme--></font></td>
+</tr>
+</table>
+<p><font color="#666666"><b><font size="2" face="宋体">只连接一片EEPROM时,所有的引脚接地<br>
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0003"></a>3&nbsp;</font></b></font><b><font size="2" face="宋体" color="#666666"><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">系列的开漏结构</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">与M16的硬件连接图<br>
+<br>
+<br>
+</span><span style="font-size: 10.5pt; mso-bidi-font-size: 12.0pt; font-family: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman; mso-bidi-font-family: Times New Roman">1.       
+</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">系列的开漏结构<br>
+<br>
+所有 TWI 兼容的器件的总线驱动都是漏极开路或集电极开路的。这样就实现了对接口操作非常关键的线与功能。<br>       
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:371.25pt;
+ height:201.75pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II2.gif" v:shapes="_x0000_i1025" width="495" height="269"><br>
+<br>
+<br>
+<br>
+</span></span><span style="font-size: 10.5pt; mso-bidi-font-size: 12.0pt; font-family: 宋体; mso-fareast-font-family: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman; mso-bidi-font-family: Times New Roman" lang="EN-US">2.       
+</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C</span><span style="font-size: 10.5pt; mso-bidi-font-size: 12.0pt; font-family: Times New Roman; mso-fareast-font-family: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA" lang="EN-US">16</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">与M16的硬件连接图<br>
+</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:414.75pt;
+ height:399pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+ <!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"  
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:414.75pt;
+ height:399pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+ <img src="skl_II1.gif" v:shapes="_x0000_i1025" width="553" height="532"><br> 
+<br>
+</span><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0004"></a>4<br>            
+&nbsp;<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font face="宋体" size="2"><b><a name="Tips0005"><font color="#666666"></font></a><font color="#666666">5         
+</font></b><span style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">总线容量与驱动能力</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">&nbsp;<o:p>
+</o:p>        
+</span></font></p>            
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">I</span><span lang="EN-US" style="mso-bidi-font-size: 6.5pt; mso-font-kerning: 0pt">2</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">C         
+总线的外围扩展器件都是CMOS 器件,总线有足够的电流驱动能力,因此总线上扩</span><span style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">展的节点数不是由电流负载能力决定<span lang="EN-US"><o:p>        
+</o:p>
+</span></span></font></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">&nbsp;</span><span style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">而是由电容负载确定<span lang="EN-US">I</span></span><span lang="EN-US" style="mso-bidi-font-size: 6.5pt; mso-font-kerning: 0pt">2</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">C的扩展的节点数,         
+总线上每个实际的节点器件的I</span><span lang="EN-US" style="mso-bidi-font-size: 6.5pt; mso-font-kerning: 0pt">2</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">C         
+总线接口都有一定的等效电容,等效电容的存在会造成总线传输的延迟(因为要对电容充电占用时间)而导致数据传输出错,通常I</span><span lang="EN-US" style="mso-bidi-font-size: 6.5pt; mso-font-kerning: 0pt">2</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">C         
+总线负载能力为400pF,         
+据此可计算出总线长度及节点数目的限制数量&nbsp;<o:p>
+</o:p>        
+</span></font></p>
+<font face="宋体" size="2"><span style="mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">总线上的每个外围器件都有一个器件地址总线上扩展外围器件时也要受器件地址限制(最多128个)</span></font>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0006"></a>6<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0007"></a>7       
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">SCL, SDA</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">时序及时钟控制的讲解及代码示例</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA"><br>
+<br>
+</span></font></b><font FACE="SimSun+1" SIZE="3">(</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">1</font><font FACE="SimSun+1" SIZE="3">)I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线上的数据传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">递</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">序</p>            
+</font><font FACE="SimSun+1" SIZE="3">
+<p ALIGN="LEFT">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线上数据传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">递</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">序</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">如图</font><font FACE="SimSun+1" SIZE="3">3     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">所示总线上传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的每一</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">帧</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">数据</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">均</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">为一个字节</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">但启</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">动</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线后传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的字节数</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">没</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">有限制只要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">求</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">每传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">一个字节后</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">对方回</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">应一个应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">在发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">首先</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的是数据的最</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">高位</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">每</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">次</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">开</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">始</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">有</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">起始</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">结</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">束</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时有</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">停止</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">在总线传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">完一个字节后可以通过</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">对</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">钟</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">线的控制使传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送暂停例</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">如</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">当某</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">个外围器件接</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">收</font><font FACE="SimSun+1" SIZE="3">N     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">个字节数据后</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">需</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">要一段处理时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">间</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">以</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">便继续</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">接</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">收</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">以后的字节数据这时可在应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">后使</font><font FACE="SimSun+1" SIZE="3">SCL     
+</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">变低</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">电</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">平</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">控制总线</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">暂停</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">如</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">果</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">主节点要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">求</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">暂停</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">也可使时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">钟</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">线</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">保</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">持</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">低</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">电</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">平</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">控制总线</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">暂停</p>
+</font>            
+<p><img border="0" src="skl_II8.gif" width="406" height="165"><br>
+<br>
+</p>            
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><span lang="EN-US" style="mso-bidi-font-size:10.5pt;
+font-family:宋体;mso-font-kerning:0pt">(2)总线上的时序信号<o:p>
+</o:p>    
+</span></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><span lang="EN-US" style="mso-bidi-font-size:10.5pt;
+font-family:宋体;mso-font-kerning:0pt">I</span><span lang="EN-US" style="mso-bidi-font-size:
+6.5pt;font-family:宋体;mso-font-kerning:0pt">2</span><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:宋体;mso-font-kerning:0pt">C     
+总线为同步传输总线总线信号完全与时钟同步I</span><span lang="EN-US" style="mso-bidi-font-size:6.5pt;font-family:宋体;mso-font-kerning:
+0pt">2</span><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:
+宋体;mso-font-kerning:0pt">C 总线上与数据传送有关的信</span><span style="font-size:10.5pt;font-family:宋体;mso-bidi-font-family:&quot;Times New Roman&quot;;    
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">号有起始信号<span lang="EN-US">S     
+终止信号P 应答信号A 以及位传送信号等如图4 所示</span></span><br>    
+<br>
+<br>
+<img border="0" src="skl_II9.gif" width="445" height="124"><br>
+<br>
+</p>
+<font FACE="SimSun" LANG="ZH-CN" SIZE="3">
+<p ALIGN="LEFT">其中</font><font FACE="SimSun+1" SIZE="3">SLAR </font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">寻</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">址字节</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">读</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">在主接</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">收</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">中</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">第</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">一个应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">是</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">从</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">节点接</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">收</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">到</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">寻</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">址字节</font><font FACE="SimSun+1" SIZE="3">SLAR     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">后发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">回</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">其</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">余</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">都是由主控器在接</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">收</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">到数据后向</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">从</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">节点发出的应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</p>
+</font><font FACE="SimSun+1" SIZE="3">
+<p ALIGN="LEFT">(3)</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作格</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">式的应用</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">特性</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作格</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">式是</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线的</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">重</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">要应用</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">界面对</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">于具</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">体</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">外围器件的运行</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">原</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">理不同其操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">内容也不同实际应用中要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">根</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">据具</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">体</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">器件的运行</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">原</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">理</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">列写</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">出具</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">体</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作格</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">式</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">无论哪</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">种</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">工作方</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">式都是由主控器</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">来启</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">动总线发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送寻</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">址字节和</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">终止</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">运行</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线数据操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作格</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">式表示了</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线的一</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">次</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">完</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">整</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的数据传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">过</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">程</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">它在</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线通用软件</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">包</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的支持下自动完成应用</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">程序</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">设计时只要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">按照归</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">一</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">化</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作指令准</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">备</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">好入</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">口</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">条</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">件</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">即</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">可在</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线接口的外围器件中器件内部有多个地址</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">空间</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时其</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">读写</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">操</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">作</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">都有地址自动</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">加</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">1     
+功能</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">简化</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">了</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线的外部</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">寻</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">址</p>
+</font>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><br>
+-----------------代码示例:------------------------------------<br>
+<br>
+<font FACE="SimHei+1" LANG="ZH-CN" SIZE="3">1 总线时序及数据操作模拟</p>    
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">
+<p ALIGN="LEFT">1 </font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">典型</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">的时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">序</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">求</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线数据传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时有</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">起始位</font><font FACE="SimSun+1" SIZE="3">S     
+</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">终止位</font><font FACE="SimSun+1" SIZE="3">P     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun+1" SIZE="3">0     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">及应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</font><font FACE="SimSun+1" SIZE="3">A     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">发</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">1及</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">非</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">应</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">答位</font><font FACE="SimSun+1" SIZE="3">A     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">等信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号按照典型</font><font FACE="SimSun+1" SIZE="3">I</font><font FACE="SimSun+1" SIZE="1">2</font><font FACE="SimSun+1" SIZE="3">C 
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">总线传</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">送</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">速率要</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">求</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">这些信</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">号</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">时</font><font FACE="SimSun+2" LANG="ZH-CN" SIZE="3">序</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">如图</font><font FACE="SimSun+1" SIZE="3">6     
+</font><font FACE="SimSun" LANG="ZH-CN" SIZE="3">所示</p>
+</font>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:414.75pt;
+ height:313.5pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II11.gif" v:shapes="_x0000_i1025" width="553" height="418"></span><br>
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:315pt;
+ height:200.25pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II12.gif" v:shapes="_x0000_i1025" width="420" height="267"></span><br>
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:414.75pt;
+ height:239.25pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II13.gif" v:shapes="_x0000_i1025" width="553" height="319"><br> 
+<br>
+<img border="0" src="skl_II14.gif" width="622" height="248"><br>
+</span><br>
+<font size="2"><b><font color="#666666" face="宋体" size="2"><img border="0" src="skl_II15.gif" width="599" height="278"><br>
+<br>
+<img border="0" src="skl_II16.gif" width="469" height="232"><br>
+<br>
+<img border="0" src="skl_II17.gif" width="656" height="291"><br>
+<br>
+<br>
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0008"></a>8     
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">MCU主机对</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">AT24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的器件寻址和节点地址及读写数据格式</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2">
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:414.75pt;
+ height:171pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.png"
+  o:title=""/>
+</v:shape><![endif]-->
+<br>
+<img src="skl_II4.jpg" v:shapes="_x0000_i1025" width="553" height="228"><br>
+<br>
+</span></font></b></font><span lang="EN-US">
+<img src="skl_II2.jpg" v:shapes="_x0000_i1025" width="554" height="134"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1226312335">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>            
+<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">当对</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">AT24C32 - AT24C512</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:      
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">操作时</span><span lang="EN-US" style="font-size:
+10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">, SUBADR</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">应该是</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">2</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">个字节</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">, </span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:      
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">对</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">AT24C01 - AT24C16</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">操作时</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">, SUBADR</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">是</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">1</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">个字节</span>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">            
+－－－－－－－－－－对2片at24c02的地址操作讲解－－－－－－－－－－－－－－－<br>
+<br>
+要把at24c02的片选地址赋给SLA的A2,A1,A0<br>
+<br>
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0009"></a>9<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font face="宋体" size="2"><b><a name="Tips0010"><font color="#666666"></font></a><font color="#666666">10         
+</font></b><span style="mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">关于</span><span lang="EN-US">A0,A1,A2</span><span style="mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman">引脚的器件选择及引脚无效情况的讲解</span><span lang="EN-US"><br>
+<br>
+(参考: </span></font><b><font size="2" face="宋体" color="#666666"><a href="#Tips0002">02</a>&nbsp;<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:    
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">AT24C02 – AT24C512</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:      
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的大小及各参数表</span></font></b><font face="宋体" size="2"><span lang="EN-US">)<br>
+</span><span lang="EN-US">
+<br>
+</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">1. 
+</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A0   
+A</span><span lang="EN-US" style="mso-bidi-font-size:   
+10.5pt;font-family:黑体;mso-hansi-font-family:SimHei;mso-font-kerning:0pt">1 </span><span lang="EN-US" style="mso-bidi-font-size:10.5pt;font-family:SimHei;mso-font-kerning:
+0pt">A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">器件地址输入端<span lang="EN-US"><o:p>
+</o:p> 
+</span></span></font></p>            
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">这些输入脚用于多个器件级联时设置器件地址当这些脚悬空时默认值为</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">0,       
+24WC01 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">除外<span lang="EN-US"><o:p>        
+</o:p> 
+</span></span></font></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">2.     
+当使用</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC01 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">或</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC02 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">时最大可级联</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">8 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">个器件<br>    
+<br>
+&nbsp;&nbsp; a. 如果只有一个</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC02 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">被总线寻址这三个地址输入脚</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A0       
+A1 A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">可悬空或连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss&nbsp;<br>    
+<br>
+ </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">&nbsp;&nbsp;     
+b. 如果只有一个</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC01 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">被总线寻址这三个地址输入脚</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A0       
+A1 A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">必须连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss<o:p>        
+</o:p>          
+</span></font></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">3.     
+当使用</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC04 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">时最多可连接</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">4 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">个器件该器件仅使用</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A1       
+A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">地址管脚</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A0 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">管脚未用,可以连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">或悬空如果只有一个</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC04 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">被总线寻址</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A1 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">和</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">地址管脚可悬空或连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss<o:p>        
+</o:p>          
+</span></font></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">4.     
+当使用</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC08 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">时最多可连接</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">个器件且仅使用地址管脚</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A2       
+A0 A1 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">管脚未用,可以连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">或悬空如果只有一个</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC08 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">被总线寻址</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">管脚可悬空或连接到</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">Vss&nbsp;<o:p>        
+</o:p>          
+</span></font></p>
+<p class="MsoNormal" align="left" style="text-align:left;mso-layout-grid-align:
+none;text-autospace:none"><font face="宋体" size="2"><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">5.     
+当使用</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">24WC16 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">时最多只可连接</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">1 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">个器件所有地址管脚</span><span lang="EN-US" style="mso-bidi-font-size: 10.5pt; mso-font-kerning: 0pt">A0       
+A1 A2 </span><span style="mso-bidi-font-size: 10.5pt; mso-hansi-font-family: SimHei; mso-font-kerning: 0pt">都未用,管脚可以连接到</span><span lang="EN-US" style="mso-fareast-font-family: 宋体; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">Vss </span><span style="mso-hansi-font-family: SimHei; mso-bidi-font-family: Times New Roman; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">或悬空</span></font></p>        
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0011"></a>11<br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0012" href="#tips0012"></a>12<br>
+<br>
+</font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0013" href="#tips0013"></a>13<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0014" href="#tips0014"></a>14<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0015" href="#tips0015"></a>15     
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">读操作和写操作</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+<br>
+1. 读写N个字节<br>    
+<br>
+</font></b></font><span lang="EN-US">
+<img src="skl_II2.jpg" v:shapes="_x0000_i1025" width="554" height="134"><!--[if gte mso 9]><xml>
+ <o:OLEObject Type="Embed" ProgID="PBrush" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1226312335">
+ </o:OLEObject>
+</xml><![endif]-->
+</span></p>            
+<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;
+mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">当对</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">AT24C32 - AT24C512</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:      
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">操作时</span><span lang="EN-US" style="font-size:
+10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">, SUBADR</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">应该是</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">2</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">个字节</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">, </span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:      
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">对</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">AT24C01 - AT24C16</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">操作时</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">, SUBADR</span><span style="font-size:10.5pt;      
+mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">是</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">1</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">个字节</span>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">2.     
+写操作时, ATC24器件内部需先写入缓冲区, 然后再写入eeprom    
+<br>
+<br>
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:250.5pt;
+ height:154.5pt' o:ole="">
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.png"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II3.jpg" v:shapes="_x0000_i1025" width="334" height="206"><!--[if gte mso 9]><xml> 
+ <o:OLEObject Type="Embed" ProgID="Paint.Picture" ShapeID="_x0000_i1025"
+  DrawAspect="Content" ObjectID="_1226312494">
+ </o:OLEObject>
+</xml><![endif]-->
+<br>
+<br>
+<br>
+</span>   
+</font></b></font><span lang="EN-US"><b><font face="宋体" size="2">页写和节写都要用到At24cxx的内部缓冲区,  
+都需要延时(10ms)后才能写下一个命令<br>
+所以字节写会比页写慢很多</font></b></span><font size="2"><b><font color="#666666" face="宋体" size="2">
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA">
+<br>
+</span><br>            
+<br>            
+<a href="#home">返回<br>            
+<br>            
+</a><a name="tips0016"></a>16     
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">字节写和页写的讲解</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA"></span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+</font></b></font><span lang="EN-US"><br>
+4 </span><span style="font-family:宋体;     
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">写操作</span></p>            
+<p class="MsoNormal"><span lang="EN-US"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+</span>1 </span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;      
+mso-hansi-font-family:&quot;Times New Roman&quot;">字节写,     
+写完后At24cxx内部地址自动加1&nbsp;</span></p>
+<p class="MsoNormal"><span lang="EN-US"><span style="mso-tab-count:2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+</span>2 </span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;      
+mso-hansi-font-family:&quot;Times New Roman&quot;">页写</span><span lang="EN-US">&nbsp;<span style="mso-tab-count:1">&nbsp; 
+</span>AT24C02</span><span style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">是</span><span lang="EN-US">8</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">字节</span><span lang="EN-US">/</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">页</span><span lang="EN-US"> AT24C04/08</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:      
+&quot;Times New Roman&quot;">是</span><span lang="EN-US">16</span><span style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">字节</span><span lang="EN-US">/</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">页</span></p>
+<p class="MsoNormal"><span style="mso-tab-count:4" lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">注意</span><span lang="EN-US">:</span><span style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">页写的地址只在当前页自动累加</span><span lang="EN-US">,</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">页地址范围内循环。</span></p>
+<p class="MsoNormal"><span style="mso-tab-count:2" lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       
+</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">启动写命令后需要</span><span lang="EN-US">10ms(</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">最大</span><span lang="EN-US">)</span><span style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">的编程时间才能真正的把数据记录下来，编程期间器件不响应任何命令</span><span lang="EN-US"><br style="mso-special-character:line-break">
+<br style="mso-special-character:line-break">
+问题:&nbsp;     
+字节写也要用到At24cxx的内部缓冲区,也需要延时(10ms)后才能写下一个命令(待验证)</span></p>
+<p><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA"><span lang="EN-US"><!--[if gte vml 1]><v:shapetype id="_x0000_t75"
+ coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+ filled="f" stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:495pt;
+ height:195pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.wmz"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II3.gif" v:shapes="_x0000_i1025" width="660" height="260"><br>
+<br>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><!--[if gte vml 1]><v:shapetype id="_x0000_t75" coordsize="21600,21600"
+ o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f"
+ stroked="f">
+ <v:stroke joinstyle="miter"/>
+ <v:formulas>
+  <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+  <v:f eqn="sum @0 1 0"/>
+  <v:f eqn="sum 0 0 @1"/>
+  <v:f eqn="prod @2 1 2"/>
+  <v:f eqn="prod @3 21600 pixelWidth"/>
+  <v:f eqn="prod @3 21600 pixelHeight"/>
+  <v:f eqn="sum @0 0 1"/>
+  <v:f eqn="prod @6 1 2"/>
+  <v:f eqn="prod @7 21600 pixelWidth"/>
+  <v:f eqn="sum @8 21600 0"/>
+  <v:f eqn="prod @7 21600 pixelHeight"/>
+  <v:f eqn="sum @10 21600 0"/>
+ </v:formulas>
+ <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+ <o:lock v:ext="edit" aspectratio="t"/>
+</v:shapetype><v:shape id="_x0000_i1025" type="#_x0000_t75" style='width:477pt;
+ height:264.75pt'>
+ <v:imagedata src="file:///D:/DOCUME~1/TOM/LOCALS~1/Temp/msoclip1/01/clip_image001.png"
+  o:title=""/>
+</v:shape><![endif]-->
+<img src="skl_II5.jpg" v:shapes="_x0000_i1025" width="636" height="353"></span></span></span>            
+</p>
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0017" href="#tips0012"></a>17 </font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;    
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">字节读和连续读的讲解<br>
+<br>
+</span></font></b><span lang="EN-US">1.&nbsp; </span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;     
+mso-hansi-font-family:&quot;Times New Roman&quot;">立即地址读</span><span style="mso-spacerun: yes" lang="EN-US">&nbsp;     
+</span><span style="font-family:宋体;
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">地址自动累加，即为上次读</span><span lang="EN-US">/</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;">写操作地址</span><span lang="EN-US">+1</span></p>            
+<p class="MsoNormal"><span lang="EN-US">2.&nbsp; </span><span style="font-family:宋体;     
+mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">随机读</span><span style="mso-spacerun: yes" lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;       
+</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">指定地址读一个字节</span></p>
+<span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:
+&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:
+EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">3.&nbsp; </span><span style="font-size:     
+10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;
+mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;
+mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">连续读</span><span style="mso-spacerun: yes; font-size: 10.5pt; mso-bidi-font-size: 12.0pt; font-family: Times New Roman; mso-fareast-font-family: 宋体; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA" lang="EN-US">&nbsp;&nbsp;&nbsp;&nbsp;       
+</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">连续读操作可通过立即读或随机读操作启动，由主机发出</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">NAK</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">和</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">STOP</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">来停止读操作读操作时地址计数器在</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">AT24C02/04/08</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">整个地址内增加</span><span lang="EN-US" style="font-size:
+10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">,</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">这样整个寄存器区域在可在一个读操作内全部读出循环读取，读到最后一个地址后，从第一个地址继续开始读<br>
+</span>            
+<p><b><font size="2" face="宋体" color="#666666"><span style="font-size: 10.5pt; mso-bidi-font-size: 12.0pt; font-family: 宋体; mso-ascii-font-family: Times New Roman; mso-hansi-font-family: Times New Roman; mso-bidi-font-family: Times New Roman; mso-font-kerning: 1.0pt; mso-ansi-language: EN-US; mso-fareast-language: ZH-CN; mso-bidi-language: AR-SA">注意:     
+读操作好像不受At24Cxx页面大小的限制, 可一次性读所有的eeprom大小     
+(待验证)</span></font></b><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA"><br>
+<br>
+</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0018" href="#tips0018"></a>18     
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">读写完成后的处理</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+<br>
+</font></b></font><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">启动写命令后需要</span><span lang="EN-US">10ms(</span><span style="font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;">最大</span><span lang="EN-US">)</span><span style="font-family:
+宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;">的编程时间才能真正的把数据记录下来，编程期间器件不响应任何命令</span><span lang="EN-US"><br style="mso-special-character:line-break">
+<br>
+启动读命令后,不需要延时处理(待验证)</span><font size="2"><b><font color="#666666" face="宋体" size="2"><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0019" href="#tips0019"></a>19    
+</font></b></font><b><font size="2" face="宋体" color="#666666">主机读应答位的处理<br>
+<br>
+读应答位ACK, 先把SDA置高电平，然后再读，如果无应答，应重发</font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>               
+<br>            
+</font></b></font><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:宋体;mso-font-kerning:
+1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:
+AR-SA"><img border="0" src="skl_II14.gif" width="622" height="248"><br>
+<br>
+</span><font size="2"><b><font color="#666666" face="宋体" size="2">            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0020" href="#tips0015"></a>20         
+</font></b></font><b><font size="2" face="宋体" color="#666666"><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">引脚</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">WP</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">和写保护</span></font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+<br>
+<span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;
+font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">写保护功能，由</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">WP</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">引脚控制，</span><span lang="EN-US" style="font-size:
+10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">WP=VCC</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">时，</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">24C02</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的高</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">1K</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">位，</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">24C04</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的高</span><span lang="EN-US" style="font-size:10.5pt;
+mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">2K</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">位，</span><span lang="EN-US" style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;
+mso-fareast-font-family:宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;
+mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">24C08</span><span style="font-size:10.5pt;mso-bidi-font-size:12.0pt;font-family:宋体;mso-ascii-font-family:
+&quot;Times New Roman&quot;;mso-hansi-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:
+&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:
+ZH-CN;mso-bidi-language:AR-SA">的全部</span><span lang="EN-US" style="font-size:
+10.5pt;mso-bidi-font-size:12.0pt;font-family:&quot;Times New Roman&quot;;mso-fareast-font-family:
+宋体;mso-font-kerning:1.0pt;mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;
+mso-bidi-language:AR-SA">8K</span><span style="font-size:10.5pt;mso-bidi-font-size:
+12.0pt;font-family:宋体;mso-ascii-font-family:&quot;Times New Roman&quot;;mso-hansi-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;;mso-font-kerning:1.0pt;
+mso-ansi-language:EN-US;mso-fareast-language:ZH-CN;mso-bidi-language:AR-SA">位都变成只读，不能写入</span><br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0021" href="#Tips0021"></a>21<br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0022" href="#tips0012"></a>22     
+</font></b></font><b><font size="2" face="宋体" color="#666666">关于对AT24C02(从机)写数据后，从机是否拉低SCL时钟线等思考</font></b><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+</font></b></font><font face="宋体" size="2"><br>
+问题1: at24cxx的接收频率是固定的,     
+还是随着主机的频率而变化<br>
+<br>
+问题2: 器件At24cxx在接到主机页写的stop指令后,     
+在把缓冲区的数据写入内部eeprom的过程中, 会不会把时钟线SLC拉成低电平?<br>    
+<br>
+</font><font size="2"><b><font color="#666666" face="宋体" size="2"><br>
+<br>            
+<a href="#home">返回</a></font></b></font></p>             
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0023" href="#tips0023"></a>23<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0024" href="#tips0019"></a>24<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0025" href="#tips0015"></a>25<br>            
+<br>            
+<a href="#home">返回<br>            
+</a><a name="tips0026" href="#Tips0026"><br>          
+</a>26<br>            
+<br>            
+<a href="#home">返回</a>            
+<a href="#Return"><br>            
+<br>            
+</a><a name="tips0027" href="#tips0027"></a>27<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0028" href="#tips0028"></a>28<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0029" href="#tips0029"></a>29<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0030" href="#tips0030"></a>30<br>            
+<br>            
+<a href="#home">返回<br>            
+</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0031" href="#Tips0031"></a>31&nbsp;<br>                              
+<br>                 
+<br>                 
+<a href="#home">返回</a>                 
+<a href="#Return"><br>                 
+<br>                 
+</a><a name="tips0032" href="#tips0012"></a>32&nbsp;               
+</font></b></font></p>                
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">                
+<a href="#home">返回</a></font></b></font></p>                
+<p><font face="宋体" size="2"><b><a name="tips0033" href="#tips0023"><font color="#666666"></font></a><font color="#666666">33&nbsp;            
+<br>            
+</font></b></font></p>               
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">               
+<a href="#home">返回</a></font></b></font></p>               
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0034" href="#tips0019"></a>34&nbsp;&nbsp;<br>             
+<br>                
+<a href="#home">返回</a>             
+</font></b></font></p>                
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0035" href="#tips0015"></a>35<br>               
+<br>               
+<a href="#home">返回</a><a name="tips0036" href="#tips0015"><br>            
+<br>            
+</a>36&nbsp;                
+<br>              
+<br>              
+<a href="#home">返回</a>              
+<a href="#Return"><br>              
+<br>              
+</a><a name="tips0037" href="#tips0027"></a>37&nbsp;         
+<br>         
+<br>             
+<a href="#home">返回</a> </font></b></font></p>             
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0038" href="#tips0028"></a>38&nbsp;&nbsp;            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0039" href="#tips0029"></a>39<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0040" href="#tips0030"></a>40<br>            
+<br>            
+<a href="#home">返回<br>            
+</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="Tips0041"></a>41&nbsp;<br>                              
+<br>                 
+<br>                 
+<a href="#home">返回</a>                 
+<a href="#Return"><br>                 
+<br>                 
+</a><a name="tips0042"></a>42&nbsp;               
+</font></b></font></p>                
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">                
+<a href="#home">返回</a></font></b></font></p>                
+<p><font face="宋体" size="2"><b><a name="tips0043"><font color="#666666"></font></a><font color="#666666">43&nbsp;            
+<br>            
+</font></b></font></p>               
+<p><font size="2"><b><font color="#666666" face="宋体" size="2">               
+<a href="#home">返回</a></font></b></font></p>               
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0044"></a>44&nbsp;&nbsp;<br>             
+<br>                
+<a href="#home">返回</a>             
+</font></b></font></p>                
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0045"></a>45<br>               
+<br>               
+<a href="#home">返回</a><br>        
+<br>        
+<a name="tips0046"></a>46&nbsp;                
+<br>              
+<br>              
+<a href="#home">返回</a>              
+<a href="#Return"><br>              
+<br>              
+</a><a name="tips0047"></a>47&nbsp;         
+<br>         
+<br>             
+<a href="#home">返回</a> </font></b></font></p>             
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0048"></a>48&nbsp;&nbsp;            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0049"></a>49<br>            
+<br>            
+<br>            
+<a href="#home">返回</a></font></b></font></p>            
+<p><font size="2"><b><font color="#666666" face="宋体" size="2"><a name="tips0050"></a>50<br>            
+<br>            
+<a href="#home">返回<br>  
+</a>            
+<br>            
+</font></b></font></p>            
+<!--mstheme--></font></body>       
+       
+</html>       

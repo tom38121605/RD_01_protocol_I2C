@@ -1,0 +1,3037 @@
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Output\main.OBJ
+ASSEMBLER INVOKED BY: C:\Keil_c51\C51\BIN\A51.EXE .\Output\main.src PR(.\LST\main.ls1) EP DEBUG
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ; .\Output\main.SRC generated from: Code\main.c
+
+                       2     ; COMPILER INVOKED BY:
+
+                       3     ;        C:\Keil_c51\C51\BIN\C51.EXE Code\main.c LARGE OPTIMIZE(4,SPEED) BROWSE INCDIR(..\.
+                             .\Include) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\LST\main.lst) TABS(3) SRC(.\Output\main.SRC)
+
+                       4     
+
+                       5     $nomod51 
+
+                       6     
+
+                       7     NAME    MAIN
+
+                       8     
+
+  00F6                 9     AINDIDS DATA    0F6H
+
+  00B1                10     P0M1    DATA    0B1H
+
+  0082                11     RXD_1   BIT     080H.2
+
+  00B3                12     P1M1    DATA    0B3H
+
+  00B2                13     P0M2    DATA    0B2H
+
+  0080                14     P0      DATA    080H
+
+  00BB                15     SADDR_1 DATA    0BBH
+
+  00B4                16     P1M2    DATA    0B4H
+
+  0090                17     P1      DATA    090H
+
+  0096                18     TXD_1   BIT     090H.6
+
+  00C2                19     AA      BIT     0C0H.2
+
+  00AC                20     P3M1    DATA    0ACH
+
+  00A0                21     P2      DATA    0A0H
+
+  00B0                22     P3      DATA    0B0H
+
+  00AD                23     P3M2    DATA    0ADH
+
+  00D6                24     AC      BIT     0D0H.6
+
+  008F                25     WKCON   DATA    08FH
+
+  0084                26     RCTRIM0 DATA    084H
+
+  009C                27     EIE1    DATA    09CH
+
+  0085                28     RCTRIM1 DATA    085H
+
+  00AF                29     EA      BIT     0A8H.7
+
+  00D8                30     PWMCON0 DATA    0D8H
+
+  00DF                31     PWMCON1 DATA    0DFH
+
+  009F                32     FE      BIT     098H.7
+
+  00AE                33     EADC    BIT     0A8H.6
+
+  00D1                34     PWMPH   DATA    0D1H
+
+  00A8                35     IE      DATA    0A8H
+
+  0096                36     CKSWT   DATA    096H
+
+  00EF                37     ADCF    BIT     0E8H.7
+
+  00FE                38     EIP1    DATA    0FEH
+
+  00D9                39     PWMPL   DATA    0D9H
+
+  00E8                40     ADCHS0  BIT     0E8H.0
+
+  00C7                41     TA      DATA    0C7H
+
+  00E9                42     ADCHS1  BIT     0E8H.1
+
+  00EA                43     ADCHS2  BIT     0E8H.2
+
+  00AC                44     ES      BIT     0A8H.4
+
+  00EB                45     ADCHS3  BIT     0E8H.3
+
+  00C1                46     I2ADDR  DATA    0C1H
+
+  00BE                47     PADC    BIT     0B8H.6
+
+  00B8                48     IP      DATA    0B8H
+
+  0098                49     RI      BIT     098H.0
+
+  00AD                50     EBOD    BIT     0A8H.5
+
+  00C3                51     SI      BIT     0C0H.3
+
+  00D7                52     CY      BIT     0D0H.7
+
+  00EE                53     ADCS    BIT     0E8H.6
+
+  00FF                54     FE_1    BIT     0F8H.7
+
+  0099                55     TI      BIT     098H.1
+
+  00DE                56     LOAD    BIT     0D8H.6
+
+  0097                57     CKEN    DATA    097H
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     2
+
+  00BC                58     PS      BIT     0B8H.4
+
+  0081                59     SP      DATA    081H
+
+  00D2                60     OV      BIT     0D0H.2
+
+  00B7                61     PWMINTC DATA    0B7H
+
+  00BD                62     PBOD    BIT     0B8H.5
+
+  00B2                63     P0SR    DATA    0B2H
+
+  00F7                64     EIPH    DATA    0F7H
+
+  00B4                65     P1SR    DATA    0B4H
+
+  00AD                66     P3SR    DATA    0ADH
+
+  00F8                67     RI_1    BIT     0F8H.0
+
+  00F9                68     TI_1    BIT     0F8H.1
+
+  00CB                69     RCMP2H  DATA    0CBH
+
+  00CF                70     ADCMPH  DATA    0CFH
+
+  0080                71     P00     BIT     080H.0
+
+  0081                72     P01     BIT     080H.1
+
+  0090                73     P10     BIT     090H.0
+
+  00FB                74     PMEN    DATA    0FBH
+
+  0099                75     SBUF    DATA    099H
+
+  0087                76     PCON    DATA    087H
+
+  0082                77     P02     BIT     080H.2
+
+  0091                78     P11     BIT     090H.1
+
+  00A0                79     P20     BIT     0A0H.0
+
+  00CA                80     RCMP2L  DATA    0CAH
+
+  0083                81     P03     BIT     080H.3
+
+  0092                82     P12     BIT     090H.2
+
+  00B0                83     P30     BIT     0B0H.0
+
+  00E3                84     ADCDLY  DATA    0E3H
+
+  00CE                85     ADCMPL  DATA    0CEH
+
+  0084                86     P04     BIT     080H.4
+
+  0093                87     P13     BIT     090H.3
+
+  0098                88     SCON    DATA    098H
+
+  0085                89     P05     BIT     080H.5
+
+  0094                90     P14     BIT     090H.4
+
+  0089                91     TMOD    DATA    089H
+
+  0088                92     TCON    DATA    088H
+
+  0086                93     P06     BIT     080H.6
+
+  0095                94     P15     BIT     090H.5
+
+  0087                95     P07     BIT     080H.7
+
+  0096                96     P16     BIT     090H.6
+
+  0097                97     P17     BIT     090H.7
+
+  0080                98     MOSI    BIT     080H.0
+
+  0081                99     MISO    BIT     080H.1
+
+  00F3               100     SPCR    DATA    0F3H
+
+  00BD               101     I2STAT  DATA    0BDH
+
+  00F5               102     SPDR    DATA    0F5H
+
+  00DD               103     PWMF    BIT     0D8H.5
+
+  00E5               104     C0H     DATA    0E5H
+
+  00E7               105     C1H     DATA    0E7H
+
+  00EE               106     C2H     DATA    0EEH
+
+  009F               107     CHPCON  DATA    09FH
+
+  0089               108     IE0     BIT     088H.1
+
+  008B               109     IE1     BIT     088H.3
+
+  00E4               110     C0L     DATA    0E4H
+
+  0091               111     SFRS    DATA    091H
+
+  00E6               112     C1L     DATA    0E6H
+
+  00C8               113     CM_RL2  BIT     0C8H.0
+
+  00F0               114     B       DATA    0F0H
+
+  00ED               115     C2L     DATA    0EDH
+
+  009A               116     SBUF_1  DATA    09AH
+
+  00A5               117     IAPUEN  DATA    0A5H
+
+  00F8               118     SCON_1  DATA    0F8H
+
+  00E0               119     ACC     DATA    0E0H
+
+  00A9               120     ET0     BIT     0A8H.1
+
+  00F4               121     SPSR    DATA    0F4H
+
+  00A4               122     IAPTRG  DATA    0A4H
+
+  008D               123     TF0     BIT     088H.5
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     3
+
+  00AB               124     ET1     BIT     0A8H.3
+
+  008F               125     TF1     BIT     088H.7
+
+  009A               126     RB8     BIT     098H.2
+
+  00CF               127     TF2     BIT     0C8H.7
+
+  00D7               128     FBD     DATA    0D7H
+
+  008C               129     TH0     DATA    08CH
+
+  0088               130     IT0     BIT     088H.0
+
+  00A8               131     EX0     BIT     0A8H.0
+
+  00C6               132     RH3     DATA    0C6H
+
+  008D               133     TH1     DATA    08DH
+
+  008A               134     IT1     BIT     088H.2
+
+  009B               135     TB8     BIT     098H.3
+
+  00AA               136     EX1     BIT     0A8H.2
+
+  00CD               137     TH2     DATA    0CDH
+
+  00D0               138     P       BIT     0D0H.0
+
+  00FA               139     PDTCNT  DATA    0FAH
+
+  009F               140     SM0     BIT     098H.7
+
+  008A               141     TL0     DATA    08AH
+
+  009E               142     SM1     BIT     098H.6
+
+  00C5               143     RL3     DATA    0C5H
+
+  008B               144     TL1     DATA    08BH
+
+  009D               145     SM2     BIT     098H.5
+
+  00C6               146     I2CEN   BIT     0C0H.6
+
+  00CC               147     TL2     DATA    0CCH
+
+  00B1               148     P0S     DATA    0B1H
+
+  009B               149     EIE     DATA    09BH
+
+  00B9               150     PT0     BIT     0B8H.1
+
+  00B3               151     P1S     DATA    0B3H
+
+  00BB               152     PT1     BIT     0B8H.3
+
+  00D3               153     RS0     BIT     0D0H.3
+
+  00BC               154     I2DAT   DATA    0BCH
+
+  00B5               155     P2S     DATA    0B5H
+
+  008C               156     TR0     BIT     088H.4
+
+  00D4               157     RS1     BIT     0D0H.4
+
+  00BE               158     I2CLK   DATA    0BEH
+
+  00AC               159     P3S     DATA    0ACH
+
+  008E               160     TR1     BIT     088H.6
+
+  00DC               161     CLRPWM  BIT     0D8H.4
+
+  0094               162     SDA     BIT     090H.4
+
+  00B8               163     PX0     BIT     0B8H.0
+
+  00CA               164     TR2     BIT     0C8H.2
+
+  00FF               165     EIPH1   DATA    0FFH
+
+  00BA               166     PX1     BIT     0B8H.2
+
+  00E8               167     ADCCON0 DATA    0E8H
+
+  00E1               168     ADCCON1 DATA    0E1H
+
+  00E2               169     ADCCON2 DATA    0E2H
+
+  00C0               170     I2CON   DATA    0C0H
+
+  0083               171     DPH     DATA    083H
+
+  00FA               172     RB8_1   BIT     0F8H.2
+
+  00EF               173     EIP     DATA    0EFH
+
+  00FB               174     TB8_1   BIT     0F8H.3
+
+  00EC               175     PIF     DATA    0ECH
+
+  0082               176     DPL     DATA    082H
+
+  00FF               177     SM0_1   BIT     0F8H.7
+
+  00FC               178     PMD     DATA    0FCH
+
+  00B7               179     IPH     DATA    0B7H
+
+  0093               180     SCL     BIT     090H.3
+
+  00FE               181     SM1_1   BIT     0F8H.6
+
+  00BF               182     I2TOC   DATA    0BFH
+
+  00FD               183     SM2_1   BIT     0F8H.5
+
+  00C3               184     ADCRH   DATA    0C3H
+
+  00A7               185     IAPAH   DATA    0A7H
+
+  009C               186     REN     BIT     098H.4
+
+  00AE               187     IAPFD   DATA    0AEH
+
+  0092               188     CAPCON0 DATA    092H
+
+  00C0               189     I2CPX   BIT     0C0H.0
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     4
+
+  00C9               190     T2MOD   DATA    0C9H
+
+  00C8               191     T2CON   DATA    0C8H
+
+  00C2               192     ADCRL   DATA    0C2H
+
+  00A3               193     BODCON0 DATA    0A3H
+
+  0093               194     CAPCON1 DATA    093H
+
+  00C5               195     STA     BIT     0C0H.5
+
+  00C4               196     T3CON   DATA    0C4H
+
+  00AB               197     BODCON1 DATA    0ABH
+
+  00A6               198     IAPAL   DATA    0A6H
+
+  0094               199     CAPCON2 DATA    094H
+
+  00F1               200     CAPCON3 DATA    0F1H
+
+  00F2               201     CAPCON4 DATA    0F2H
+
+  00DF               202     PWMRUN  BIT     0D8H.7
+
+  00F3               203     SPCR2   DATA    0F3H
+
+  00B9               204     SADEN   DATA    0B9H
+
+  00AF               205     IAPCN   DATA    0AFH
+
+  00D2               206     PWM0H   DATA    0D2H
+
+  0087               207     RXD     BIT     080H.7
+
+  00D6               208     PNP     DATA    0D6H
+
+  00D3               209     PWM1H   DATA    0D3H
+
+  00D4               210     PWM2H   DATA    0D4H
+
+  00A9               211     SADDR   DATA    0A9H
+
+  008E               212     CKCON   DATA    08EH
+
+  0084               213     STADC   BIT     080H.4
+
+  0086               214     TXD     BIT     080H.6
+
+  00D5               215     PWM3H   DATA    0D5H
+
+  00DA               216     PWM0L   DATA    0DAH
+
+  00C4               217     PWM4H   DATA    0C4H
+
+  00DB               218     PWM1L   DATA    0DBH
+
+  00C5               219     PWM5H   DATA    0C5H
+
+  00A2               220     AUXR1   DATA    0A2H
+
+  0095               221     CKDIV   DATA    095H
+
+  00DC               222     PWM2L   DATA    0DCH
+
+  00DD               223     PWM3L   DATA    0DDH
+
+  0086               224     RWK     DATA    086H
+
+  00D5               225     F0      BIT     0D0H.5
+
+  00CC               226     PWM4L   DATA    0CCH
+
+  00C4               227     STO     BIT     0C0H.4
+
+  00EC               228     ETGSEL0 BIT     0E8H.4
+
+  00FC               229     REN_1   BIT     0F8H.4
+
+  00CD               230     PWM5L   DATA    0CDH
+
+  00ED               231     ETGSEL1 BIT     0E8H.5
+
+  00E9               232     PICON   DATA    0E9H
+
+  00DE               233     PIOCON0 DATA    0DEH
+
+  00D0               234     PSW     DATA    0D0H
+
+  00EA               235     PINEN   DATA    0EAH
+
+  00C6               236     PIOCON1 DATA    0C6H
+
+  00F9               237     PDTEN   DATA    0F9H
+
+  00AA               238     WDCON   DATA    0AAH
+
+  00EB               239     PIPEN   DATA    0EBH
+
+  00BA               240     SADEN_1 DATA    0BAH
+
+                     241     ?PR?_iputs0?MAIN     SEGMENT CODE 
+
+                     242     ?XD?_iputs0?MAIN     SEGMENT XDATA OVERLAYABLE 
+
+                     243     ?PR?Init_I2C?MAIN    SEGMENT CODE 
+
+                     244     ?PR?I2C_SI_Check?MAIN                    SEGMENT CODE 
+
+                     245     ?PR?_at24c02_write?MAIN                  SEGMENT CODE 
+
+                     246     ?XD?_at24c02_write?MAIN                  SEGMENT XDATA OVERLAYABLE 
+
+                     247     ?PR?_at24c02_read?MAIN                   SEGMENT CODE 
+
+                     248     ?XD?_at24c02_read?MAIN                   SEGMENT XDATA OVERLAYABLE 
+
+                     249     ?PR?main?MAIN        SEGMENT CODE 
+
+                     250     ?XD?main?MAIN        SEGMENT XDATA OVERLAYABLE 
+
+                     251     ?CO?MAIN             SEGMENT CODE 
+
+                     252     ?BI?MAIN             SEGMENT BIT 
+
+                     253             EXTRN   CODE (_sprintf)
+
+                     254             EXTRN   XDATA (?_sprintf?BYTE)
+
+                     255             EXTRN   CODE (_Timer0_Delay1ms)
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     5
+
+                     256             EXTRN   CODE (_InitialUART0_Timer3)
+
+                     257             EXTRN   CODE (_Send_Data_To_UART0)
+
+                     258             EXTRN   CODE (?C?CLDPTR)
+
+                     259             EXTRN   CODE (?C?ILDIX)
+
+                     260             EXTRN   CODE (?C?CLDOPTR)
+
+                     261             EXTRN   CODE (?C?CSTOPTR)
+
+                     262             EXTRN   CODE (?C_STARTUP)
+
+                     263             EXTRN   CODE (?C?COPY)
+
+                     264             PUBLIC  temp
+
+                     265             PUBLIC  xtemp
+
+                     266             PUBLIC  itemp
+
+                     267             PUBLIC  I2C_Reset_Flag
+
+                     268             PUBLIC  main
+
+                     269             PUBLIC  ?_at24c02_read?BYTE
+
+                     270             PUBLIC  _at24c02_read
+
+                     271             PUBLIC  ?_at24c02_write?BYTE
+
+                     272             PUBLIC  _at24c02_write
+
+                     273             PUBLIC  I2C_SI_Check
+
+                     274             PUBLIC  Init_I2C
+
+                     275             PUBLIC  _iputs0
+
+                     276     
+
+----                 277             ISEG  AT  080H
+
+0080                 278               itemp:   DS   1
+
+                     279     
+
+----                 280             XSEG  AT  080H
+
+0080                 281               xtemp:   DS   1
+
+                     282     
+
+----                 283             XSEG  AT  08H
+
+0008                 284                temp:   DS   1
+
+                     285     
+
+----                 286             RSEG  ?XD?_at24c02_read?MAIN
+
+0000                 287     ?_at24c02_read?BYTE:
+
+0000                 288           iaddr?445:   DS   1
+
+0001                 289             ORG  1
+
+0001                 290            sbuf?446:   DS   3
+
+0004                 291             ORG  4
+
+0004                 292            ilen?447:   DS   1
+
+                     293     
+
+----                 294             RSEG  ?XD?_at24c02_write?MAIN
+
+0000                 295     ?_at24c02_write?BYTE:
+
+0000                 296           iaddr?341:   DS   1
+
+0001                 297             ORG  1
+
+0001                 298            sbuf?342:   DS   3
+
+0004                 299             ORG  4
+
+0004                 300            ilen?343:   DS   1
+
+                     301     
+
+----                 302             RSEG  ?XD?main?MAIN
+
+0000                 303     ?main?BYTE:
+
+0000                 304           sbuf1?549:   DS   10
+
+000A                 305             ORG  10
+
+000A                 306           sbuf2?550:   DS   10
+
+0014                 307             ORG  20
+
+0014                 308           stemp?551:   DS   20
+
+                     309     
+
+----                 310             RSEG  ?XD?_iputs0?MAIN
+
+0000                 311     ?_iputs0?BYTE:
+
+0000                 312             msg?040:   DS   3
+
+                     313     
+
+----                 314             RSEG  ?BI?MAIN
+
+0000                 315      I2C_Reset_Flag:   DBIT   1
+
+                     316     
+
+----                 317             RSEG  ?CO?MAIN
+
+0000                 318     ?SC_0:
+
+0000 0A207374        319             DB  00AH,' ' ,'s' ,'t' ,'a' ,'r' ,'t' ,'.' ,'.' ,'.' 
+
+0004 6172742E                
+0008 2E2E                    
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     6
+
+000A 2E2E2E2E        320             DB  '.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' 
+
+000E 2E2E2E2E                
+0012 2E2E                    
+0014 2E2E2E2E        321             DB  '.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' ,'.' 
+
+0018 2E2E2E2E                
+001C 2E2E                    
+001E 2E2E00          322             DB  '.' ,'.' ,000H
+
+                     323     
+
+0021                 324     ?SC_33:
+
+0021 72656730        325             DB  'r' ,'e' ,'g' ,'0' ,'2' ,' ' ,'=' ,' ' ,'%' ,'b' 
+
+0025 32203D20                
+0029 2562                    
+002B 750D0A00        326             DB  'u' ,00DH,00AH,000H
+
+                     327     
+
+002F                 328     _?ix1000:
+
+002F 00              329             DB      000H
+
+0030 00000000        330             DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+0034 00000000                
+0038 00                      
+                     331     
+
+                     332     
+
+0039                 333     _?ix1001:
+
+0039 00              334             DB      000H
+
+003A 00000000        335             DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+003E 00000000                
+0042 00                      
+                     336     
+
+                     337     
+
+0043                 338     _?ix1002:
+
+0043 00              339             DB      000H
+
+0044 00000000        340             DB  000H,000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+0048 00000000                
+004C 0000                    
+004E 00000000        341             DB  000H,000H,000H,000H,000H,000H,000H,000H,000H
+
+0052 00000000                
+0056 00                      
+                     342     
+
+                     343     
+
+                     344     ; #include "N76E003.h"
+
+                     345     ; #include "SFR_Macro.h"
+
+                     346     ; #include "Function_define.h"
+
+                     347     ; #include "Common.h"
+
+                     348     ; #include "Delay.h"
+
+                     349     ; #include <string.h>
+
+                     350     ; 
+
+                     351     ; 
+
+                     352     ; unsigned char temp _at_ 0x08;
+
+                     353     ; unsigned char idata itemp _at_ 0x80;
+
+                     354     ; unsigned char xdata xtemp _at_ 0x80;
+
+                     355     ;  
+
+                     356     ; 
+
+                     357     ; //i2c
+
+                     358     ; #define I2C_CLOCK_400KHz    9 
+
+                     359     ; #define EEPROM_SLA              0x26   
+
+                     360     ; 
+
+                     361     ; #define EEPROM_WR               0
+
+                     362     ; #define EEPROM_RD               1
+
+                     363     ; 
+
+                     364     ; #define  REG00  0x80
+
+                     365     ; #define  REG01  0x81
+
+                     366     ; #define  REG02  0x82
+
+                     367     ; #define  REG03  0x83
+
+                     368     ; 
+
+                     369     ; #define  REG07  0x87
+
+                     370     ; #define  REG08  0x88
+
+                     371     ; #define  REG09  0x89
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     7
+
+                     372     ; #define  REG10  0x8A
+
+                     373     ; #define  REG11  0x8B
+
+                     374     ; #define  REG12  0x8C
+
+                     375     ; #define  REG13  0x8D
+
+                     376     ; #define  REG14  0x8E
+
+                     377     ; #define  REG15  0x8F
+
+                     378     ; //#define  REG16  0x90
+
+                     379     ; 
+
+                     380     ; 
+
+                     381     ; bit I2C_Reset_Flag;
+
+                     382     ;   
+
+                     383     ; void iputs0(UINT8 *msg);
+
+                     384     ;    
+
+                     385     ; void iputs0(UINT8 *msg)
+
+                     386     
+
+----                 387             RSEG  ?PR?_iputs0?MAIN
+
+0000                 388     _iputs0:
+
+                     389             USING   0
+
+                     390                             ; SOURCE LINE # 42
+
+0000 900000   F      391             MOV     DPTR,#msg?040
+
+0003 EB              392             MOV     A,R3
+
+0004 F0              393             MOVX    @DPTR,A
+
+0005 A3              394             INC     DPTR
+
+0006 EA              395             MOV     A,R2
+
+0007 F0              396             MOVX    @DPTR,A
+
+0008 A3              397             INC     DPTR
+
+0009 E9              398             MOV     A,R1
+
+000A F0              399             MOVX    @DPTR,A
+
+                     400     ; {
+
+                     401                             ; SOURCE LINE # 43
+
+000B                 402     ?C0001:
+
+                     403     ;    while(*msg)
+
+                     404                             ; SOURCE LINE # 44
+
+000B 900000   F      405             MOV     DPTR,#msg?040
+
+000E E0              406             MOVX    A,@DPTR
+
+000F FB              407             MOV     R3,A
+
+0010 A3              408             INC     DPTR
+
+0011 E0              409             MOVX    A,@DPTR
+
+0012 FA              410             MOV     R2,A
+
+0013 A3              411             INC     DPTR
+
+0014 E0              412             MOVX    A,@DPTR
+
+0015 F9              413             MOV     R1,A
+
+0016 120000   F      414             LCALL   ?C?CLDPTR
+
+0019 6018            415             JZ      ?C0003
+
+                     416     ;                Send_Data_To_UART0(*msg++);
+
+                     417                             ; SOURCE LINE # 45
+
+001B 900000   F      418             MOV     DPTR,#msg?040
+
+001E E0              419             MOVX    A,@DPTR
+
+001F A3              420             INC     DPTR
+
+0020 E4              421             CLR     A
+
+0021 75F001          422             MOV     B,#01H
+
+0024 120000   F      423             LCALL   ?C?ILDIX
+
+0027 A9F0            424             MOV     R1,B
+
+0029 FA              425             MOV     R2,A
+
+002A 120000   F      426             LCALL   ?C?CLDPTR
+
+002D FF              427             MOV     R7,A
+
+002E 120000   F      428             LCALL   _Send_Data_To_UART0
+
+0031 80D8            429             SJMP    ?C0001
+
+                     430     ; }
+
+                     431                             ; SOURCE LINE # 46
+
+0033                 432     ?C0003:
+
+0033 22              433             RET     
+
+                     434     ; END OF _iputs0
+
+                     435     
+
+                     436     ; 
+
+                     437     ; 
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     8
+
+                     438     ; void Init_I2C(void)
+
+                     439     
+
+----                 440             RSEG  ?PR?Init_I2C?MAIN
+
+0000                 441     Init_I2C:
+
+                     442                             ; SOURCE LINE # 49
+
+                     443     ; {
+
+                     444                             ; SOURCE LINE # 50
+
+                     445     ;    P13_OpenDrain_Mode;                                 
+
+                     446                             ; SOURCE LINE # 51
+
+0000 43B308          447             ORL     P1M1,#08H
+
+0003 43B408          448             ORL     P1M2,#08H
+
+                     449     ;    P14_OpenDrain_Mode;                                 
+
+                     450                             ; SOURCE LINE # 52
+
+0006 43B310          451             ORL     P1M1,#010H
+
+0009 43B410          452             ORL     P1M2,#010H
+
+                     453     ; 
+
+                     454     ;    // Set I2C clock rate  
+
+                     455     ;    I2CLK =  I2C_CLOCK_400KHz; 
+
+                     456                             ; SOURCE LINE # 55
+
+000C 75BE09          457             MOV     I2CLK,#09H
+
+                     458     ; 
+
+                     459     ;    // Enable I2C  
+
+                     460     ;    set_I2CEN;                                   
+
+                     461                             ; SOURCE LINE # 58
+
+000F D2C6            462             SETB    I2CEN
+
+                     463     ; }
+
+                     464                             ; SOURCE LINE # 59
+
+0011 22              465             RET     
+
+                     466     ; END OF Init_I2C
+
+                     467     
+
+                     468     ; 
+
+                     469     ; void I2C_SI_Check(void)
+
+                     470     
+
+----                 471             RSEG  ?PR?I2C_SI_Check?MAIN
+
+0000                 472     I2C_SI_Check:
+
+                     473                             ; SOURCE LINE # 61
+
+                     474     ; {
+
+                     475                             ; SOURCE LINE # 62
+
+                     476     ;    if (I2STAT == 0x00)
+
+                     477                             ; SOURCE LINE # 63
+
+0000 E5BD            478             MOV     A,I2STAT
+
+0002 7011            479             JNZ     ?C0007
+
+                     480     ;    {
+
+                     481                             ; SOURCE LINE # 64
+
+                     482     ;       I2C_Reset_Flag = 1;
+
+                     483                             ; SOURCE LINE # 65
+
+0004 D200     F      484             SETB    I2C_Reset_Flag
+
+                     485     ;       set_STO;
+
+                     486                             ; SOURCE LINE # 66
+
+0006 D2C4            487             SETB    STO
+
+                     488     ;       SI = 0;
+
+                     489                             ; SOURCE LINE # 67
+
+0008 C2C3            490             CLR     SI
+
+                     491     ;       if(SI)
+
+                     492                             ; SOURCE LINE # 68
+
+000A 30C308          493             JNB     SI,?C0007
+
+                     494     ;       {
+
+                     495                             ; SOURCE LINE # 69
+
+                     496     ;          clr_I2CEN;
+
+                     497                             ; SOURCE LINE # 70
+
+000D C2C6            498             CLR     I2CEN
+
+                     499     ;          set_I2CEN;
+
+                     500                             ; SOURCE LINE # 71
+
+000F D2C6            501             SETB    I2CEN
+
+                     502     ;          clr_SI;
+
+                     503                             ; SOURCE LINE # 72
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE     9
+
+0011 C2C3            504             CLR     SI
+
+                     505     ;          clr_I2CEN;           
+
+                     506                             ; SOURCE LINE # 73
+
+0013 C2C6            507             CLR     I2CEN
+
+                     508     ;       }       
+
+                     509                             ; SOURCE LINE # 74
+
+                     510     ;    }  
+
+                     511                             ; SOURCE LINE # 75
+
+                     512     ;    
+
+                     513     ; }
+
+                     514                             ; SOURCE LINE # 77
+
+0015                 515     ?C0007:
+
+0015 22              516             RET     
+
+                     517     ; END OF I2C_SI_Check
+
+                     518     
+
+                     519     ; 
+
+                     520     ; 
+
+                     521     ; void at24c02_write( UINT8 iaddr, UINT8 *sbuf, UINT8 ilen )
+
+                     522     
+
+----                 523             RSEG  ?PR?_at24c02_write?MAIN
+
+0000                 524     _at24c02_write:
+
+                     525             USING   0
+
+                     526                             ; SOURCE LINE # 80
+
+0000 900000   F      527             MOV     DPTR,#sbuf?342
+
+0003 EB              528             MOV     A,R3
+
+0004 F0              529             MOVX    @DPTR,A
+
+0005 A3              530             INC     DPTR
+
+0006 EA              531             MOV     A,R2
+
+0007 F0              532             MOVX    @DPTR,A
+
+0008 A3              533             INC     DPTR
+
+0009 E9              534             MOV     A,R1
+
+000A F0              535             MOVX    @DPTR,A
+
+                     536     ;---- Variable 'iaddr?341' assigned to Register 'R7' ----
+
+                     537     ; {
+
+                     538                             ; SOURCE LINE # 81
+
+                     539     ;    
+
+                     540     ;     UINT8  u8Count;
+
+                     541     ; 
+
+                     542     ;     /* Step1 */
+
+                     543     ;     set_STA;                                /* Send Start bit to I2C EEPROM */         
+
+                     544                             ; SOURCE LINE # 86
+
+000B D2C5            545             SETB    STA
+
+                     546     ;     clr_SI;
+
+                     547                             ; SOURCE LINE # 87
+
+000D C2C3            548             CLR     SI
+
+000F                 549     ?C0008:
+
+                     550     ;     while (!SI);
+
+                     551                             ; SOURCE LINE # 88
+
+000F 30C3FD          552             JNB     SI,?C0008
+
+0012                 553     ?C0009:
+
+                     554     ;    
+
+                     555     ;     if (I2STAT != 0x08)                     /* 0x08:  A START condition has been transmit
+                             ted*/
+
+                     556                             ; SOURCE LINE # 90
+
+0012 E5BD            557             MOV     A,I2STAT
+
+0014 6408            558             XRL     A,#08H
+
+0016 6004            559             JZ      ?C0010
+
+                     560     ;     {
+
+                     561                             ; SOURCE LINE # 91
+
+                     562     ;         I2C_Reset_Flag = 1;
+
+                     563                             ; SOURCE LINE # 92
+
+0018 D200     F      564             SETB    I2C_Reset_Flag
+
+                     565     ;         //iputs1("\nI2C 'Send STA' error");
+
+                     566     ;         goto Write_Error_Stop;
+
+                     567                             ; SOURCE LINE # 94
+
+001A 805F            568             SJMP    ?_at24c02_write?Write_Error_Stop
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    10
+
+                     569     ;     }
+
+                     570                             ; SOURCE LINE # 95
+
+001C                 571     ?C0010:
+
+                     572     ;     
+
+                     573     ; 
+
+                     574     ;     /* Step2 */
+
+                     575     ;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */
+
+                     576                             ; SOURCE LINE # 99
+
+001C C2C5            577             CLR     STA
+
+                     578     ;     I2DAT = EEPROM_SLA | EEPROM_WR;         /* Send (SLA+W) to EEPROM */
+
+                     579                             ; SOURCE LINE # 100
+
+001E 75BC26          580             MOV     I2DAT,#026H
+
+                     581     ;     clr_SI;
+
+                     582                             ; SOURCE LINE # 101
+
+0021 C2C3            583             CLR     SI
+
+0023                 584     ?C0012:
+
+                     585     ;     while (!SI);
+
+                     586                             ; SOURCE LINE # 102
+
+0023 30C3FD          587             JNB     SI,?C0012
+
+0026                 588     ?C0013:
+
+                     589     ;     if (I2STAT != 0x18)                     /* 0x18: SLA+W has been transmitted; ACK has 
+                             been received */             
+
+                     590                             ; SOURCE LINE # 103
+
+0026 E5BD            591             MOV     A,I2STAT
+
+0028 6418            592             XRL     A,#018H
+
+002A 6004            593             JZ      ?C0014
+
+                     594     ;     {
+
+                     595                             ; SOURCE LINE # 104
+
+                     596     ;         I2C_Reset_Flag = 1;
+
+                     597                             ; SOURCE LINE # 105
+
+002C D200     F      598             SETB    I2C_Reset_Flag
+
+                     599     ;         //iputs1("\nI2C 'Send SLA+W' error");
+
+                     600     ;         goto Write_Error_Stop;
+
+                     601                             ; SOURCE LINE # 107
+
+002E 804B            602             SJMP    ?_at24c02_write?Write_Error_Stop
+
+                     603     ;     }
+
+                     604                             ; SOURCE LINE # 108
+
+0030                 605     ?C0014:
+
+                     606     ; 
+
+                     607     ;     /* Step3 */
+
+                     608     ;     I2DAT = iaddr;             /* Send EEPROM's  Address */
+
+                     609                             ; SOURCE LINE # 111
+
+0030 8FBC            610             MOV     I2DAT,R7
+
+                     611     ;     clr_SI;
+
+                     612                             ; SOURCE LINE # 112
+
+0032 C2C3            613             CLR     SI
+
+0034                 614     ?C0015:
+
+                     615     ;     while (!SI);
+
+                     616                             ; SOURCE LINE # 113
+
+0034 30C3FD          617             JNB     SI,?C0015
+
+0037                 618     ?C0016:
+
+                     619     ;     if (I2STAT != 0x28)                     /* 0x28:  Data byte in S1DAT has been transmi
+                             tted; ACK has been received */
+
+                     620                             ; SOURCE LINE # 114
+
+0037 E5BD            621             MOV     A,I2STAT
+
+0039 6428            622             XRL     A,#028H
+
+003B 6004            623             JZ      ?C0017
+
+                     624     ;     {
+
+                     625                             ; SOURCE LINE # 115
+
+                     626     ;         I2C_Reset_Flag = 1;
+
+                     627                             ; SOURCE LINE # 116
+
+003D D200     F      628             SETB    I2C_Reset_Flag
+
+                     629     ;         //iputs1("\nI2C 'Send High byte address' error");
+
+                     630     ;         goto Write_Error_Stop;
+
+                     631                             ; SOURCE LINE # 118
+
+003F 803A            632             SJMP    ?_at24c02_write?Write_Error_Stop
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    11
+
+                     633     ;     }
+
+                     634                             ; SOURCE LINE # 119
+
+0041                 635     ?C0017:
+
+                     636     ;  
+
+                     637     ; 
+
+                     638     ;     /* Step5 */
+
+                     639     ;     /* Write data to I2C EEPROM */ 
+
+                     640     ; 
+
+                     641     ;     for (u8Count = 0; u8Count < ilen; u8Count++)
+
+                     642                             ; SOURCE LINE # 125
+
+                     643     ;---- Variable 'u8Count?344' assigned to Register 'R7' ----
+
+0041 E4              644             CLR     A
+
+0042 FF              645             MOV     R7,A
+
+0043                 646     ?C0018:
+
+0043 900000   F      647             MOV     DPTR,#ilen?343
+
+0046 E0              648             MOVX    A,@DPTR
+
+0047 FE              649             MOV     R6,A
+
+0048 EF              650             MOV     A,R7
+
+0049 C3              651             CLR     C
+
+004A 9E              652             SUBB    A,R6
+
+004B 5027            653             JNC     ?C0019
+
+                     654     ;     {
+
+                     655                             ; SOURCE LINE # 126
+
+                     656     ;     
+
+                     657     ;       I2DAT = sbuf[u8Count];                    /* Send data to EEPROM */
+
+                     658                             ; SOURCE LINE # 128
+
+004D 900000   F      659             MOV     DPTR,#sbuf?342
+
+0050 E0              660             MOVX    A,@DPTR
+
+0051 FB              661             MOV     R3,A
+
+0052 A3              662             INC     DPTR
+
+0053 E0              663             MOVX    A,@DPTR
+
+0054 FA              664             MOV     R2,A
+
+0055 A3              665             INC     DPTR
+
+0056 E0              666             MOVX    A,@DPTR
+
+0057 F9              667             MOV     R1,A
+
+0058 8F82            668             MOV     DPL,R7
+
+005A 758300          669             MOV     DPH,#00H
+
+005D 120000   F      670             LCALL   ?C?CLDOPTR
+
+0060 F5BC            671             MOV     I2DAT,A
+
+                     672     ;       clr_SI;
+
+                     673                             ; SOURCE LINE # 129
+
+0062 C2C3            674             CLR     SI
+
+0064                 675     ?C0021:
+
+                     676     ;       while (!SI);
+
+                     677                             ; SOURCE LINE # 130
+
+0064 30C3FD          678             JNB     SI,?C0021
+
+0067                 679     ?C0022:
+
+                     680     ;       if (I2STAT != 0x28)                 /* 0x28:  Data byte in S1DAT has been transmitt
+                             ed; ACK has been received */
+
+                     681                             ; SOURCE LINE # 131
+
+0067 E5BD            682             MOV     A,I2STAT
+
+0069 6428            683             XRL     A,#028H
+
+006B 6004            684             JZ      ?C0020
+
+                     685     ;       {
+
+                     686                             ; SOURCE LINE # 132
+
+                     687     ;          I2C_Reset_Flag = 1;
+
+                     688                             ; SOURCE LINE # 133
+
+006D D200     F      689             SETB    I2C_Reset_Flag
+
+                     690     ;          //iputs1("\nI2C 'Write Data' error");
+
+                     691     ;          goto Write_Error_Stop; 
+
+                     692                             ; SOURCE LINE # 135
+
+006F 800A            693             SJMP    ?_at24c02_write?Write_Error_Stop
+
+                     694     ;          
+
+                     695     ;       }   
+
+                     696                             ; SOURCE LINE # 137
+
+                     697     ;       
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    12
+
+                     698     ;    }
+
+                     699                             ; SOURCE LINE # 139
+
+0071                 700     ?C0020:
+
+0071 0F              701             INC     R7
+
+0072 80CF            702             SJMP    ?C0018
+
+0074                 703     ?C0019:
+
+                     704     ;  
+
+                     705     ;    
+
+                     706     ;    /* Step6 */
+
+                     707     ; 
+
+                     708     ;    set_STO;                           
+
+                     709                             ; SOURCE LINE # 144
+
+0074 D2C4            710             SETB    STO
+
+                     711     ;    clr_SI;
+
+                     712                             ; SOURCE LINE # 145
+
+0076 C2C3            713             CLR     SI
+
+0078                 714     ?C0024:
+
+                     715     ;    while (STO);
+
+                     716                             ; SOURCE LINE # 146
+
+0078 20C4FD          717             JB      STO,?C0024
+
+007B                 718     ?C0025:
+
+                     719     ;    
+
+                     720     ;  
+
+                     721     ; Write_Error_Stop: 
+
+                     722                             ; SOURCE LINE # 149
+
+007B                 723     ?_at24c02_write?Write_Error_Stop:
+
+                     724     ;    
+
+                     725     ;    if (I2C_Reset_Flag)
+
+                     726                             ; SOURCE LINE # 151
+
+007B 300005   F      727             JNB     I2C_Reset_Flag,?C0027
+
+                     728     ;    {
+
+                     729                             ; SOURCE LINE # 152
+
+                     730     ;       I2C_SI_Check();
+
+                     731                             ; SOURCE LINE # 153
+
+007E 120000   F      732             LCALL   I2C_SI_Check
+
+                     733     ;       I2C_Reset_Flag  = 0;
+
+                     734                             ; SOURCE LINE # 154
+
+0081 C200     F      735             CLR     I2C_Reset_Flag
+
+                     736     ;       //iputs1("\nI2C Write error, test stop");
+
+                     737     ;    }          
+
+                     738                             ; SOURCE LINE # 156
+
+                     739     ;               
+
+                     740     ; }
+
+                     741                             ; SOURCE LINE # 158
+
+0083                 742     ?C0027:
+
+0083 22              743             RET     
+
+                     744     ; END OF _at24c02_write
+
+                     745     
+
+                     746     ; 
+
+                     747     ; 
+
+                     748     ; void at24c02_read( UINT8 iaddr, UINT8 *sbuf, UINT8 ilen )
+
+                     749     
+
+----                 750             RSEG  ?PR?_at24c02_read?MAIN
+
+0000                 751     _at24c02_read:
+
+                     752             USING   0
+
+                     753                             ; SOURCE LINE # 161
+
+0000 900000   F      754             MOV     DPTR,#sbuf?446
+
+0003 EB              755             MOV     A,R3
+
+0004 F0              756             MOVX    @DPTR,A
+
+0005 A3              757             INC     DPTR
+
+0006 EA              758             MOV     A,R2
+
+0007 F0              759             MOVX    @DPTR,A
+
+0008 A3              760             INC     DPTR
+
+0009 E9              761             MOV     A,R1
+
+000A F0              762             MOVX    @DPTR,A
+
+                     763     ;---- Variable 'iaddr?445' assigned to Register 'R7' ----
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    13
+
+                     764     ; {
+
+                     765                             ; SOURCE LINE # 162
+
+                     766     ;     UINT8  u8Count; 
+
+                     767     ;    
+
+                     768     ; 
+
+                     769     ;     /* Step1 */
+
+                     770     ;     set_STA;                                /* Send Start bit to I2C EEPROM */
+
+                     771                             ; SOURCE LINE # 167
+
+000B D2C5            772             SETB    STA
+
+                     773     ;     clr_SI;
+
+                     774                             ; SOURCE LINE # 168
+
+000D C2C3            775             CLR     SI
+
+000F                 776     ?C0028:
+
+                     777     ;     while (!SI);
+
+                     778                             ; SOURCE LINE # 169
+
+000F 30C3FD          779             JNB     SI,?C0028
+
+0012                 780     ?C0029:
+
+                     781     ;     if (I2STAT != 0x08)                     /* 0x08:  A START condition has been transmit
+                             ted*/
+
+                     782                             ; SOURCE LINE # 170
+
+0012 E5BD            783             MOV     A,I2STAT
+
+0014 6408            784             XRL     A,#08H
+
+0016 6005            785             JZ      ?C0030
+
+                     786     ;     {
+
+                     787                             ; SOURCE LINE # 171
+
+                     788     ;       I2C_Reset_Flag = 1;
+
+                     789                             ; SOURCE LINE # 172
+
+0018 D200     F      790             SETB    I2C_Reset_Flag
+
+                     791     ;       //iputs1("\nI2C 'Send STA' error");
+
+                     792     ;       goto Read_Error_Stop;
+
+                     793                             ; SOURCE LINE # 174
+
+001A 020000   F      794             LJMP    ?_at24c02_read?Read_Error_Stop
+
+                     795     ;     }
+
+                     796                             ; SOURCE LINE # 175
+
+001D                 797     ?C0030:
+
+                     798     ; 
+
+                     799     ;     /* Step2 */
+
+                     800     ;     I2DAT = (EEPROM_SLA | EEPROM_WR);       /* Send (SLA+W) to EEPROM */
+
+                     801                             ; SOURCE LINE # 178
+
+001D 75BC26          802             MOV     I2DAT,#026H
+
+                     803     ;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */   
+                              
+
+                     804                             ; SOURCE LINE # 179
+
+0020 C2C5            805             CLR     STA
+
+                     806     ;     clr_SI;
+
+                     807                             ; SOURCE LINE # 180
+
+0022 C2C3            808             CLR     SI
+
+0024                 809     ?C0032:
+
+                     810     ;     while (!SI);
+
+                     811                             ; SOURCE LINE # 181
+
+0024 30C3FD          812             JNB     SI,?C0032
+
+0027                 813     ?C0033:
+
+                     814     ;     if (I2STAT != 0x18)                     /* 0x18: SLA+W has been transmitted; ACK has 
+                             been received */              
+
+                     815                             ; SOURCE LINE # 182
+
+0027 E5BD            816             MOV     A,I2STAT
+
+0029 6418            817             XRL     A,#018H
+
+002B 6005            818             JZ      ?C0034
+
+                     819     ;     {
+
+                     820                             ; SOURCE LINE # 183
+
+                     821     ;       I2C_Reset_Flag = 1;
+
+                     822                             ; SOURCE LINE # 184
+
+002D D200     F      823             SETB    I2C_Reset_Flag
+
+                     824     ;       //iputs1("\nI2C 'Send SLA+W' error");
+
+                     825     ;       goto Read_Error_Stop;
+
+                     826                             ; SOURCE LINE # 186
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    14
+
+002F 020000   F      827             LJMP    ?_at24c02_read?Read_Error_Stop
+
+                     828     ;     }
+
+                     829                             ; SOURCE LINE # 187
+
+0032                 830     ?C0034:
+
+                     831     ; 
+
+                     832     ;     /* Step3 */
+
+                     833     ;     I2DAT = iaddr;             /* Send I2C EEPROM's Address */
+
+                     834                             ; SOURCE LINE # 190
+
+0032 8FBC            835             MOV     I2DAT,R7
+
+                     836     ;     clr_SI;
+
+                     837                             ; SOURCE LINE # 191
+
+0034 C2C3            838             CLR     SI
+
+0036                 839     ?C0035:
+
+                     840     ;     while (!SI);
+
+                     841                             ; SOURCE LINE # 192
+
+0036 30C3FD          842             JNB     SI,?C0035
+
+0039                 843     ?C0036:
+
+                     844     ;     if (I2STAT != 0x28)                     /* 0x28:  Data byte in S1DAT has been transmi
+                             tted; ACK has been received */              
+
+                     845                             ; SOURCE LINE # 193
+
+0039 E5BD            846             MOV     A,I2STAT
+
+003B 6428            847             XRL     A,#028H
+
+003D 6004            848             JZ      ?C0037
+
+                     849     ;     {
+
+                     850                             ; SOURCE LINE # 194
+
+                     851     ;       I2C_Reset_Flag = 1;
+
+                     852                             ; SOURCE LINE # 195
+
+003F D200     F      853             SETB    I2C_Reset_Flag
+
+                     854     ;       //iputs1("\nI2C 'Send I2C High Byte Address' error");
+
+                     855     ;       goto Read_Error_Stop;
+
+                     856                             ; SOURCE LINE # 197
+
+0041 8072            857             SJMP    ?_at24c02_read?Read_Error_Stop
+
+                     858     ;     }
+
+                     859                             ; SOURCE LINE # 198
+
+0043                 860     ?C0037:
+
+                     861     ;  
+
+                     862     ;     /* Step5 */
+
+                     863     ;     set_STA;                                /* Repeated START */
+
+                     864                             ; SOURCE LINE # 201
+
+0043 D2C5            865             SETB    STA
+
+                     866     ;     clr_SI; 
+
+                     867                             ; SOURCE LINE # 202
+
+0045 C2C3            868             CLR     SI
+
+0047                 869     ?C0038:
+
+                     870     ;     while (!SI);
+
+                     871                             ; SOURCE LINE # 203
+
+0047 30C3FD          872             JNB     SI,?C0038
+
+004A                 873     ?C0039:
+
+                     874     ;     if (I2STAT != 0x10)                     /* 0x10: A repeated START condition has been 
+                             transmitted */
+
+                     875                             ; SOURCE LINE # 204
+
+004A E5BD            876             MOV     A,I2STAT
+
+004C 6410            877             XRL     A,#010H
+
+004E 6004            878             JZ      ?C0040
+
+                     879     ;     {
+
+                     880                             ; SOURCE LINE # 205
+
+                     881     ;       I2C_Reset_Flag = 1;
+
+                     882                             ; SOURCE LINE # 206
+
+0050 D200     F      883             SETB    I2C_Reset_Flag
+
+                     884     ;       //iputs1("\nI2C 'Send STA' error");
+
+                     885     ;       goto Read_Error_Stop;
+
+                     886                             ; SOURCE LINE # 208
+
+0052 8061            887             SJMP    ?_at24c02_read?Read_Error_Stop
+
+                     888     ;     }
+
+                     889                             ; SOURCE LINE # 209
+
+0054                 890     ?C0040:
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    15
+
+                     891     ; 
+
+                     892     ;     /* Step6 */
+
+                     893     ;     clr_STA;                                /* Clear STA and Keep SI value in I2CON */
+
+                     894                             ; SOURCE LINE # 212
+
+0054 C2C5            895             CLR     STA
+
+                     896     ;     I2DAT = (EEPROM_SLA | EEPROM_RD);       /* Send (SLA+R) to EEPROM */
+
+                     897                             ; SOURCE LINE # 213
+
+0056 75BC27          898             MOV     I2DAT,#027H
+
+                     899     ;     clr_SI;
+
+                     900                             ; SOURCE LINE # 214
+
+0059 C2C3            901             CLR     SI
+
+005B                 902     ?C0041:
+
+                     903     ;     while (!SI);
+
+                     904                             ; SOURCE LINE # 215
+
+005B 30C3FD          905             JNB     SI,?C0041
+
+005E                 906     ?C0042:
+
+                     907     ;     if (I2STAT != 0x40)                     /* 0x40:  SLA+R has been transmitted; ACK has
+                              been received */              
+
+                     908                             ; SOURCE LINE # 216
+
+005E E5BD            909             MOV     A,I2STAT
+
+0060 6440            910             XRL     A,#040H
+
+0062 6004            911             JZ      ?C0043
+
+                     912     ;     {
+
+                     913                             ; SOURCE LINE # 217
+
+                     914     ;       I2C_Reset_Flag = 1;
+
+                     915                             ; SOURCE LINE # 218
+
+0064 D200     F      916             SETB    I2C_Reset_Flag
+
+                     917     ;       //iputs1("\nI2C 'Send SLA+R' error");
+
+                     918     ;       goto Read_Error_Stop;
+
+                     919                             ; SOURCE LINE # 220
+
+0066 804D            920             SJMP    ?_at24c02_read?Read_Error_Stop
+
+                     921     ;     }
+
+                     922                             ; SOURCE LINE # 221
+
+0068                 923     ?C0043:
+
+                     924     ; 
+
+                     925     ;     /* Step7 */                             /* Verify I2C EEPROM data */
+
+                     926     ;     for (u8Count = 0; u8Count <ilen; u8Count++)
+
+                     927                             ; SOURCE LINE # 224
+
+                     928     ;---- Variable 'u8Count?448' assigned to Register 'R7' ----
+
+0068 E4              929             CLR     A
+
+0069 FF              930             MOV     R7,A
+
+006A                 931     ?C0044:
+
+006A 900000   F      932             MOV     DPTR,#ilen?447
+
+006D E0              933             MOVX    A,@DPTR
+
+006E FE              934             MOV     R6,A
+
+006F EF              935             MOV     A,R7
+
+0070 C3              936             CLR     C
+
+0071 9E              937             SUBB    A,R6
+
+0072 5029            938             JNC     ?C0045
+
+                     939     ;     {
+
+                     940                             ; SOURCE LINE # 225
+
+                     941     ;         set_AA;                             /* Set Assert Acknowledge Control Bit */
+
+                     942                             ; SOURCE LINE # 226
+
+0074 D2C2            943             SETB    AA
+
+                     944     ;         clr_SI;
+
+                     945                             ; SOURCE LINE # 227
+
+0076 C2C3            946             CLR     SI
+
+0078                 947     ?C0047:
+
+                     948     ;         while (!SI);
+
+                     949                             ; SOURCE LINE # 228
+
+0078 30C3FD          950             JNB     SI,?C0047
+
+007B                 951     ?C0048:
+
+                     952     ;         if (I2STAT != 0x50)                 /* 0x50:Data byte has been received; NOT ACK 
+                             has been returned */              
+
+                     953                             ; SOURCE LINE # 229
+
+007B E5BD            954             MOV     A,I2STAT
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    16
+
+007D 6450            955             XRL     A,#050H
+
+007F 6004            956             JZ      ?C0049
+
+                     957     ;         {
+
+                     958                             ; SOURCE LINE # 230
+
+                     959     ;             I2C_Reset_Flag = 1;
+
+                     960                             ; SOURCE LINE # 231
+
+0081 D200     F      961             SETB    I2C_Reset_Flag
+
+                     962     ;             //iputs1("\nI2C 'No Ack' error");
+
+                     963     ;             goto Read_Error_Stop;
+
+                     964                             ; SOURCE LINE # 233
+
+0083 8030            965             SJMP    ?_at24c02_read?Read_Error_Stop
+
+                     966     ;         }
+
+                     967                             ; SOURCE LINE # 234
+
+0085                 968     ?C0049:
+
+                     969     ;        
+
+                     970     ;         sbuf[u8Count] = I2DAT;
+
+                     971                             ; SOURCE LINE # 236
+
+0085 900000   F      972             MOV     DPTR,#sbuf?446
+
+0088 E0              973             MOVX    A,@DPTR
+
+0089 FB              974             MOV     R3,A
+
+008A A3              975             INC     DPTR
+
+008B E0              976             MOVX    A,@DPTR
+
+008C FA              977             MOV     R2,A
+
+008D A3              978             INC     DPTR
+
+008E E0              979             MOVX    A,@DPTR
+
+008F F9              980             MOV     R1,A
+
+0090 8F82            981             MOV     DPL,R7
+
+0092 758300          982             MOV     DPH,#00H
+
+0095 E5BC            983             MOV     A,I2DAT
+
+0097 120000   F      984             LCALL   ?C?CSTOPTR
+
+                     985     ;  
+
+                     986     ;     }
+
+                     987                             ; SOURCE LINE # 238
+
+009A 0F              988             INC     R7
+
+009B 80CD            989             SJMP    ?C0044
+
+009D                 990     ?C0045:
+
+                     991     ; 
+
+                     992     ;     /* Step8 */
+
+                     993     ;     clr_AA;                                 /* Send a NACK to disconnect 24xx64 */
+
+                     994                             ; SOURCE LINE # 241
+
+009D C2C2            995             CLR     AA
+
+                     996     ;     clr_SI;
+
+                     997                             ; SOURCE LINE # 242
+
+009F C2C3            998             CLR     SI
+
+00A1                 999     ?C0050:
+
+                    1000     ;     while (!SI);
+
+                    1001                             ; SOURCE LINE # 243
+
+00A1 30C3FD         1002             JNB     SI,?C0050
+
+00A4                1003     ?C0051:
+
+                    1004     ;     if (I2STAT != 0x58)                     /* 0x58:Data byte has been received; ACK has 
+                             been returned */
+
+                    1005                             ; SOURCE LINE # 244
+
+00A4 E5BD           1006             MOV     A,I2STAT
+
+00A6 6458           1007             XRL     A,#058H
+
+00A8 6004           1008             JZ      ?C0052
+
+                    1009     ;     {
+
+                    1010                             ; SOURCE LINE # 245
+
+                    1011     ;         I2C_Reset_Flag = 1;
+
+                    1012                             ; SOURCE LINE # 246
+
+00AA D200     F     1013             SETB    I2C_Reset_Flag
+
+                    1014     ;         //iputs1("\nI2C 'Ack' error");
+
+                    1015     ;         goto Read_Error_Stop;
+
+                    1016                             ; SOURCE LINE # 248
+
+00AC 8007           1017             SJMP    ?_at24c02_read?Read_Error_Stop
+
+                    1018     ;     }
+
+                    1019                             ; SOURCE LINE # 249
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    17
+
+00AE                1020     ?C0052:
+
+                    1021     ;     
+
+                    1022     ;       /* Step9 */    
+
+                    1023     ;         clr_SI;
+
+                    1024                             ; SOURCE LINE # 252
+
+00AE C2C3           1025             CLR     SI
+
+                    1026     ;     set_STO;
+
+                    1027                             ; SOURCE LINE # 253
+
+00B0 D2C4           1028             SETB    STO
+
+00B2                1029     ?C0053:
+
+                    1030     ;     
+
+                    1031     ;     while (STO);
+
+                    1032                             ; SOURCE LINE # 255
+
+00B2 20C4FD         1033             JB      STO,?C0053
+
+00B5                1034     ?C0054:
+
+                    1035     ;     
+
+                    1036     ;  
+
+                    1037     ; Read_Error_Stop: 
+
+                    1038                             ; SOURCE LINE # 258
+
+00B5                1039     ?_at24c02_read?Read_Error_Stop:
+
+                    1040     ;               if (I2C_Reset_Flag)
+
+                    1041                             ; SOURCE LINE # 259
+
+00B5 300005   F     1042             JNB     I2C_Reset_Flag,?C0056
+
+                    1043     ;               {
+
+                    1044                             ; SOURCE LINE # 260
+
+                    1045     ;          I2C_SI_Check();
+
+                    1046                             ; SOURCE LINE # 261
+
+00B8 120000   F     1047             LCALL   I2C_SI_Check
+
+                    1048     ;          //iputs1("\nI2C Read error, test stop");
+
+                    1049     ;          I2C_Reset_Flag = 0;
+
+                    1050                             ; SOURCE LINE # 263
+
+00BB C200     F     1051             CLR     I2C_Reset_Flag
+
+                    1052     ;               }
+
+                    1053                             ; SOURCE LINE # 264
+
+                    1054     ; }
+
+                    1055                             ; SOURCE LINE # 265
+
+00BD                1056     ?C0056:
+
+00BD 22             1057             RET     
+
+                    1058     ; END OF _at24c02_read
+
+                    1059     
+
+                    1060     ; 
+
+                    1061     ; 
+
+                    1062     ; 
+
+                    1063     ; 
+
+                    1064     ; 
+
+                    1065     ; void main (void) 
+
+                    1066     
+
+----                1067             RSEG  ?PR?main?MAIN
+
+0000                1068     main:
+
+                    1069             USING   0
+
+                    1070                             ; SOURCE LINE # 271
+
+                    1071     ; {   
+
+                    1072                             ; SOURCE LINE # 272
+
+                    1073     ;    
+
+                    1074     ;    UINT8 sbuf1[10]={0};
+
+                    1075                             ; SOURCE LINE # 274
+
+0000 7BFF           1076             MOV     R3,#0FFH
+
+0002 7A00     F     1077             MOV     R2,#HIGH (_?ix1000)
+
+0004 7900     F     1078             MOV     R1,#LOW (_?ix1000)
+
+0006 7800     F     1079             MOV     R0,#LOW (sbuf1?549)
+
+0008 7C00     F     1080             MOV     R4,#HIGH (sbuf1?549)
+
+000A 7D01           1081             MOV     R5,#01H
+
+000C 7E00           1082             MOV     R6,#00H
+
+000E 7F0A           1083             MOV     R7,#0AH
+
+0010 120000   F     1084             LCALL   ?C?COPY
+
+                    1085     ;    UINT8 sbuf2[10]={0};
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    18
+
+                    1086                             ; SOURCE LINE # 275
+
+0013 7BFF           1087             MOV     R3,#0FFH
+
+0015 7A00     F     1088             MOV     R2,#HIGH (_?ix1001)
+
+0017 7900     F     1089             MOV     R1,#LOW (_?ix1001)
+
+0019 7800     F     1090             MOV     R0,#LOW (sbuf2?550)
+
+001B 7C00     F     1091             MOV     R4,#HIGH (sbuf2?550)
+
+001D 7D01           1092             MOV     R5,#01H
+
+001F 7E00           1093             MOV     R6,#00H
+
+0021 7F0A           1094             MOV     R7,#0AH
+
+0023 120000   F     1095             LCALL   ?C?COPY
+
+                    1096     ;    UINT8 stemp[20]={0};
+
+                    1097                             ; SOURCE LINE # 276
+
+0026 7BFF           1098             MOV     R3,#0FFH
+
+0028 7A00     F     1099             MOV     R2,#HIGH (_?ix1002)
+
+002A 7900     F     1100             MOV     R1,#LOW (_?ix1002)
+
+002C 7800     F     1101             MOV     R0,#LOW (stemp?551)
+
+002E 7C00     F     1102             MOV     R4,#HIGH (stemp?551)
+
+0030 7D01           1103             MOV     R5,#01H
+
+0032 7E00           1104             MOV     R6,#00H
+
+0034 7F14           1105             MOV     R7,#014H
+
+0036 120000   F     1106             LCALL   ?C?COPY
+
+                    1107     ;    
+
+                    1108     ;    
+
+                    1109     ;    //Set_All_GPIO_Quasi_Mode;          
+
+                    1110     ;       //P15_PushPull_Mode;    
+
+                    1111     ;    
+
+                    1112     ;   
+
+                    1113     ;    //uart0 init
+
+                    1114     ;    InitialUART0_Timer3(115200);    
+
+                    1115                             ; SOURCE LINE # 284
+
+0039 7F00           1116             MOV     R7,#00H
+
+003B 7EC2           1117             MOV     R6,#0C2H
+
+003D 7D01           1118             MOV     R5,#01H
+
+003F 7C00           1119             MOV     R4,#00H
+
+0041 120000   F     1120             LCALL   _InitialUART0_Timer3
+
+                    1121     ;    TI = 1;   
+
+                    1122                             ; SOURCE LINE # 285
+
+0044 D299           1123             SETB    TI
+
+                    1124     ;    set_ES;           
+
+                    1125                             ; SOURCE LINE # 286
+
+0046 D2AC           1126             SETB    ES
+
+                    1127     ;    set_EA;        
+
+                    1128                             ; SOURCE LINE # 287
+
+0048 D2AF           1129             SETB    EA
+
+                    1130     ;    
+
+                    1131     ;    iputs0("\n start.........................");  
+
+                    1132                             ; SOURCE LINE # 289
+
+004A 7BFF           1133             MOV     R3,#0FFH
+
+004C 7A00     F     1134             MOV     R2,#HIGH (?SC_0)
+
+004E 7900     F     1135             MOV     R1,#LOW (?SC_0)
+
+0050 120000   F     1136             LCALL   _iputs0
+
+                    1137     ;    
+
+                    1138     ;    
+
+                    1139     ;    //i2c master init
+
+                    1140     ;    Init_I2C();  
+
+                    1141                             ; SOURCE LINE # 293
+
+0053 120000   F     1142             LCALL   Init_I2C
+
+0056                1143     ?C0057:
+
+                    1144     ;    
+
+                    1145     ;       
+
+                    1146     ; //   sbuf[0] = 8;   
+
+                    1147     ; //   at24c02_write(0x82, sbuf, 1);
+
+                    1148     ; //   Timer0_Delay1ms(2);         
+
+                    1149     ; //   
+
+                    1150     ; //   at24c02_read(0x82, sbuf2, 1);    
+
+                    1151     ; //   sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    19
+
+                    1152     ; //   iputs0(stemp);
+
+                    1153     ; 
+
+                    1154     ; 
+
+                    1155     ; 
+
+                    1156     ;    
+
+                    1157     ;       while(1)
+
+                    1158                             ; SOURCE LINE # 307
+
+                    1159     ;       {
+
+                    1160                             ; SOURCE LINE # 308
+
+                    1161     ;       //iputs0("\n run2...\r\n"); 
+
+                    1162     ;       Timer0_Delay1ms(1000);
+
+                    1163                             ; SOURCE LINE # 310
+
+0056 7FE8           1164             MOV     R7,#0E8H
+
+0058 7E03           1165             MOV     R6,#03H
+
+005A 7D00           1166             MOV     R5,#00H
+
+005C 7C00           1167             MOV     R4,#00H
+
+005E 120000   F     1168             LCALL   _Timer0_Delay1ms
+
+                    1169     ;       
+
+                    1170     ;       sbuf1[0] = 8;   
+
+                    1171                             ; SOURCE LINE # 312
+
+0061 900000   F     1172             MOV     DPTR,#sbuf1?549
+
+0064 7408           1173             MOV     A,#08H
+
+0066 F0             1174             MOVX    @DPTR,A
+
+                    1175     ;       at24c02_write(0x82, sbuf1, 1);
+
+                    1176                             ; SOURCE LINE # 313
+
+0067 7B01           1177             MOV     R3,#01H
+
+0069 7A00     F     1178             MOV     R2,#HIGH (sbuf1?549)
+
+006B 7900     F     1179             MOV     R1,#LOW (sbuf1?549)
+
+006D 900000   F     1180             MOV     DPTR,#?_at24c02_write?BYTE+04H
+
+0070 7401           1181             MOV     A,#01H
+
+0072 F0             1182             MOVX    @DPTR,A
+
+0073 7F82           1183             MOV     R7,#082H
+
+0075 120000   F     1184             LCALL   _at24c02_write
+
+                    1185     ;       Timer0_Delay1ms(2);         
+
+                    1186                             ; SOURCE LINE # 314
+
+0078 7F02           1187             MOV     R7,#02H
+
+007A 7E00           1188             MOV     R6,#00H
+
+007C 7D00           1189             MOV     R5,#00H
+
+007E 7C00           1190             MOV     R4,#00H
+
+0080 120000   F     1191             LCALL   _Timer0_Delay1ms
+
+                    1192     ;       
+
+                    1193     ;       at24c02_read(0x82, sbuf2, 1);    
+
+                    1194                             ; SOURCE LINE # 316
+
+0083 7B01           1195             MOV     R3,#01H
+
+0085 7A00     F     1196             MOV     R2,#HIGH (sbuf2?550)
+
+0087 7900     F     1197             MOV     R1,#LOW (sbuf2?550)
+
+0089 900000   F     1198             MOV     DPTR,#?_at24c02_read?BYTE+04H
+
+008C 7401           1199             MOV     A,#01H
+
+008E F0             1200             MOVX    @DPTR,A
+
+008F 7F82           1201             MOV     R7,#082H
+
+0091 120000   F     1202             LCALL   _at24c02_read
+
+                    1203     ;       sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+
+                    1204                             ; SOURCE LINE # 317
+
+0094 7B01           1205             MOV     R3,#01H
+
+0096 7A00     F     1206             MOV     R2,#HIGH (stemp?551)
+
+0098 7900     F     1207             MOV     R1,#LOW (stemp?551)
+
+009A 900000   F     1208             MOV     DPTR,#?_sprintf?BYTE+03H
+
+009D 74FF           1209             MOV     A,#0FFH
+
+009F F0             1210             MOVX    @DPTR,A
+
+00A0 A3             1211             INC     DPTR
+
+00A1 7400     F     1212             MOV     A,#HIGH (?SC_33)
+
+00A3 F0             1213             MOVX    @DPTR,A
+
+00A4 A3             1214             INC     DPTR
+
+00A5 7400     F     1215             MOV     A,#LOW (?SC_33)
+
+00A7 F0             1216             MOVX    @DPTR,A
+
+00A8 900000   F     1217             MOV     DPTR,#sbuf2?550
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    20
+
+00AB E0             1218             MOVX    A,@DPTR
+
+00AC 900000   F     1219             MOV     DPTR,#?_sprintf?BYTE+06H
+
+00AF F0             1220             MOVX    @DPTR,A
+
+00B0 120000   F     1221             LCALL   _sprintf
+
+                    1222     ;       iputs0(stemp);
+
+                    1223                             ; SOURCE LINE # 318
+
+00B3 7B01           1224             MOV     R3,#01H
+
+00B5 7A00     F     1225             MOV     R2,#HIGH (stemp?551)
+
+00B7 7900     F     1226             MOV     R1,#LOW (stemp?551)
+
+00B9 120000   F     1227             LCALL   _iputs0
+
+                    1228     ; 
+
+                    1229     ;       Timer0_Delay1ms(1000);
+
+                    1230                             ; SOURCE LINE # 320
+
+00BC 7FE8           1231             MOV     R7,#0E8H
+
+00BE 7E03           1232             MOV     R6,#03H
+
+00C0 7D00           1233             MOV     R5,#00H
+
+00C2 7C00           1234             MOV     R4,#00H
+
+00C4 120000   F     1235             LCALL   _Timer0_Delay1ms
+
+                    1236     ;       sbuf1[0] = 9;   
+
+                    1237                             ; SOURCE LINE # 321
+
+00C7 900000   F     1238             MOV     DPTR,#sbuf1?549
+
+00CA 7409           1239             MOV     A,#09H
+
+00CC F0             1240             MOVX    @DPTR,A
+
+                    1241     ;       at24c02_write(0x82, sbuf1, 1);
+
+                    1242                             ; SOURCE LINE # 322
+
+00CD 7B01           1243             MOV     R3,#01H
+
+00CF 7A00     F     1244             MOV     R2,#HIGH (sbuf1?549)
+
+00D1 7900     F     1245             MOV     R1,#LOW (sbuf1?549)
+
+00D3 900000   F     1246             MOV     DPTR,#?_at24c02_write?BYTE+04H
+
+00D6 7401           1247             MOV     A,#01H
+
+00D8 F0             1248             MOVX    @DPTR,A
+
+00D9 7F82           1249             MOV     R7,#082H
+
+00DB 120000   F     1250             LCALL   _at24c02_write
+
+                    1251     ;       Timer0_Delay1ms(2);         
+
+                    1252                             ; SOURCE LINE # 323
+
+00DE 7F02           1253             MOV     R7,#02H
+
+00E0 7E00           1254             MOV     R6,#00H
+
+00E2 7D00           1255             MOV     R5,#00H
+
+00E4 7C00           1256             MOV     R4,#00H
+
+00E6 120000   F     1257             LCALL   _Timer0_Delay1ms
+
+                    1258     ;       
+
+                    1259     ;       at24c02_read(0x82, sbuf2, 1);    
+
+                    1260                             ; SOURCE LINE # 325
+
+00E9 7B01           1261             MOV     R3,#01H
+
+00EB 7A00     F     1262             MOV     R2,#HIGH (sbuf2?550)
+
+00ED 7900     F     1263             MOV     R1,#LOW (sbuf2?550)
+
+00EF 900000   F     1264             MOV     DPTR,#?_at24c02_read?BYTE+04H
+
+00F2 7401           1265             MOV     A,#01H
+
+00F4 F0             1266             MOVX    @DPTR,A
+
+00F5 7F82           1267             MOV     R7,#082H
+
+00F7 120000   F     1268             LCALL   _at24c02_read
+
+                    1269     ;       sprintf (stemp,"reg02 = %bu\r\n",sbuf2[0]); 
+
+                    1270                             ; SOURCE LINE # 326
+
+00FA 7B01           1271             MOV     R3,#01H
+
+00FC 7A00     F     1272             MOV     R2,#HIGH (stemp?551)
+
+00FE 7900     F     1273             MOV     R1,#LOW (stemp?551)
+
+0100 900000   F     1274             MOV     DPTR,#?_sprintf?BYTE+03H
+
+0103 74FF           1275             MOV     A,#0FFH
+
+0105 F0             1276             MOVX    @DPTR,A
+
+0106 A3             1277             INC     DPTR
+
+0107 7400     F     1278             MOV     A,#HIGH (?SC_33)
+
+0109 F0             1279             MOVX    @DPTR,A
+
+010A A3             1280             INC     DPTR
+
+010B 7400     F     1281             MOV     A,#LOW (?SC_33)
+
+010D F0             1282             MOVX    @DPTR,A
+
+010E 900000   F     1283             MOV     DPTR,#sbuf2?550
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    21
+
+0111 E0             1284             MOVX    A,@DPTR
+
+0112 900000   F     1285             MOV     DPTR,#?_sprintf?BYTE+06H
+
+0115 F0             1286             MOVX    @DPTR,A
+
+0116 120000   F     1287             LCALL   _sprintf
+
+                    1288     ;       iputs0(stemp);      
+
+                    1289                             ; SOURCE LINE # 327
+
+0119 7B01           1290             MOV     R3,#01H
+
+011B 7A00     F     1291             MOV     R2,#HIGH (stemp?551)
+
+011D 7900     F     1292             MOV     R1,#LOW (stemp?551)
+
+011F 120000   F     1293             LCALL   _iputs0
+
+                    1294     ; 
+
+                    1295     ;       }   
+
+                    1296                             ; SOURCE LINE # 329
+
+0122 020000   F     1297             LJMP    ?C0057
+
+0125 22             1298             RET     
+
+                    1299     ; END OF main
+
+                    1300     
+
+                    1301             END
+
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    22
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E                           T Y P E  V A L U E   ATTRIBUTES
+
+?BI?MAIN . . . . . . . . . . . .  B SEG    0001H       REL=UNIT
+?C0001 . . . . . . . . . . . . .  C ADDR   000BH   R   SEG=?PR?_IPUTS0?MAIN
+?C0003 . . . . . . . . . . . . .  C ADDR   0033H   R   SEG=?PR?_IPUTS0?MAIN
+?C0007 . . . . . . . . . . . . .  C ADDR   0015H   R   SEG=?PR?I2C_SI_CHECK?MAIN
+?C0008 . . . . . . . . . . . . .  C ADDR   000FH   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0009 . . . . . . . . . . . . .  C ADDR   0012H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0010 . . . . . . . . . . . . .  C ADDR   001CH   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0012 . . . . . . . . . . . . .  C ADDR   0023H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0013 . . . . . . . . . . . . .  C ADDR   0026H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0014 . . . . . . . . . . . . .  C ADDR   0030H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0015 . . . . . . . . . . . . .  C ADDR   0034H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0016 . . . . . . . . . . . . .  C ADDR   0037H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0017 . . . . . . . . . . . . .  C ADDR   0041H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0018 . . . . . . . . . . . . .  C ADDR   0043H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0019 . . . . . . . . . . . . .  C ADDR   0074H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0020 . . . . . . . . . . . . .  C ADDR   0071H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0021 . . . . . . . . . . . . .  C ADDR   0064H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0022 . . . . . . . . . . . . .  C ADDR   0067H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0024 . . . . . . . . . . . . .  C ADDR   0078H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0025 . . . . . . . . . . . . .  C ADDR   007BH   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0027 . . . . . . . . . . . . .  C ADDR   0083H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?C0028 . . . . . . . . . . . . .  C ADDR   000FH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0029 . . . . . . . . . . . . .  C ADDR   0012H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0030 . . . . . . . . . . . . .  C ADDR   001DH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0032 . . . . . . . . . . . . .  C ADDR   0024H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0033 . . . . . . . . . . . . .  C ADDR   0027H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0034 . . . . . . . . . . . . .  C ADDR   0032H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0035 . . . . . . . . . . . . .  C ADDR   0036H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0036 . . . . . . . . . . . . .  C ADDR   0039H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0037 . . . . . . . . . . . . .  C ADDR   0043H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0038 . . . . . . . . . . . . .  C ADDR   0047H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0039 . . . . . . . . . . . . .  C ADDR   004AH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0040 . . . . . . . . . . . . .  C ADDR   0054H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0041 . . . . . . . . . . . . .  C ADDR   005BH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0042 . . . . . . . . . . . . .  C ADDR   005EH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0043 . . . . . . . . . . . . .  C ADDR   0068H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0044 . . . . . . . . . . . . .  C ADDR   006AH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0045 . . . . . . . . . . . . .  C ADDR   009DH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0047 . . . . . . . . . . . . .  C ADDR   0078H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0048 . . . . . . . . . . . . .  C ADDR   007BH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0049 . . . . . . . . . . . . .  C ADDR   0085H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0050 . . . . . . . . . . . . .  C ADDR   00A1H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0051 . . . . . . . . . . . . .  C ADDR   00A4H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0052 . . . . . . . . . . . . .  C ADDR   00AEH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0053 . . . . . . . . . . . . .  C ADDR   00B2H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0054 . . . . . . . . . . . . .  C ADDR   00B5H   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0056 . . . . . . . . . . . . .  C ADDR   00BDH   R   SEG=?PR?_AT24C02_READ?MAIN
+?C0057 . . . . . . . . . . . . .  C ADDR   0056H   R   SEG=?PR?MAIN?MAIN
+?C?CLDOPTR . . . . . . . . . . .  C ADDR   -----       EXT
+?C?CLDPTR. . . . . . . . . . . .  C ADDR   -----       EXT
+?C?COPY. . . . . . . . . . . . .  C ADDR   -----       EXT
+?C?CSTOPTR . . . . . . . . . . .  C ADDR   -----       EXT
+?C?ILDIX . . . . . . . . . . . .  C ADDR   -----       EXT
+?CO?MAIN . . . . . . . . . . . .  C SEG    0057H       REL=UNIT
+?C_STARTUP . . . . . . . . . . .  C ADDR   -----       EXT
+?MAIN?BYTE . . . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?MAIN?MAIN
+?PR?I2C_SI_CHECK?MAIN. . . . . .  C SEG    0016H       REL=UNIT
+?PR?INIT_I2C?MAIN. . . . . . . .  C SEG    0012H       REL=UNIT
+?PR?MAIN?MAIN. . . . . . . . . .  C SEG    0126H       REL=UNIT
+?PR?_AT24C02_READ?MAIN . . . . .  C SEG    00BEH       REL=UNIT
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    23
+
+?PR?_AT24C02_WRITE?MAIN. . . . .  C SEG    0084H       REL=UNIT
+?PR?_IPUTS0?MAIN . . . . . . . .  C SEG    0034H       REL=UNIT
+?SC_0. . . . . . . . . . . . . .  C ADDR   0000H   R   SEG=?CO?MAIN
+?SC_33 . . . . . . . . . . . . .  C ADDR   0021H   R   SEG=?CO?MAIN
+?XD?MAIN?MAIN. . . . . . . . . .  X SEG    0028H       REL=UNIT
+?XD?_AT24C02_READ?MAIN . . . . .  X SEG    0005H       REL=UNIT
+?XD?_AT24C02_WRITE?MAIN. . . . .  X SEG    0005H       REL=UNIT
+?XD?_IPUTS0?MAIN . . . . . . . .  X SEG    0003H       REL=UNIT
+?_AT24C02_READ?BYTE. . . . . . .  X ADDR   0000H   R   SEG=?XD?_AT24C02_READ?MAIN
+?_AT24C02_READ?READ_ERROR_STOP .  C ADDR   00B5H   R   SEG=?PR?_AT24C02_READ?MAIN
+?_AT24C02_WRITE?BYTE . . . . . .  X ADDR   0000H   R   SEG=?XD?_AT24C02_WRITE?MAIN
+?_AT24C02_WRITE?WRITE_ERROR_STOP  C ADDR   007BH   R   SEG=?PR?_AT24C02_WRITE?MAIN
+?_IPUTS0?BYTE. . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?_IPUTS0?MAIN
+?_SPRINTF?BYTE . . . . . . . . .  X ADDR   -----       EXT
+AA . . . . . . . . . . . . . . .  B ADDR   00C0H.2 A   
+AC . . . . . . . . . . . . . . .  B ADDR   00D0H.6 A   
+ACC. . . . . . . . . . . . . . .  D ADDR   00E0H   A   
+ADCCON0. . . . . . . . . . . . .  D ADDR   00E8H   A   
+ADCCON1. . . . . . . . . . . . .  D ADDR   00E1H   A   
+ADCCON2. . . . . . . . . . . . .  D ADDR   00E2H   A   
+ADCDLY . . . . . . . . . . . . .  D ADDR   00E3H   A   
+ADCF . . . . . . . . . . . . . .  B ADDR   00E8H.7 A   
+ADCHS0 . . . . . . . . . . . . .  B ADDR   00E8H.0 A   
+ADCHS1 . . . . . . . . . . . . .  B ADDR   00E8H.1 A   
+ADCHS2 . . . . . . . . . . . . .  B ADDR   00E8H.2 A   
+ADCHS3 . . . . . . . . . . . . .  B ADDR   00E8H.3 A   
+ADCMPH . . . . . . . . . . . . .  D ADDR   00CFH   A   
+ADCMPL . . . . . . . . . . . . .  D ADDR   00CEH   A   
+ADCRH. . . . . . . . . . . . . .  D ADDR   00C3H   A   
+ADCRL. . . . . . . . . . . . . .  D ADDR   00C2H   A   
+ADCS . . . . . . . . . . . . . .  B ADDR   00E8H.6 A   
+AINDIDS. . . . . . . . . . . . .  D ADDR   00F6H   A   
+AUXR1. . . . . . . . . . . . . .  D ADDR   00A2H   A   
+B. . . . . . . . . . . . . . . .  D ADDR   00F0H   A   
+BODCON0. . . . . . . . . . . . .  D ADDR   00A3H   A   
+BODCON1. . . . . . . . . . . . .  D ADDR   00ABH   A   
+C0H. . . . . . . . . . . . . . .  D ADDR   00E5H   A   
+C0L. . . . . . . . . . . . . . .  D ADDR   00E4H   A   
+C1H. . . . . . . . . . . . . . .  D ADDR   00E7H   A   
+C1L. . . . . . . . . . . . . . .  D ADDR   00E6H   A   
+C2H. . . . . . . . . . . . . . .  D ADDR   00EEH   A   
+C2L. . . . . . . . . . . . . . .  D ADDR   00EDH   A   
+CAPCON0. . . . . . . . . . . . .  D ADDR   0092H   A   
+CAPCON1. . . . . . . . . . . . .  D ADDR   0093H   A   
+CAPCON2. . . . . . . . . . . . .  D ADDR   0094H   A   
+CAPCON3. . . . . . . . . . . . .  D ADDR   00F1H   A   
+CAPCON4. . . . . . . . . . . . .  D ADDR   00F2H   A   
+CHPCON . . . . . . . . . . . . .  D ADDR   009FH   A   
+CKCON. . . . . . . . . . . . . .  D ADDR   008EH   A   
+CKDIV. . . . . . . . . . . . . .  D ADDR   0095H   A   
+CKEN . . . . . . . . . . . . . .  D ADDR   0097H   A   
+CKSWT. . . . . . . . . . . . . .  D ADDR   0096H   A   
+CLRPWM . . . . . . . . . . . . .  B ADDR   00D8H.4 A   
+CM_RL2 . . . . . . . . . . . . .  B ADDR   00C8H.0 A   
+CY . . . . . . . . . . . . . . .  B ADDR   00D0H.7 A   
+DPH. . . . . . . . . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . . . . . . . . .  D ADDR   0082H   A   
+EA . . . . . . . . . . . . . . .  B ADDR   00A8H.7 A   
+EADC . . . . . . . . . . . . . .  B ADDR   00A8H.6 A   
+EBOD . . . . . . . . . . . . . .  B ADDR   00A8H.5 A   
+EIE. . . . . . . . . . . . . . .  D ADDR   009BH   A   
+EIE1 . . . . . . . . . . . . . .  D ADDR   009CH   A   
+EIP. . . . . . . . . . . . . . .  D ADDR   00EFH   A   
+EIP1 . . . . . . . . . . . . . .  D ADDR   00FEH   A   
+EIPH . . . . . . . . . . . . . .  D ADDR   00F7H   A   
+EIPH1. . . . . . . . . . . . . .  D ADDR   00FFH   A   
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    24
+
+ES . . . . . . . . . . . . . . .  B ADDR   00A8H.4 A   
+ET0. . . . . . . . . . . . . . .  B ADDR   00A8H.1 A   
+ET1. . . . . . . . . . . . . . .  B ADDR   00A8H.3 A   
+ETGSEL0. . . . . . . . . . . . .  B ADDR   00E8H.4 A   
+ETGSEL1. . . . . . . . . . . . .  B ADDR   00E8H.5 A   
+EX0. . . . . . . . . . . . . . .  B ADDR   00A8H.0 A   
+EX1. . . . . . . . . . . . . . .  B ADDR   00A8H.2 A   
+F0 . . . . . . . . . . . . . . .  B ADDR   00D0H.5 A   
+FBD. . . . . . . . . . . . . . .  D ADDR   00D7H   A   
+FE . . . . . . . . . . . . . . .  B ADDR   0098H.7 A   
+FE_1 . . . . . . . . . . . . . .  B ADDR   00F8H.7 A   
+I2ADDR . . . . . . . . . . . . .  D ADDR   00C1H   A   
+I2CEN. . . . . . . . . . . . . .  B ADDR   00C0H.6 A   
+I2CLK. . . . . . . . . . . . . .  D ADDR   00BEH   A   
+I2CON. . . . . . . . . . . . . .  D ADDR   00C0H   A   
+I2CPX. . . . . . . . . . . . . .  B ADDR   00C0H.0 A   
+I2C_RESET_FLAG . . . . . . . . .  B ADDR   0000H.0 R   SEG=?BI?MAIN
+I2C_SI_CHECK . . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?I2C_SI_CHECK?MAIN
+I2DAT. . . . . . . . . . . . . .  D ADDR   00BCH   A   
+I2STAT . . . . . . . . . . . . .  D ADDR   00BDH   A   
+I2TOC. . . . . . . . . . . . . .  D ADDR   00BFH   A   
+IADDR?341. . . . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?_AT24C02_WRITE?MAIN
+IADDR?445. . . . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?_AT24C02_READ?MAIN
+IAPAH. . . . . . . . . . . . . .  D ADDR   00A7H   A   
+IAPAL. . . . . . . . . . . . . .  D ADDR   00A6H   A   
+IAPCN. . . . . . . . . . . . . .  D ADDR   00AFH   A   
+IAPFD. . . . . . . . . . . . . .  D ADDR   00AEH   A   
+IAPTRG . . . . . . . . . . . . .  D ADDR   00A4H   A   
+IAPUEN . . . . . . . . . . . . .  D ADDR   00A5H   A   
+IE . . . . . . . . . . . . . . .  D ADDR   00A8H   A   
+IE0. . . . . . . . . . . . . . .  B ADDR   0088H.1 A   
+IE1. . . . . . . . . . . . . . .  B ADDR   0088H.3 A   
+ILEN?343 . . . . . . . . . . . .  X ADDR   0004H   R   SEG=?XD?_AT24C02_WRITE?MAIN
+ILEN?447 . . . . . . . . . . . .  X ADDR   0004H   R   SEG=?XD?_AT24C02_READ?MAIN
+INIT_I2C . . . . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?INIT_I2C?MAIN
+IP . . . . . . . . . . . . . . .  D ADDR   00B8H   A   
+IPH. . . . . . . . . . . . . . .  D ADDR   00B7H   A   
+IT0. . . . . . . . . . . . . . .  B ADDR   0088H.0 A   
+IT1. . . . . . . . . . . . . . .  B ADDR   0088H.2 A   
+ITEMP. . . . . . . . . . . . . .  I ADDR   0080H   A   
+LOAD . . . . . . . . . . . . . .  B ADDR   00D8H.6 A   
+MAIN . . . . . . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?MAIN?MAIN
+MISO . . . . . . . . . . . . . .  B ADDR   0080H.1 A   
+MOSI . . . . . . . . . . . . . .  B ADDR   0080H.0 A   
+MSG?040. . . . . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?_IPUTS0?MAIN
+OV . . . . . . . . . . . . . . .  B ADDR   00D0H.2 A   
+P. . . . . . . . . . . . . . . .  B ADDR   00D0H.0 A   
+P0 . . . . . . . . . . . . . . .  D ADDR   0080H   A   
+P00. . . . . . . . . . . . . . .  B ADDR   0080H.0 A   
+P01. . . . . . . . . . . . . . .  B ADDR   0080H.1 A   
+P02. . . . . . . . . . . . . . .  B ADDR   0080H.2 A   
+P03. . . . . . . . . . . . . . .  B ADDR   0080H.3 A   
+P04. . . . . . . . . . . . . . .  B ADDR   0080H.4 A   
+P05. . . . . . . . . . . . . . .  B ADDR   0080H.5 A   
+P06. . . . . . . . . . . . . . .  B ADDR   0080H.6 A   
+P07. . . . . . . . . . . . . . .  B ADDR   0080H.7 A   
+P0M1 . . . . . . . . . . . . . .  D ADDR   00B1H   A   
+P0M2 . . . . . . . . . . . . . .  D ADDR   00B2H   A   
+P0S. . . . . . . . . . . . . . .  D ADDR   00B1H   A   
+P0SR . . . . . . . . . . . . . .  D ADDR   00B2H   A   
+P1 . . . . . . . . . . . . . . .  D ADDR   0090H   A   
+P10. . . . . . . . . . . . . . .  B ADDR   0090H.0 A   
+P11. . . . . . . . . . . . . . .  B ADDR   0090H.1 A   
+P12. . . . . . . . . . . . . . .  B ADDR   0090H.2 A   
+P13. . . . . . . . . . . . . . .  B ADDR   0090H.3 A   
+P14. . . . . . . . . . . . . . .  B ADDR   0090H.4 A   
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    25
+
+P15. . . . . . . . . . . . . . .  B ADDR   0090H.5 A   
+P16. . . . . . . . . . . . . . .  B ADDR   0090H.6 A   
+P17. . . . . . . . . . . . . . .  B ADDR   0090H.7 A   
+P1M1 . . . . . . . . . . . . . .  D ADDR   00B3H   A   
+P1M2 . . . . . . . . . . . . . .  D ADDR   00B4H   A   
+P1S. . . . . . . . . . . . . . .  D ADDR   00B3H   A   
+P1SR . . . . . . . . . . . . . .  D ADDR   00B4H   A   
+P2 . . . . . . . . . . . . . . .  D ADDR   00A0H   A   
+P20. . . . . . . . . . . . . . .  B ADDR   00A0H.0 A   
+P2S. . . . . . . . . . . . . . .  D ADDR   00B5H   A   
+P3 . . . . . . . . . . . . . . .  D ADDR   00B0H   A   
+P30. . . . . . . . . . . . . . .  B ADDR   00B0H.0 A   
+P3M1 . . . . . . . . . . . . . .  D ADDR   00ACH   A   
+P3M2 . . . . . . . . . . . . . .  D ADDR   00ADH   A   
+P3S. . . . . . . . . . . . . . .  D ADDR   00ACH   A   
+P3SR . . . . . . . . . . . . . .  D ADDR   00ADH   A   
+PADC . . . . . . . . . . . . . .  B ADDR   00B8H.6 A   
+PBOD . . . . . . . . . . . . . .  B ADDR   00B8H.5 A   
+PCON . . . . . . . . . . . . . .  D ADDR   0087H   A   
+PDTCNT . . . . . . . . . . . . .  D ADDR   00FAH   A   
+PDTEN. . . . . . . . . . . . . .  D ADDR   00F9H   A   
+PICON. . . . . . . . . . . . . .  D ADDR   00E9H   A   
+PIF. . . . . . . . . . . . . . .  D ADDR   00ECH   A   
+PINEN. . . . . . . . . . . . . .  D ADDR   00EAH   A   
+PIOCON0. . . . . . . . . . . . .  D ADDR   00DEH   A   
+PIOCON1. . . . . . . . . . . . .  D ADDR   00C6H   A   
+PIPEN. . . . . . . . . . . . . .  D ADDR   00EBH   A   
+PMD. . . . . . . . . . . . . . .  D ADDR   00FCH   A   
+PMEN . . . . . . . . . . . . . .  D ADDR   00FBH   A   
+PNP. . . . . . . . . . . . . . .  D ADDR   00D6H   A   
+PS . . . . . . . . . . . . . . .  B ADDR   00B8H.4 A   
+PSW. . . . . . . . . . . . . . .  D ADDR   00D0H   A   
+PT0. . . . . . . . . . . . . . .  B ADDR   00B8H.1 A   
+PT1. . . . . . . . . . . . . . .  B ADDR   00B8H.3 A   
+PWM0H. . . . . . . . . . . . . .  D ADDR   00D2H   A   
+PWM0L. . . . . . . . . . . . . .  D ADDR   00DAH   A   
+PWM1H. . . . . . . . . . . . . .  D ADDR   00D3H   A   
+PWM1L. . . . . . . . . . . . . .  D ADDR   00DBH   A   
+PWM2H. . . . . . . . . . . . . .  D ADDR   00D4H   A   
+PWM2L. . . . . . . . . . . . . .  D ADDR   00DCH   A   
+PWM3H. . . . . . . . . . . . . .  D ADDR   00D5H   A   
+PWM3L. . . . . . . . . . . . . .  D ADDR   00DDH   A   
+PWM4H. . . . . . . . . . . . . .  D ADDR   00C4H   A   
+PWM4L. . . . . . . . . . . . . .  D ADDR   00CCH   A   
+PWM5H. . . . . . . . . . . . . .  D ADDR   00C5H   A   
+PWM5L. . . . . . . . . . . . . .  D ADDR   00CDH   A   
+PWMCON0. . . . . . . . . . . . .  D ADDR   00D8H   A   
+PWMCON1. . . . . . . . . . . . .  D ADDR   00DFH   A   
+PWMF . . . . . . . . . . . . . .  B ADDR   00D8H.5 A   
+PWMINTC. . . . . . . . . . . . .  D ADDR   00B7H   A   
+PWMPH. . . . . . . . . . . . . .  D ADDR   00D1H   A   
+PWMPL. . . . . . . . . . . . . .  D ADDR   00D9H   A   
+PWMRUN . . . . . . . . . . . . .  B ADDR   00D8H.7 A   
+PX0. . . . . . . . . . . . . . .  B ADDR   00B8H.0 A   
+PX1. . . . . . . . . . . . . . .  B ADDR   00B8H.2 A   
+RB8. . . . . . . . . . . . . . .  B ADDR   0098H.2 A   
+RB8_1. . . . . . . . . . . . . .  B ADDR   00F8H.2 A   
+RCMP2H . . . . . . . . . . . . .  D ADDR   00CBH   A   
+RCMP2L . . . . . . . . . . . . .  D ADDR   00CAH   A   
+RCTRIM0. . . . . . . . . . . . .  D ADDR   0084H   A   
+RCTRIM1. . . . . . . . . . . . .  D ADDR   0085H   A   
+REN. . . . . . . . . . . . . . .  B ADDR   0098H.4 A   
+REN_1. . . . . . . . . . . . . .  B ADDR   00F8H.4 A   
+RH3. . . . . . . . . . . . . . .  D ADDR   00C6H   A   
+RI . . . . . . . . . . . . . . .  B ADDR   0098H.0 A   
+RI_1 . . . . . . . . . . . . . .  B ADDR   00F8H.0 A   
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    26
+
+RL3. . . . . . . . . . . . . . .  D ADDR   00C5H   A   
+RS0. . . . . . . . . . . . . . .  B ADDR   00D0H.3 A   
+RS1. . . . . . . . . . . . . . .  B ADDR   00D0H.4 A   
+RWK. . . . . . . . . . . . . . .  D ADDR   0086H   A   
+RXD. . . . . . . . . . . . . . .  B ADDR   0080H.7 A   
+RXD_1. . . . . . . . . . . . . .  B ADDR   0080H.2 A   
+SADDR. . . . . . . . . . . . . .  D ADDR   00A9H   A   
+SADDR_1. . . . . . . . . . . . .  D ADDR   00BBH   A   
+SADEN. . . . . . . . . . . . . .  D ADDR   00B9H   A   
+SADEN_1. . . . . . . . . . . . .  D ADDR   00BAH   A   
+SBUF . . . . . . . . . . . . . .  D ADDR   0099H   A   
+SBUF1?549. . . . . . . . . . . .  X ADDR   0000H   R   SEG=?XD?MAIN?MAIN
+SBUF2?550. . . . . . . . . . . .  X ADDR   000AH   R   SEG=?XD?MAIN?MAIN
+SBUF?342 . . . . . . . . . . . .  X ADDR   0001H   R   SEG=?XD?_AT24C02_WRITE?MAIN
+SBUF?446 . . . . . . . . . . . .  X ADDR   0001H   R   SEG=?XD?_AT24C02_READ?MAIN
+SBUF_1 . . . . . . . . . . . . .  D ADDR   009AH   A   
+SCL. . . . . . . . . . . . . . .  B ADDR   0090H.3 A   
+SCON . . . . . . . . . . . . . .  D ADDR   0098H   A   
+SCON_1 . . . . . . . . . . . . .  D ADDR   00F8H   A   
+SDA. . . . . . . . . . . . . . .  B ADDR   0090H.4 A   
+SFRS . . . . . . . . . . . . . .  D ADDR   0091H   A   
+SI . . . . . . . . . . . . . . .  B ADDR   00C0H.3 A   
+SM0. . . . . . . . . . . . . . .  B ADDR   0098H.7 A   
+SM0_1. . . . . . . . . . . . . .  B ADDR   00F8H.7 A   
+SM1. . . . . . . . . . . . . . .  B ADDR   0098H.6 A   
+SM1_1. . . . . . . . . . . . . .  B ADDR   00F8H.6 A   
+SM2. . . . . . . . . . . . . . .  B ADDR   0098H.5 A   
+SM2_1. . . . . . . . . . . . . .  B ADDR   00F8H.5 A   
+SP . . . . . . . . . . . . . . .  D ADDR   0081H   A   
+SPCR . . . . . . . . . . . . . .  D ADDR   00F3H   A   
+SPCR2. . . . . . . . . . . . . .  D ADDR   00F3H   A   
+SPDR . . . . . . . . . . . . . .  D ADDR   00F5H   A   
+SPSR . . . . . . . . . . . . . .  D ADDR   00F4H   A   
+STA. . . . . . . . . . . . . . .  B ADDR   00C0H.5 A   
+STADC. . . . . . . . . . . . . .  B ADDR   0080H.4 A   
+STEMP?551. . . . . . . . . . . .  X ADDR   0014H   R   SEG=?XD?MAIN?MAIN
+STO. . . . . . . . . . . . . . .  B ADDR   00C0H.4 A   
+T2CON. . . . . . . . . . . . . .  D ADDR   00C8H   A   
+T2MOD. . . . . . . . . . . . . .  D ADDR   00C9H   A   
+T3CON. . . . . . . . . . . . . .  D ADDR   00C4H   A   
+TA . . . . . . . . . . . . . . .  D ADDR   00C7H   A   
+TB8. . . . . . . . . . . . . . .  B ADDR   0098H.3 A   
+TB8_1. . . . . . . . . . . . . .  B ADDR   00F8H.3 A   
+TCON . . . . . . . . . . . . . .  D ADDR   0088H   A   
+TEMP . . . . . . . . . . . . . .  X ADDR   0008H   A   
+TF0. . . . . . . . . . . . . . .  B ADDR   0088H.5 A   
+TF1. . . . . . . . . . . . . . .  B ADDR   0088H.7 A   
+TF2. . . . . . . . . . . . . . .  B ADDR   00C8H.7 A   
+TH0. . . . . . . . . . . . . . .  D ADDR   008CH   A   
+TH1. . . . . . . . . . . . . . .  D ADDR   008DH   A   
+TH2. . . . . . . . . . . . . . .  D ADDR   00CDH   A   
+TI . . . . . . . . . . . . . . .  B ADDR   0098H.1 A   
+TI_1 . . . . . . . . . . . . . .  B ADDR   00F8H.1 A   
+TL0. . . . . . . . . . . . . . .  D ADDR   008AH   A   
+TL1. . . . . . . . . . . . . . .  D ADDR   008BH   A   
+TL2. . . . . . . . . . . . . . .  D ADDR   00CCH   A   
+TMOD . . . . . . . . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . . . . . . . . .  B ADDR   0088H.4 A   
+TR1. . . . . . . . . . . . . . .  B ADDR   0088H.6 A   
+TR2. . . . . . . . . . . . . . .  B ADDR   00C8H.2 A   
+TXD. . . . . . . . . . . . . . .  B ADDR   0080H.6 A   
+TXD_1. . . . . . . . . . . . . .  B ADDR   0090H.6 A   
+WDCON. . . . . . . . . . . . . .  D ADDR   00AAH   A   
+WKCON. . . . . . . . . . . . . .  D ADDR   008FH   A   
+XTEMP. . . . . . . . . . . . . .  X ADDR   0080H   A   
+_?IX1000 . . . . . . . . . . . .  C ADDR   002FH   R   SEG=?CO?MAIN
+A51 MACRO ASSEMBLER  MAIN                                                                 03/20/2019 16:47:50 PAGE    27
+
+_?IX1001 . . . . . . . . . . . .  C ADDR   0039H   R   SEG=?CO?MAIN
+_?IX1002 . . . . . . . . . . . .  C ADDR   0043H   R   SEG=?CO?MAIN
+_AT24C02_READ. . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?_AT24C02_READ?MAIN
+_AT24C02_WRITE . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?_AT24C02_WRITE?MAIN
+_INITIALUART0_TIMER3 . . . . . .  C ADDR   -----       EXT
+_IPUTS0. . . . . . . . . . . . .  C ADDR   0000H   R   SEG=?PR?_IPUTS0?MAIN
+_SEND_DATA_TO_UART0. . . . . . .  C ADDR   -----       EXT
+_SPRINTF . . . . . . . . . . . .  C ADDR   -----       EXT
+_TIMER0_DELAY1MS . . . . . . . .  C ADDR   -----       EXT
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

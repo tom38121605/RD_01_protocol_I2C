@@ -1,0 +1,223 @@
+//twi 从机
+
+#include <string.h>
+
+#include <iom16v.h>
+#include <macros.h>
+
+//----串口------
+#define  B9600  47	//波特率 7.3728MHz clock
+#define  B19200 23
+#define  B38400 11
+#define  B57600 7
+#define  BAUD B19200
+
+#define RX_BUFFER_SIZE 12 
+
+void UART_Init(void);               //串口初始化函数
+void UART_Receive(void);            //串口接收函数
+void UART_PutChar(unsigned char c); //串口输出字符
+void UART_Puts(unsigned char *s);   //串口输出字符串
+void UART_PutBytes(unsigned char *s, unsigned char ilen);  //串口输出字节
+
+unsigned char RX_data[RX_BUFFER_SIZE]={0};   //串口接收缓冲区
+unsigned char RX_data2[RX_BUFFER_SIZE]={0};
+
+void twi_slave_init(unsigned char add);
+void twi_isr(void);
+
+//从机接收状态码
+#define TW_SR_SLA_ACK             0x60   //自己的SLA+W 已经被接收ACK已返回
+#define TW_SR_ARB_LOST_SLA_ACK    0x68   //SLA+R/W 作为主机的仲裁失败；自己的SLA+W 已经被接收ACK 已返回
+#define TW_SR_GCALL_ACK           0x70   //接收到广播地址ACK 已返回
+#define TW_SR_ARB_LOST_GCALL_ACK  0x78   //SLA+R/W 作为主机的仲裁失败；接收到广播地址ACK已返回
+#define TW_SR_DATA_ACK            0x80   //以前以自己的SLA+W被寻址；数据已经被接收ACK已返回
+#define TW_SR_DATA_NACK           0x88   //以前以自己的SLA+W被寻址；数据已经被接收NOT ACK已返回
+#define TW_SR_GCALL_DATA_ACK      0x90   //以前以广播方式被寻址；数据已经被接收ACK已返回
+#define TW_SR_GCALL_DATA_NACK     0x98   //以前以广播方式被寻址；数据已经被接收NOT ACK已返回
+#define TW_SR_STOP                0xA0   //在以从机工作时接收到STOP或重复START
+ 
+ 
+//从发送状态码
+#define TW_ST_SLA_ACK             0xA8   //自己的SLA+R 已经被接收ACK 已返回
+#define TW_ST_ARB_LOST_SLA_ACK    0xB0   //SLA+R/W 作为主机的仲裁失败；自己的SLA+R 已经被接收ACK 已返回
+#define TW_ST_DATA_ACK            0xB8   //TWDR 里数据已经发送接收到ACK
+#define TW_ST_DATA_NACK           0xC0   //TWDR 里数据已经发送接收到NOT ACK
+#define TW_ST_LAST_DATA           0xC8   //TWDR 的一字节数据已经发送(TWAE = “0”);接收到ACK
+ 
+
+/***********************************************/
+//常用TWI操作(从模式写和从模式读)
+/***********************************************/
+
+// defines and constants 
+#define TWCR_CMD_MASK     0x0F 
+#define TWSR_STATUS_MASK  0xF8 
+
+//其它状态码
+#define TW_NO_INFO   0xF8   //没有相关的状态信息；TWINT = “0”
+#define TW_BUS_ERROR 0x00   //由于非法的START 或STOP 引起的总线错误
+
+
+//TWSR--Twi_状态寄存器,检查TWI状态,应该将预分频位屏蔽(第三位是保留位)
+#define Test_Twsr() (TWSR&0xf8)                                               //查询模式下等待中断发生
+#define Twi_WaitForComplete() {while(!(TWCR&(1<<TWINT)));}                    //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下对SDA线作应答
+#define Twi_Ack()   {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWEA)|(1<<TWINT);}           //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下不对SDA线作应答
+#define Twi_NoAcK() {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT);}                     //写入8位数据到数据寄存器中,同时清除中断标志位，使能TWI功能
+#define Twi_SendByte(x)  {TWDR=(x);TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT);}       //清除中断标志位，在总线上发出终止信号，激活TWI功能，
+#define Twi_Stop()   TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWEA)|(1<<TWSTO)  //清除中断标志位，在总线上发出起始信号，激活TWI功能，开放TWI中断    注意是否自动产生ACK （TWEA）
+#define Twi_Start()  TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWSTA)            //设置本机地址(从机方式)
+#define Twi_SetLocalDeviceAddr(deviceAddr, genCallEn)   TWAR=((deviceAddr)&0xFE)|((genCallEn)&0x01) //功能描述:返回总线状态
+#define Twi_GetState()    Twi_State
+
+
+volatile unsigned char main_tmp=0;
+
+
+//TWI slave initialize
+// bit rate:100
+void twi_slave_init(unsigned char add)
+{
+ TWCR= 0x00; //disable twi
+ TWBR= 14;//0x64; //set bit rate   14 -- 166.7KHz   //用中断方式时, 这个设置不是很重要
+ TWSR= 0x00; //set prescale
+ TWAR= add; //set slave address 
+ 
+ TWCR= (1<<TWEN)|(1<<TWEA)|(1<<TWIE); //enable twi
+ //TWEN必须置位以使能TWI接口。TWEA也要置位以使主机寻址到自己(从机地址或广播) 时返回确认信息ACK
+
+}
+
+#pragma interrupt_handler twi_isr:18
+void twi_isr(void)
+{
+   //twi event
+   switch (TWSR&0xF8)
+   {
+      //从接收
+      case TW_SR_SLA_ACK:
+           UART_PutChar(0x80);
+           Twi_Ack();  //返回ACK
+           break;
+           
+      case TW_SR_ARB_LOST_SLA_ACK:
+      case TW_SR_GCALL_ACK:
+      case TW_SR_ARB_LOST_GCALL_ACK:
+           Twi_Ack();  //返回ACK
+           break;          
+           
+      case TW_SR_DATA_ACK:
+      
+       case TW_SR_DATA_NACK:  //以前以自己的SLA+W被寻址；数据已经被接收NOT ACK已返回
+           main_tmp = TWDR;
+           UART_PutChar(main_tmp);
+           //PORTA = ~ TWDR; //接收数据并显示
+           Twi_Ack();  //返回ACK
+           break;
+      case TW_SR_GCALL_DATA_ACK:
+      case TW_SR_GCALL_DATA_NACK:
+           Twi_Ack();  //返回ACK 
+           break;
+      case TW_SR_STOP:
+           Twi_Ack();
+           break;
+
+      //从发送*****************************
+      
+      case TW_ST_SLA_ACK:               // 0xA8: 自己的SLA+R 已经被接收，ACK 已返回
+      case TW_ST_ARB_LOST_SLA_ACK:// 0xB0: SLA+R/W 作为主机的仲裁失败；自己的SLA+R 已经被接收，ACK 已返回
+           // 被选中为从读出 (数据将从传回主机)
+           //TWDR=main_tmp;  //发送全局变量中值
+           //Twi_Ack();
+           break;
+      case TW_ST_DATA_ACK:            // 0xB8: TWDR 里数据已经发送，接收到ACK
+           //发送数据位
+           //TWDR=main_tmp;
+           break;
+      case TW_ST_DATA_NACK:            // 0xC0: TWDR 里数据已经发送接收到NOT ACK
+      case TW_ST_LAST_DATA:            // 0xC8: TWDR 的一字节数据已经发送(TWAE = “0”);接收到ACK
+           // 全部完成
+           // 从方式开放
+           Twi_NoAcK();
+           twi_slave_init(0x5A);        //重新回到初始化状态，等待接收模式的到来
+           break;
+      case TW_NO_INFO:                 // 0xF8: 没有相关的状态信息；TWINT = “0”
+           // 无操作
+           break;
+      case TW_BUS_ERROR:               // 0x00: 由于非法的START 或STOP 引起的总线错误
+           // 内部硬件复位，释放总线
+           TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWSTO)|(1<<TWEA);
+           break;
+      default:
+           break;
+   }
+   
+
+}
+
+//串口初始化函数
+void UART_Init(void)
+{
+   UCSRB = (1<<RXCIE)| (1<<RXEN) |(1<<TXEN);   //允许串口发送和接收，并响应接收完成中断
+   UBRR = BAUD;
+   UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);   //8位数据＋1位stop位
+}
+
+//串口输出字符
+void UART_PutChar(unsigned char c)  
+{
+   while (!(UCSRA&(1 << UDRE)));    //判断上次发送有没有完成
+   UDR = c;
+}
+
+//串口输出字符串
+void UART_Puts(unsigned char *s)
+{
+   while (*s)
+   {
+      UART_PutChar(*s++);
+   }
+}
+
+//串口输出字节
+void UART_PutBytes(unsigned char *s, unsigned char ilen)
+{
+unsigned char i;
+
+   for(i=0;i<ilen;i++)
+   {
+      UART_PutChar(*s++);
+   }
+}
+
+
+
+
+void main(void)
+{
+
+   CLI();
+
+
+   DDRC&=~(1<<0|1<<1);
+   PORTC|=(1<<0|1<<1);   //使能内部上拉电阻 
+   twi_slave_init(0x5A); //初始化为从机
+
+   
+   UART_Init();
+   
+   
+   SEI();
+   
+   //UART_Puts("abcde123");
+   
+   while (1)
+   {
+   
+      ;//UART_Puts("abcde123");      
+        
+   }   
+   
+}
+
+

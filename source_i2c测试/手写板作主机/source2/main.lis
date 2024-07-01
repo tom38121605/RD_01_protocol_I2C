@@ -1,0 +1,687 @@
+                        .module main.c
+                        .area data(ram, con, rel)
+ 0000           _RX_data::
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .blkb 11
+                        .area idata
+ 0001 00000000000000000000      .word 0,0,0,0,0
+ 000B 00                .byte 0
+                        .area data(ram, con, rel)
+ 000C                   .dbfile E:\__test\source2\main.c
+ 000C                   .dbsym e RX_data _RX_data A[12:12]c
+ 000C           _RX_data2::
+ 000C                   .blkb 1
+                        .area idata
+ 000C 00                .byte 0
+                        .area data(ram, con, rel)
+ 000D                   .dbfile E:\__test\source2\main.c
+ 000D                   .blkb 11
+                        .area idata
+ 000D 00000000000000000000      .word 0,0,0,0,0
+ 0017 00                .byte 0
+                        .area data(ram, con, rel)
+ 0018                   .dbfile E:\__test\source2\main.c
+ 0018                   .dbsym e RX_data2 _RX_data2 A[12:12]c
+ 0018           _main_tmp::
+ 0018                   .blkb 1
+                        .area idata
+ 0018 00                .byte 0
+                        .area data(ram, con, rel)
+ 0019                   .dbfile E:\__test\source2\main.c
+ 0019                   .dbsym e main_tmp _main_tmp c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\__test\source2\main.c
+ 0000                   .dbfunc e twi_slave_init _twi_slave_init fV
+ 0000           ;            add -> R16
+                        .even
+ 0000           _twi_slave_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 80
+ 0000           ; //twi 从机
+ 0000           ; 
+ 0000           ; #include <string.h>
+ 0000           ; 
+ 0000           ; #include <iom16v.h>
+ 0000           ; #include <macros.h>
+ 0000           ; 
+ 0000           ; //----串口------
+ 0000           ; #define  B9600  47    //波特率 7.3728MHz clock
+ 0000           ; #define  B19200 23
+ 0000           ; #define  B38400 11
+ 0000           ; #define  B57600 7
+ 0000           ; #define  BAUD B19200
+ 0000           ; 
+ 0000           ; #define RX_BUFFER_SIZE 12 
+ 0000           ; 
+ 0000           ; void UART_Init(void);               //串口初始化函数
+ 0000           ; void UART_Receive(void);            //串口接收函数
+ 0000           ; void UART_PutChar(unsigned char c); //串口输出字符
+ 0000           ; void UART_Puts(unsigned char *s);   //串口输出字符串
+ 0000           ; void UART_PutBytes(unsigned char *s, unsigned char ilen);  //串口输出字节
+ 0000           ; 
+ 0000           ; unsigned char RX_data[RX_BUFFER_SIZE]={0};   //串口接收缓冲区
+ 0000           ; unsigned char RX_data2[RX_BUFFER_SIZE]={0};
+ 0000           ; 
+ 0000           ; void twi_slave_init(unsigned char add);
+ 0000           ; void twi_isr(void);
+ 0000           ; 
+ 0000           ; //从机接收状态码
+ 0000           ; #define TW_SR_SLA_ACK             0x60   //自己的SLA+W 已经被接收ACK已返回
+ 0000           ; #define TW_SR_ARB_LOST_SLA_ACK    0x68   //SLA+R/W 作为主机的仲裁失败；自己的SLA+W 已经被接收ACK 已返回
+ 0000           ; #define TW_SR_GCALL_ACK           0x70   //接收到广播地址ACK 已返回
+ 0000           ; #define TW_SR_ARB_LOST_GCALL_ACK  0x78   //SLA+R/W 作为主机的仲裁失败；接收到广播地址ACK已返回
+ 0000           ; #define TW_SR_DATA_ACK            0x80   //以前以自己的SLA+W被寻址；数据已经被接收ACK已返回
+ 0000           ; #define TW_SR_DATA_NACK           0x88   //以前以自己的SLA+W被寻址；数据已经被接收NOT ACK已返回
+ 0000           ; #define TW_SR_GCALL_DATA_ACK      0x90   //以前以广播方式被寻址；数据已经被接收ACK已返回
+ 0000           ; #define TW_SR_GCALL_DATA_NACK     0x98   //以前以广播方式被寻址；数据已经被接收NOT ACK已返回
+ 0000           ; #define TW_SR_STOP                0xA0   //在以从机工作时接收到STOP或重复START
+ 0000           ;  
+ 0000           ;  
+ 0000           ; //从发送状态码
+ 0000           ; #define TW_ST_SLA_ACK             0xA8   //自己的SLA+R 已经被接收ACK 已返回
+ 0000           ; #define TW_ST_ARB_LOST_SLA_ACK    0xB0   //SLA+R/W 作为主机的仲裁失败；自己的SLA+R 已经被接收ACK 已返回
+ 0000           ; #define TW_ST_DATA_ACK            0xB8   //TWDR 里数据已经发送接收到ACK
+ 0000           ; #define TW_ST_DATA_NACK           0xC0   //TWDR 里数据已经发送接收到NOT ACK
+ 0000           ; #define TW_ST_LAST_DATA           0xC8   //TWDR 的一字节数据已经发送(TWAE = “0”);接收到ACK
+ 0000           ;  
+ 0000           ; 
+ 0000           ; /***********************************************/
+ 0000           ; //常用TWI操作(从模式写和从模式读)
+ 0000           ; /***********************************************/
+ 0000           ; 
+ 0000           ; // defines and constants 
+ 0000           ; #define TWCR_CMD_MASK     0x0F 
+ 0000           ; #define TWSR_STATUS_MASK  0xF8 
+ 0000           ; 
+ 0000           ; //其它状态码
+ 0000           ; #define TW_NO_INFO   0xF8   //没有相关的状态信息；TWINT = “0”
+ 0000           ; #define TW_BUS_ERROR 0x00   //由于非法的START 或STOP 引起的总线错误
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //TWSR--Twi_状态寄存器,检查TWI状态,应该将预分频位屏蔽(第三位是保留位)
+ 0000           ; #define Test_Twsr() (TWSR&0xf8)                                               //查询模式下等待中断发生
+ 0000           ; #define Twi_WaitForComplete() {while(!(TWCR&(1<<TWINT)));}                    //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下对SDA线作应答
+ 0000           ; #define Twi_Ack()   {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWEA)|(1<<TWINT);}           //清除中断标志位,使能TWI功能,开放TWI中断,在主控接收状态下不对SDA线作应答
+ 0000           ; #define Twi_NoAcK() {TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT);}                     //写入8位数据到数据寄存器中,同时清除中断标志位，使能TWI功能
+ 0000           ; #define Twi_SendByte(x)  {TWDR=(x);TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT);}       //清除中断标志位，在总线上发出终止信号，激活TWI功能，
+ 0000           ; #define Twi_Stop()   TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWEA)|(1<<TWSTO)  //清除中断标志位，在总线上发出起始信号，激活TWI功能，开放TWI中断    注意是否自动产生ACK （TWEA）
+ 0000           ; #define Twi_Start()  TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWSTA)            //设置本机地址(从机方式)
+ 0000           ; #define Twi_SetLocalDeviceAddr(deviceAddr, genCallEn)   TWAR=((deviceAddr)&0xFE)|((genCallEn)&0x01) //功能描述:返回总线状态
+ 0000           ; #define Twi_GetState()    Twi_State
+ 0000           ; 
+ 0000           ; 
+ 0000           ; volatile unsigned char main_tmp=0;
+ 0000           ; 
+ 0000           ; 
+ 0000           ; //TWI slave initialize
+ 0000           ; // bit rate:100
+ 0000           ; void twi_slave_init(unsigned char add)
+ 0000           ; {
+ 0000                   .dbline 81
+ 0000           ;  TWCR= 0x00; //disable twi
+ 0000 2224              clr R2
+ 0002 26BE              out 0x36,R2
+ 0004                   .dbline 82
+ 0004           ;  TWBR= 14;//0x64; //set bit rate   14 -- 166.7KHz   //用中断方式时, 这个设置不是很重要
+ 0004 8EE0              ldi R24,14
+ 0006 80B9              out 0x0,R24
+ 0008                   .dbline 83
+ 0008           ;  TWSR= 0x00; //set prescale
+ 0008 21B8              out 0x1,R2
+ 000A                   .dbline 84
+ 000A           ;  TWAR= add; //set slave address 
+ 000A 02B9              out 0x2,R16
+ 000C                   .dbline 86
+ 000C           ;  
+ 000C           ;  TWCR= (1<<TWEN)|(1<<TWEA)|(1<<TWIE); //enable twi
+ 000C 85E4              ldi R24,69
+ 000E 86BF              out 0x36,R24
+ 0010                   .dbline -2
+ 0010           L1:
+ 0010                   .dbline 0 ; func end
+ 0010 0895              ret
+ 0012                   .dbsym r add 16 c
+ 0012                   .dbend
+                        .area vector(rom, abs)
+                        .org 68
+ 0044 0C940900          jmp _twi_isr
+                        .area text(rom, con, rel)
+ 0012                   .dbfile E:\__test\source2\main.c
+ 0012                   .dbfunc e twi_isr _twi_isr fV
+                        .even
+ 0012           _twi_isr::
+ 0012 0E940000          xcall push_lset
+ 0016 0E940000          xcall push_gset1
+ 001A                   .dbline -1
+ 001A                   .dbline 93
+ 001A           ;  //TWEN必须置位以使能TWI接口。TWEA也要置位以使主机寻址到自己(从机地址或广播) 时返回确认信息ACK
+ 001A           ; 
+ 001A           ; }
+ 001A           ; 
+ 001A           ; #pragma interrupt_handler twi_isr:18
+ 001A           ; void twi_isr(void)
+ 001A           ; {
+ 001A                   .dbline 95
+ 001A           ;    //twi event
+ 001A           ;    switch (TWSR&0xF8)
+ 001A 41B1              in R20,0x1
+ 001C 5527              clr R21
+ 001E 487F              andi R20,248
+ 0020 5070              andi R21,0
+ 0022 4039              cpi R20,144
+ 0024 E0E0              ldi R30,0
+ 0026 5E07              cpc R21,R30
+ 0028 09F4              brne X4
+ 002A 8FC0              xjmp L9
+ 002C           X4:
+ 002C 80E9              ldi R24,144
+ 002E 90E0              ldi R25,0
+ 0030 8417              cp R24,R20
+ 0032 9507              cpc R25,R21
+ 0034 0CF4              brge X5
+ 0036 35C0              xjmp L17
+ 0038           X5:
+ 0038           L16:
+ 0038 4037              cpi R20,112
+ 003A E0E0              ldi R30,0
+ 003C 5E07              cpc R21,R30
+ 003E 09F4              brne X6
+ 0040 74C0              xjmp L7
+ 0042           X6:
+ 0042 80E7              ldi R24,112
+ 0044 90E0              ldi R25,0
+ 0046 8417              cp R24,R20
+ 0048 9507              cpc R25,R21
+ 004A ACF0              brlt L19
+ 004C           L18:
+ 004C 4036              cpi R20,96
+ 004E E0E0              ldi R30,0
+ 0050 5E07              cpc R21,R30
+ 0052 09F4              brne X7
+ 0054 63C0              xjmp L6
+ 0056           X7:
+ 0056 80E6              ldi R24,96
+ 0058 90E0              ldi R25,0
+ 005A 8417              cp R24,R20
+ 005C 9507              cpc R25,R21
+ 005E 2CF0              brlt L21
+ 0060           L20:
+ 0060 4030              cpi R20,0
+ 0062 4507              cpc R20,R21
+ 0064 09F4              brne X8
+ 0066 82C0              xjmp L15
+ 0068           X8:
+ 0068           X0:
+ 0068 85C0              xjmp L4
+ 006A           L21:
+ 006A 4836              cpi R20,104
+ 006C E0E0              ldi R30,0
+ 006E 5E07              cpc R21,R30
+ 0070 09F4              brne X9
+ 0072 5BC0              xjmp L7
+ 0074           X9:
+ 0074 7FC0              xjmp L4
+ 0076           L19:
+ 0076 4038              cpi R20,128
+ 0078 E0E0              ldi R30,0
+ 007A 5E07              cpc R21,R30
+ 007C 09F4              brne X10
+ 007E 5AC0              xjmp L8
+ 0080           X10:
+ 0080 80E8              ldi R24,128
+ 0082 90E0              ldi R25,0
+ 0084 8417              cp R24,R20
+ 0086 9507              cpc R25,R21
+ 0088 34F0              brlt L23
+ 008A           L22:
+ 008A 4837              cpi R20,120
+ 008C E0E0              ldi R30,0
+ 008E 5E07              cpc R21,R30
+ 0090 09F4              brne X11
+ 0092 4BC0              xjmp L7
+ 0094           X11:
+ 0094 6FC0              xjmp L4
+ 0096           L23:
+ 0096 4838              cpi R20,136
+ 0098 E0E0              ldi R30,0
+ 009A 5E07              cpc R21,R30
+ 009C 09F4              brne X12
+ 009E 4AC0              xjmp L8
+ 00A0           X12:
+ 00A0 69C0              xjmp L4
+ 00A2           L17:
+ 00A2 403B              cpi R20,176
+ 00A4 E0E0              ldi R30,0
+ 00A6 5E07              cpc R21,R30
+ 00A8 09F4              brne X13
+ 00AA 64C0              xjmp L4
+ 00AC           X13:
+ 00AC 80EB              ldi R24,176
+ 00AE 90E0              ldi R25,0
+ 00B0 8417              cp R24,R20
+ 00B2 9507              cpc R25,R21
+ 00B4 B4F0              brlt L25
+ 00B6           L24:
+ 00B6 403A              cpi R20,160
+ 00B8 E0E0              ldi R30,0
+ 00BA 5E07              cpc R21,R30
+ 00BC 09F4              brne X14
+ 00BE 4AC0              xjmp L10
+ 00C0           X14:
+ 00C0 80EA              ldi R24,160
+ 00C2 90E0              ldi R25,0
+ 00C4 8417              cp R24,R20
+ 00C6 9507              cpc R25,R21
+ 00C8 34F0              brlt L27
+ 00CA           L26:
+ 00CA 4839              cpi R20,152
+ 00CC E0E0              ldi R30,0
+ 00CE 5E07              cpc R21,R30
+ 00D0 09F4              brne X15
+ 00D2 3BC0              xjmp L9
+ 00D4           X15:
+ 00D4 4FC0              xjmp L4
+ 00D6           L27:
+ 00D6 483A              cpi R20,168
+ 00D8 E0E0              ldi R30,0
+ 00DA 5E07              cpc R21,R30
+ 00DC 09F4              brne X16
+ 00DE 4AC0              xjmp L4
+ 00E0           X16:
+ 00E0 49C0              xjmp L4
+ 00E2           L25:
+ 00E2 403C              cpi R20,192
+ 00E4 E0E0              ldi R30,0
+ 00E6 5E07              cpc R21,R30
+ 00E8 09F4              brne X17
+ 00EA 39C0              xjmp L13
+ 00EC           X17:
+ 00EC 80EC              ldi R24,192
+ 00EE 90E0              ldi R25,0
+ 00F0 8417              cp R24,R20
+ 00F2 9507              cpc R25,R21
+ 00F4 34F0              brlt L29
+ 00F6           L28:
+ 00F6 483B              cpi R20,184
+ 00F8 E0E0              ldi R30,0
+ 00FA 5E07              cpc R21,R30
+ 00FC 09F4              brne X18
+ 00FE 3AC0              xjmp L4
+ 0100           X18:
+ 0100 39C0              xjmp L4
+ 0102           L29:
+ 0102 483C              cpi R20,200
+ 0104 E0E0              ldi R30,0
+ 0106 5E07              cpc R21,R30
+ 0108 51F1              breq L13
+ 010A 483C              cpi R20,200
+ 010C E0E0              ldi R30,0
+ 010E 5E07              cpc R21,R30
+ 0110 8CF1              brlt L4
+ 0112           L30:
+ 0112 483F              cpi R20,248
+ 0114 E0E0              ldi R30,0
+ 0116 5E07              cpc R21,R30
+ 0118 69F1              breq L4
+ 011A 2CC0              xjmp L4
+ 011C           X1:
+ 011C                   .dbline 96
+ 011C           ;    {
+ 011C           L6:
+ 011C                   .dbline 99
+ 011C           ;       //从接收
+ 011C           ;       case TW_SR_SLA_ACK:
+ 011C           ;            UART_PutChar(0x80);
+ 011C 00E8              ldi R16,128
+ 011E 36D0              xcall _UART_PutChar
+ 0120                   .dbline 100
+ 0120           ;            Twi_Ack();  //返回ACK
+ 0120                   .dbline 100
+ 0120 86B7              in R24,0x36
+ 0122 8F70              andi R24,15
+ 0124 806C              ori R24,192
+ 0126 86BF              out 0x36,R24
+ 0128                   .dbline 100
+ 0128                   .dbline 100
+ 0128                   .dbline 101
+ 0128           ;            break;
+ 0128 25C0              xjmp L4
+ 012A           L7:
+ 012A                   .dbline 106
+ 012A           ;            
+ 012A           ;       case TW_SR_ARB_LOST_SLA_ACK:
+ 012A           ;       case TW_SR_GCALL_ACK:
+ 012A           ;       case TW_SR_ARB_LOST_GCALL_ACK:
+ 012A           ;            Twi_Ack();  //返回ACK
+ 012A                   .dbline 106
+ 012A 86B7              in R24,0x36
+ 012C 8F70              andi R24,15
+ 012E 806C              ori R24,192
+ 0130 86BF              out 0x36,R24
+ 0132                   .dbline 106
+ 0132                   .dbline 106
+ 0132                   .dbline 107
+ 0132           ;            break;          
+ 0132 20C0              xjmp L4
+ 0134           L8:
+ 0134                   .dbline 112
+ 0134           ;            
+ 0134           ;       case TW_SR_DATA_ACK:
+ 0134           ;       
+ 0134           ;        case TW_SR_DATA_NACK:  //以前以自己的SLA+W被寻址；数据已经被接收NOT ACK已返回
+ 0134           ;            main_tmp = TWDR;
+ 0134 23B0              in R2,0x3
+ 0136 20921800          sts _main_tmp,R2
+ 013A                   .dbline 113
+ 013A           ;            UART_PutChar(main_tmp);
+ 013A 00911800          lds R16,_main_tmp
+ 013E 26D0              xcall _UART_PutChar
+ 0140                   .dbline 115
+ 0140           ;            //PORTA = ~ TWDR; //接收数据并显示
+ 0140           ;            Twi_Ack();  //返回ACK
+ 0140                   .dbline 115
+ 0140 86B7              in R24,0x36
+ 0142 8F70              andi R24,15
+ 0144 806C              ori R24,192
+ 0146 86BF              out 0x36,R24
+ 0148                   .dbline 115
+ 0148                   .dbline 115
+ 0148                   .dbline 116
+ 0148           ;            break;
+ 0148 15C0              xjmp L4
+ 014A           L9:
+ 014A                   .dbline 119
+ 014A           ;       case TW_SR_GCALL_DATA_ACK:
+ 014A           ;       case TW_SR_GCALL_DATA_NACK:
+ 014A           ;            Twi_Ack();  //返回ACK 
+ 014A                   .dbline 119
+ 014A 86B7              in R24,0x36
+ 014C 8F70              andi R24,15
+ 014E 806C              ori R24,192
+ 0150 86BF              out 0x36,R24
+ 0152                   .dbline 119
+ 0152                   .dbline 119
+ 0152                   .dbline 120
+ 0152           ;            break;
+ 0152 10C0              xjmp L4
+ 0154           L10:
+ 0154                   .dbline 122
+ 0154           ;       case TW_SR_STOP:
+ 0154           ;            Twi_Ack();
+ 0154                   .dbline 122
+ 0154 86B7              in R24,0x36
+ 0156 8F70              andi R24,15
+ 0158 806C              ori R24,192
+ 015A 86BF              out 0x36,R24
+ 015C                   .dbline 122
+ 015C                   .dbline 122
+ 015C                   .dbline 123
+ 015C           ;            break;
+ 015C 0BC0              xjmp L4
+ 015E           X2:
+ 015E                   .dbline 132
+ 015E           ; 
+ 015E           ;       //从发送*****************************
+ 015E           ;       
+ 015E           ;       case TW_ST_SLA_ACK:               // 0xA8: 自己的SLA+R 已经被接收，ACK 已返回
+ 015E           ;       case TW_ST_ARB_LOST_SLA_ACK:// 0xB0: SLA+R/W 作为主机的仲裁失败；自己的SLA+R 已经被接收，ACK 已返回
+ 015E           ;            // 被选中为从读出 (数据将从传回主机)
+ 015E           ;            //TWDR=main_tmp;  //发送全局变量中值
+ 015E           ;            //Twi_Ack();
+ 015E           ;            break;
+ 015E                   .dbline 136
+ 015E           ;       case TW_ST_DATA_ACK:            // 0xB8: TWDR 里数据已经发送，接收到ACK
+ 015E           ;            //发送数据位
+ 015E           ;            //TWDR=main_tmp;
+ 015E           ;            break;
+ 015E           L13:
+ 015E                   .dbline 141
+ 015E           ;       case TW_ST_DATA_NACK:            // 0xC0: TWDR 里数据已经发送接收到NOT ACK
+ 015E           ;       case TW_ST_LAST_DATA:            // 0xC8: TWDR 的一字节数据已经发送(TWAE = “0”);接收到ACK
+ 015E           ;            // 全部完成
+ 015E           ;            // 从方式开放
+ 015E           ;            Twi_NoAcK();
+ 015E                   .dbline 141
+ 015E 86B7              in R24,0x36
+ 0160 8F70              andi R24,15
+ 0162 8068              ori R24,128
+ 0164 86BF              out 0x36,R24
+ 0166                   .dbline 141
+ 0166                   .dbline 141
+ 0166                   .dbline 142
+ 0166           ;            twi_slave_init(0x5A);        //重新回到初始化状态，等待接收模式的到来
+ 0166 0AE5              ldi R16,90
+ 0168 4BDF              xcall _twi_slave_init
+ 016A                   .dbline 143
+ 016A           ;            break;
+ 016A 04C0              xjmp L4
+ 016C           X3:
+ 016C                   .dbline 146
+ 016C           ;       case TW_NO_INFO:                 // 0xF8: 没有相关的状态信息；TWINT = “0”
+ 016C           ;            // 无操作
+ 016C           ;            break;
+ 016C           L15:
+ 016C                   .dbline 149
+ 016C 86B7              in R24,0x36
+ 016E 8F70              andi R24,15
+ 0170 806D              ori R24,208
+ 0172 86BF              out 0x36,R24
+ 0174                   .dbline 150
+ 0174                   .dbline 152
+ 0174           L4:
+ 0174                   .dbline -2
+ 0174           L2:
+ 0174 0E940000          xcall pop_gset1
+ 0178 0E940000          xcall pop_lset
+ 017C                   .dbline 0 ; func end
+ 017C 1895              reti
+ 017E                   .dbend
+ 017E                   .dbfunc e UART_Init _UART_Init fV
+                        .even
+ 017E           _UART_Init::
+ 017E                   .dbline -1
+ 017E                   .dbline 160
+ 017E           ;       case TW_BUS_ERROR:               // 0x00: 由于非法的START 或STOP 引起的总线错误
+ 017E           ;            // 内部硬件复位，释放总线
+ 017E           ;            TWCR=TWCR&TWCR_CMD_MASK|(1<<TWINT)|(1<<TWSTO)|(1<<TWEA);
+ 017E           ;            break;
+ 017E           ;       default:
+ 017E           ;            break;
+ 017E           ;    }
+ 017E           ;    
+ 017E           ; 
+ 017E           ; }
+ 017E           ; 
+ 017E           ; //串口初始化函数
+ 017E           ; void UART_Init(void)
+ 017E           ; {
+ 017E                   .dbline 161
+ 017E           ;    UCSRB = (1<<RXCIE)| (1<<RXEN) |(1<<TXEN);   //允许串口发送和接收，并响应接收完成中断
+ 017E 88E9              ldi R24,152
+ 0180 8AB9              out 0xa,R24
+ 0182                   .dbline 162
+ 0182           ;    UBRR = BAUD;
+ 0182 87E1              ldi R24,23
+ 0184 89B9              out 0x9,R24
+ 0186                   .dbline 163
+ 0186           ;    UCSRC = (1<<URSEL)|(1<<UCSZ1)|(1<<UCSZ0);   //8位数据＋1位stop位
+ 0186 86E8              ldi R24,134
+ 0188 80BD              out 0x20,R24
+ 018A                   .dbline -2
+ 018A           L31:
+ 018A                   .dbline 0 ; func end
+ 018A 0895              ret
+ 018C                   .dbend
+ 018C                   .dbfunc e UART_PutChar _UART_PutChar fV
+ 018C           ;              c -> R16
+                        .even
+ 018C           _UART_PutChar::
+ 018C                   .dbline -1
+ 018C                   .dbline 168
+ 018C           ; }
+ 018C           ; 
+ 018C           ; //串口输出字符
+ 018C           ; void UART_PutChar(unsigned char c)  
+ 018C           ; {
+ 018C           L33:
+ 018C                   .dbline 169
+ 018C           L34:
+ 018C                   .dbline 169
+ 018C           ;    while (!(UCSRA&(1 << UDRE)));    //判断上次发送有没有完成
+ 018C 5D9B              sbis 0xb,5
+ 018E FECF              rjmp L33
+ 0190                   .dbline 170
+ 0190           ;    UDR = c;
+ 0190 0CB9              out 0xc,R16
+ 0192                   .dbline -2
+ 0192           L32:
+ 0192                   .dbline 0 ; func end
+ 0192 0895              ret
+ 0194                   .dbsym r c 16 c
+ 0194                   .dbend
+ 0194                   .dbfunc e UART_Puts _UART_Puts fV
+ 0194           ;              s -> R20,R21
+                        .even
+ 0194           _UART_Puts::
+ 0194 0E940000          xcall push_gset1
+ 0198 A801              movw R20,R16
+ 019A                   .dbline -1
+ 019A                   .dbline 175
+ 019A           ; }
+ 019A           ; 
+ 019A           ; //串口输出字符串
+ 019A           ; void UART_Puts(unsigned char *s)
+ 019A           ; {
+ 019A 04C0              xjmp L38
+ 019C           L37:
+ 019C                   .dbline 177
+ 019C                   .dbline 178
+ 019C FA01              movw R30,R20
+ 019E 0191              ld R16,Z+
+ 01A0 AF01              movw R20,R30
+ 01A2 F4DF              xcall _UART_PutChar
+ 01A4                   .dbline 179
+ 01A4           L38:
+ 01A4                   .dbline 176
+ 01A4           ;    while (*s)
+ 01A4 FA01              movw R30,R20
+ 01A6 2080              ldd R2,z+0
+ 01A8 2220              tst R2
+ 01AA C1F7              brne L37
+ 01AC                   .dbline -2
+ 01AC           L36:
+ 01AC 0E940000          xcall pop_gset1
+ 01B0                   .dbline 0 ; func end
+ 01B0 0895              ret
+ 01B2                   .dbsym r s 20 pc
+ 01B2                   .dbend
+ 01B2                   .dbfunc e UART_PutBytes _UART_PutBytes fV
+ 01B2           ;              i -> R20
+ 01B2           ;           ilen -> R22
+ 01B2           ;              s -> R10,R11
+                        .even
+ 01B2           _UART_PutBytes::
+ 01B2 0E940000          xcall push_gset3
+ 01B6 622F              mov R22,R18
+ 01B8 5801              movw R10,R16
+ 01BA                   .dbline -1
+ 01BA                   .dbline 184
+ 01BA           ;    {
+ 01BA           ;       UART_PutChar(*s++);
+ 01BA           ;    }
+ 01BA           ; }
+ 01BA           ; 
+ 01BA           ; //串口输出字节
+ 01BA           ; void UART_PutBytes(unsigned char *s, unsigned char ilen)
+ 01BA           ; {
+ 01BA                   .dbline 187
+ 01BA           ; unsigned char i;
+ 01BA           ; 
+ 01BA           ;    for(i=0;i<ilen;i++)
+ 01BA 4427              clr R20
+ 01BC 05C0              xjmp L44
+ 01BE           L41:
+ 01BE                   .dbline 188
+ 01BE                   .dbline 189
+ 01BE F501              movw R30,R10
+ 01C0 0191              ld R16,Z+
+ 01C2 5F01              movw R10,R30
+ 01C4 E3DF              xcall _UART_PutChar
+ 01C6                   .dbline 190
+ 01C6           L42:
+ 01C6                   .dbline 187
+ 01C6 4395              inc R20
+ 01C8           L44:
+ 01C8                   .dbline 187
+ 01C8 4617              cp R20,R22
+ 01CA C8F3              brlo L41
+ 01CC                   .dbline -2
+ 01CC           L40:
+ 01CC 0E940000          xcall pop_gset3
+ 01D0                   .dbline 0 ; func end
+ 01D0 0895              ret
+ 01D2                   .dbsym r i 20 c
+ 01D2                   .dbsym r ilen 22 c
+ 01D2                   .dbsym r s 10 pc
+ 01D2                   .dbend
+ 01D2                   .dbfunc e main _main fV
+                        .even
+ 01D2           _main::
+ 01D2                   .dbline -1
+ 01D2                   .dbline 197
+ 01D2           ;    {
+ 01D2           ;       UART_PutChar(*s++);
+ 01D2           ;    }
+ 01D2           ; }
+ 01D2           ; 
+ 01D2           ; 
+ 01D2           ; 
+ 01D2           ; 
+ 01D2           ; void main(void)
+ 01D2           ; {
+ 01D2                   .dbline 199
+ 01D2           ; 
+ 01D2           ;    CLI();
+ 01D2 F894              cli
+ 01D4                   .dbline 202
+ 01D4           ; 
+ 01D4           ; 
+ 01D4           ;    DDRC&=~(1<<0|1<<1);
+ 01D4 84B3              in R24,0x14
+ 01D6 8C7F              andi R24,252
+ 01D8 84BB              out 0x14,R24
+ 01DA                   .dbline 203
+ 01DA           ;    PORTC|=(1<<0|1<<1);   //使能内部上拉电阻 
+ 01DA 85B3              in R24,0x15
+ 01DC 8360              ori R24,3
+ 01DE 85BB              out 0x15,R24
+ 01E0                   .dbline 204
+ 01E0           ;    twi_slave_init(0x5A); //初始化为从机
+ 01E0 0AE5              ldi R16,90
+ 01E2 0EDF              xcall _twi_slave_init
+ 01E4                   .dbline 207
+ 01E4           ; 
+ 01E4           ;    
+ 01E4           ;    UART_Init();
+ 01E4 CCDF              xcall _UART_Init
+ 01E6                   .dbline 210
+ 01E6           ;    
+ 01E6           ;    
+ 01E6           ;    SEI();
+ 01E6 7894              sei
+ 01E8           L46:
+ 01E8                   .dbline 215
+ 01E8                   .dbline 217
+ 01E8                   .dbline 219
+ 01E8           L47:
+ 01E8                   .dbline 214
+ 01E8 FFCF              xjmp L46
+ 01EA           X19:
+ 01EA                   .dbline -2
+ 01EA           L45:
+ 01EA                   .dbline 0 ; func end
+ 01EA 0895              ret
+ 01EC                   .dbend
